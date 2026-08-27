@@ -8,6 +8,8 @@ l1_size = sys.argv[1]
 l1_assoc = int(sys.argv[2])
 l2_size = sys.argv[3]
 l2_assoc = int(sys.argv[4])
+workload_mode = sys.argv[5] if len(sys.argv) > 5 else "all"
+
 
 system = System()
 system.clk_domain = SrcClockDomain(
@@ -77,7 +79,7 @@ system.mem_ctrl.port = system.membus.mem_side_ports
 
 system.workload = SEWorkload.init_compatible("./dse_workload")
 process = Process()
-process.cmd = ["./dse_workload"]
+process.cmd = ["./dse_workload", workload_mode]
 system.cpu.workload = process
 system.cpu.createThreads()
 root = Root(full_system=False, system=system)

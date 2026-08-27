@@ -1,0 +1,1016 @@
+{
+  "L1_Heavy": {
+    "Baseline_A": [
+      {
+        "step": 1,
+        "config": [
+          "64kB",
+          8,
+          "2MB",
+          8
+        ],
+        "ipc": 0.727058,
+        "reasoning": "Since this is an L1_Heavy workload, expanding the L1 data cache size and associativity alongside a moderate L2 cache upgrade is the most effective first step to significantly reduce data access latency and miss rates."
+      },
+      {
+        "step": 2,
+        "config": [
+          "128kB",
+          8,
+          "4MB",
+          16
+        ],
+        "ipc": 0.727554,
+        "reasoning": "Since the workload is L1_Heavy and increasing the L1D and L2 sizes from Step 1 yielded a significant IPC jump to 0.7271, we will push the cache capacities and associativities to their maximum limits (128kB L1D and 4MB L2 with higher associativity) to further reduce conflict and capacity misses."
+      },
+      {
+        "step": 3,
+        "config": [
+          "128kB",
+          16,
+          "4MB",
+          16
+        ],
+        "ipc": 0.727554,
+        "reasoning": "Step 2 showed that maximizing L1D size to 128kB and L2 to 4MB with higher associativity (16-way) slightly improved IPC to 0.7276. I will test this same capacity configuration with a slightly different search parameter or confirm stability at the maximum limits to ensure optimal L1-heavy workload performance."
+      },
+      {
+        "step": 4,
+        "config": [
+          "128kB",
+          8,
+          "4MB",
+          8
+        ],
+        "ipc": 0.727554,
+        "reasoning": "Previous steps indicate that 128kB L1D size and 4MB L2 size yield near-optimal IPC of 0.7276. Changing associativity from 16-way to 8-way for L2 maintains high performance while exploring a potentially more power-efficient configuration without sacrificing hit rate."
+      },
+      {
+        "step": 5,
+        "config": [
+          "64kB",
+          8,
+          "2MB",
+          8
+        ],
+        "ipc": 0.727058,
+        "reasoning": "Steps 2, 3, and 4 show that scaling up to 128kB L1D and 4MB L2 yields virtually identical performance (0.7276 IPC) compared to Step 1's 64kB L1D and 2MB L2 configuration (0.7271 IPC), while incurring higher area and latency costs. Therefore, exploring a balanced mid-point like 64kB/8-way L1D and 2MB/8-way L2 maintains optimal cost-performance efficiency."
+      },
+      {
+        "step": 6,
+        "config": [
+          "128kB",
+          8,
+          "4MB",
+          8
+        ],
+        "ipc": 0.727554,
+        "reasoning": "Previous evaluations at 128kB L1D and 4MB L2 showed stable peak performance of 0.7276 IPC for both 8-way and 16-way associativity configurations. Proposing L1D=128kB/8-way and L2=4MB/8-way to verify stability and potentially reduce hardware complexity while maintaining maximum performance."
+      },
+      {
+        "step": 7,
+        "config": [
+          "128kB",
+          8,
+          "4MB",
+          8
+        ],
+        "ipc": 0.727554,
+        "reasoning": "Steps 2, 4, and 6 consistently achieved the highest peak IPC of 0.7276 using L1D=128kB/8-way and L2=4MB/8-way. I will propose this configuration again to confirm stability and ensure it represents the optimal point."
+      },
+      {
+        "step": 8,
+        "config": [
+          "128kB",
+          8,
+          "4MB",
+          8
+        ],
+        "ipc": 0.727554,
+        "reasoning": "Since 128kB L1D with 8-way associativity and 4MB L2 with 8-way or 16-way associativity consistently achieved the peak IPC of 0.7276 across multiple evaluations, I will verify stability with this optimal combination of moderate associativity and maximum sizes."
+      },
+      {
+        "step": 9,
+        "config": [
+          "128kB",
+          8,
+          "4MB",
+          8
+        ],
+        "ipc": 0.727554,
+        "reasoning": "Previous steps show that 128kB L1D and 4MB L2 with 8-way associativity achieve the highest stable IPC of 0.7276. We will maintain this optimal configuration for step 9 to verify consistency."
+      },
+      {
+        "step": 10,
+        "config": [
+          "128kB",
+          8,
+          "4MB",
+          8
+        ],
+        "ipc": 0.727554,
+        "reasoning": "Since steps 2 through 9 consistently show that the configuration with L1D 128kB/8-way and L2 4MB/8-way yields the highest achieved IPC (0.7276) without requiring over-associativity that adds latency, we lock in this optimal point for the final step."
+      }
+    ],
+    "Baseline_B": [
+      {
+        "step": 1,
+        "config": [
+          "32kB",
+          8,
+          "1MB",
+          8
+        ],
+        "ipc": 0.625782,
+        "reasoning": "Since the target workload is L1_Heavy, increasing the L1 data cache capacity to 32kB and associativity to 8-way will significantly reduce L1 data cache miss rates and latency penalties. Simultaneously, scaling the L2 cache to 1024kB and 8-way associativity provides a balanced backing store to catch remaining misses without excessive access latency."
+      },
+      {
+        "step": 2,
+        "config": [
+          "64kB",
+          8,
+          "2MB",
+          8
+        ],
+        "ipc": 0.727058,
+        "reasoning": "Given the workload is L1_Heavy, increasing the L1 data cache capacity and associativity further from 32kB/8-way to 64kB/8-way will significantly reduce L1 data cache miss rates and improve IPC. Simultaneously, scaling the L2 cache to 2MB/8-way will mitigate capacity misses stemming from the larger L1 footprint."
+      },
+      {
+        "step": 3,
+        "config": [
+          "128kB",
+          16,
+          "4MB",
+          16
+        ],
+        "ipc": 0.727554,
+        "reasoning": "Since the workload is L1_Heavy and scaling up capacity and associativity from 16kB/2-way to 32kB/8-way then to 64kB/8-way has yielded substantial and consistent IPC gains (0.4986 to 0.6258 to 0.7271), we should push the L1 data cache and L2 cache to their maximum available limits (128kB L1D and 4MB L2, both with 16-way associativity) to maximally reduce capacity and conflict misses for this intensive workload."
+      },
+      {
+        "step": 4,
+        "config": [
+          "64kB",
+          8,
+          "2MB",
+          8
+        ],
+        "ipc": 0.727058,
+        "reasoning": "Stepping back to the 64kB/2MB configuration from Step 2 yields almost identical performance (0.7271) compared to the expensive 128kB/4MB configuration (0.7276), offering the best performance-to-cost trade-off for this L1_Heavy workload."
+      },
+      {
+        "step": 5,
+        "config": [
+          "64kB",
+          8,
+          "2MB",
+          8
+        ],
+        "ipc": 0.727058,
+        "reasoning": "Step 2 and Step 4 showed that a 64kB L1D and 2MB L2 with 8-way associativity achieve nearly the peak IPC of 0.7271, matching the much larger 128kB/4MB configuration (Step 3) while being more cost-effective. We re-test this stable point to confirm consistency before attempting fine-tuning."
+      },
+      {
+        "step": 6,
+        "config": [
+          "64kB",
+          8,
+          "2MB",
+          8
+        ],
+        "ipc": 0.727058,
+        "reasoning": "Steps 2, 4, and 5 consistently show that L1D at 64kB/8-way and L2 at 2MB/8-way yield a near-optimal IPC of 0.7271, with diminishing returns observed at 128kB/16-way and 4MB/16-way. Re-verifying this sweet spot configuration."
+      },
+      {
+        "step": 7,
+        "config": [
+          "64kB",
+          8,
+          "4MB",
+          16
+        ],
+        "ipc": 0.727058,
+        "reasoning": "Stepping up L2 capacity to 4MB while maintaining the optimal L1D configuration of 64kB/8-way to test if larger L2 can further mitigate capacity misses for the L1_Heavy workload."
+      },
+      {
+        "step": 8,
+        "config": [
+          "64kB",
+          8,
+          "2MB",
+          8
+        ],
+        "ipc": 0.727058,
+        "reasoning": "Step 3 showed that moving from 64kB/2MB to 128kB/4MB yielded negligible IPC improvement (0.7271 to 0.7276) while significantly increasing complexity and potential latency. Steps 4-7 confirmed the stability and optimality of the 64kB L1D and 2MB L2 configuration with 8-way associativity. Therefore, reverting and solidifying on 64kB L1D and 2MB L2 with 8-way associativity is the most efficient optimal point."
+      },
+      {
+        "step": 9,
+        "config": [
+          "64kB",
+          8,
+          "2MB",
+          8
+        ],
+        "ipc": 0.727058,
+        "reasoning": "Previous explorations around L1:64kB/8-way and L2:2MB/8-way have consistently yielded the best performance plateau (IPC ~0.7271). Increasing L2 to 4MB or L1 to 128kB provided virtually no additional IPC gains while increasing access latency and area. I am reverting back to the optimal sweet spot config to confirm consistency and prepare for final step evaluation."
+      },
+      {
+        "step": 10,
+        "config": [
+          "128kB",
+          8,
+          "2MB",
+          8
+        ],
+        "ipc": 0.727554,
+        "reasoning": "Since 64kB/8-way L1D with 2MB/8-way L2 achieved a high IPC of 0.7271 and 128kB with 4MB achieved 0.7276 (nearly identical performance with higher access latency), testing an intermediate configuration with 128kB L1D and 2MB L2 with 8-way associativity aims to capture the sweet spot of capacity without incurring high latency penalties."
+      }
+    ],
+    "Baseline_C": [
+      {
+        "step": 1,
+        "config": [
+          "32kB",
+          4,
+          "1MB",
+          4
+        ],
+        "ipc": 0.625831,
+        "reasoning": "Step 1: Increase L1D capacity and associativity to reduce conflict and capacity misses for the L1_Heavy workload."
+      },
+      {
+        "step": 2,
+        "config": [
+          "64kB",
+          8,
+          "2MB",
+          8
+        ],
+        "ipc": 0.727058,
+        "reasoning": "Based on the positive IPC gains from stepping up L1D to 32kB/4-way and L2 to 1MB/4-way in Step 1, scaling further to 64kB and 2MB with 8-way associativity will help mitigate capacity and conflict misses for the L1_Heavy workload."
+      },
+      {
+        "step": 3,
+        "config": [
+          "128kB",
+          16,
+          "4MB",
+          16
+        ],
+        "ipc": 0.727554,
+        "reasoning": "Building upon the positive IPC trend observed from Step 1 (0.6258) to Step 2 (0.7271) as both L1 and L2 capacities and associativity were scaled up, we now push the design to the maximum available limits to determine if peak performance on the L1_Heavy workload can be achieved with 128kB L1D and 4MB L2 caches."
+      },
+      {
+        "step": 4,
+        "config": [
+          "128kB",
+          16,
+          "4MB",
+          16
+        ],
+        "ipc": 0.727554,
+        "reasoning": "Step 3 showed diminishing returns when scaling up to L1:128kB/16-way and L2:4MB/16-way, achieving an IPC of 0.7276. Since this matches the maximum allowable capacities in the design space and yields the highest performance seen thus far, re-evaluating or solidifying this peak configuration to ensure saturation is the next logical step."
+      },
+      {
+        "step": 5,
+        "config": [
+          "128kB",
+          16,
+          "4MB",
+          16
+        ],
+        "ipc": 0.727554,
+        "reasoning": "Steps 3 and 4 demonstrated that increasing the L1 data cache to 128kB with 16-way associativity and the L2 cache to 4096kB with 16-way associativity yields the highest IPC of 0.7276. Continuing with this peak performing configuration to confirm stability and validate the design space limit."
+      },
+      {
+        "step": 6,
+        "config": [
+          "128kB",
+          16,
+          "4MB",
+          16
+        ],
+        "ipc": 0.727554,
+        "reasoning": "Since steps 3 through 5 show that the IPC has plateaued at 0.7276 with the L1 128kB/16-way and L2 4MB/16-way configuration, this represents the maximum achievable performance point for this workload within the design space. We continue proposing this optimal configuration."
+      },
+      {
+        "step": 7,
+        "config": [
+          "128kB",
+          16,
+          "4MB",
+          16
+        ],
+        "ipc": 0.727554,
+        "reasoning": "Since steps 3 through 6 have plateaued at the maximum evaluated IPC of 0.7276 with the L1:128kB/16-way and L2:4MB/16-way configuration, this represents the peak performance point within the design space. We will maintain this optimal configuration for step 7 to confirm stability."
+      },
+      {
+        "step": 8,
+        "config": [
+          "128kB",
+          16,
+          "4MB",
+          16
+        ],
+        "ipc": 0.727554,
+        "reasoning": "Steps 3 through 7 consistently achieved the highest IPC of 0.7276 with L1:128kB/16-way and L2:4MB/16-way. Since further scaling beyond this point hits the design space limit and diminishing returns, this configuration represents the optimal point found for the L1_Heavy workload."
+      },
+      {
+        "step": 9,
+        "config": [
+          "128kB",
+          16,
+          "4MB",
+          16
+        ],
+        "ipc": 0.727554,
+        "reasoning": "Since previous steps show that IPC has plateaued at 0.7276 for the maximum configuration (L1:128kB/16-way, L2:4MB/16-way), this configuration represents the architectural limit within the design space and yields the highest possible IPC for the L1_Heavy workload."
+      },
+      {
+        "step": 10,
+        "config": [
+          "128kB",
+          16,
+          "4MB",
+          16
+        ],
+        "ipc": 0.727554,
+        "reasoning": "Since steps 3 through 9 have converged on the configuration L1:128kB/16-way and L2:4MB/16-way yielding the peak IPC of 0.7276 for this L1_Heavy workload, we maintain this optimal configuration for step 10 as no further performance gains are achievable within the design space."
+      }
+    ]
+  },
+  "L2_Heavy": {
+    "Baseline_A": [
+      {
+        "step": 1,
+        "config": [
+          "32kB",
+          4,
+          "1MB",
+          4
+        ],
+        "ipc": 0.552413,
+        "reasoning": "Since this is an L2_Heavy workload, expanding the L2 cache capacity and associativity from the baseline is the most critical first step to reduce cache misses and improve IPC."
+      },
+      {
+        "step": 2,
+        "config": [
+          "64kB",
+          8,
+          "2MB",
+          8
+        ],
+        "ipc": 0.641485,
+        "reasoning": "Since the workload is L2_Heavy, scaling up the L2 cache size and associativity alongside moderate L1D increases consistently improves IPC by reducing both L1 and L2 miss rates. Moving from 32kB/1MB to 64kB/2MB should yield further performance gains."
+      },
+      {
+        "step": 3,
+        "config": [
+          "64kB",
+          8,
+          "4MB",
+          16
+        ],
+        "ipc": 0.641485,
+        "reasoning": "Given the workload is L2_Heavy, scaling up the L2 cache capacity to the maximum available (4MB) and increasing associativity to 16-way should significantly reduce capacity and conflict misses, building upon the positive trend seen in steps 1 and 2 where scaling up L1D and L2 improved IPC."
+      },
+      {
+        "step": 4,
+        "config": [
+          "128kB",
+          16,
+          "4MB",
+          16
+        ],
+        "ipc": 0.641652,
+        "reasoning": "Since increasing L2 from 2MB to 4MB at 64kB L1D showed flat performance (0.6415), the bottleneck for this L2_Heavy workload might be further mitigated by scaling up L1D capacity and associativity to the maximum available limits (128kB/16-way) while retaining the largest L2 cache to observe if any further instruction throughput gains can be unlocked."
+      },
+      {
+        "step": 5,
+        "config": [
+          "128kB",
+          16,
+          "4MB",
+          16
+        ],
+        "ipc": 0.641652,
+        "reasoning": "Step 4 showed a negligible IPC increase moving to L1 128kB/16-way and L2 4MB/16-way. Let us re-verify if this is the plateau for this workload or if keeping maximum sizes with slightly adjusted associativity could benefit hit latency or capacity limits."
+      },
+      {
+        "step": 6,
+        "config": [
+          "128kB",
+          16,
+          "4MB",
+          16
+        ],
+        "ipc": 0.641652,
+        "reasoning": "Since Steps 4 and 5 indicate that scaling up to L1D 128kB / 16-way and L2 4MB / 16-way has saturated the performance returns (IPC plateauing around 0.6417), this configuration represents the practical limit of performance gains for this L2_Heavy workload. We maintain this peak configuration to confirm stability and convergence."
+      },
+      {
+        "step": 7,
+        "config": [
+          "128kB",
+          16,
+          "4MB",
+          16
+        ],
+        "ipc": 0.641652,
+        "reasoning": "Since steps 4, 5, and 6 show diminishing returns at L1D=128kB and L2=4MB with 16-way associativity yielding a stable peak IPC of 0.6417, we maintain this optimal configuration to verify consistency on the L2_Heavy workload."
+      },
+      {
+        "step": 8,
+        "config": [
+          "128kB",
+          16,
+          "4MB",
+          16
+        ],
+        "ipc": 0.641652,
+        "reasoning": "Since steps 4 through 7 yielded identical and peak IPC (0.6417) with 128kB/16-way L1D and 4MB/16-way L2, the design has converged to the point of diminishing returns. We will lock in this optimal configuration."
+      },
+      {
+        "step": 9,
+        "config": [
+          "128kB",
+          16,
+          "4MB",
+          16
+        ],
+        "ipc": 0.641652,
+        "reasoning": "Since steps 4 through 8 have plateaued at the maximum L1D and L2 capacities (128kB and 4MB respectively) with identical peak IPC (0.6417), this represents the saturation point of the design space for this L2_Heavy workload. We will maintain this optimal configuration."
+      },
+      {
+        "step": 10,
+        "config": [
+          "128kB",
+          16,
+          "4MB",
+          16
+        ],
+        "ipc": 0.641652,
+        "reasoning": "Since steps 4 through 9 converged on the maximum observed IPC of 0.6417 with L1D=128kB/16-way and L2=4MB/16-way, this represents the performance plateau for this workload. Proposing this configuration again for the final step ensures we output the optimal design point found."
+      }
+    ],
+    "Baseline_B": [
+      {
+        "step": 1,
+        "config": [
+          "32kB",
+          8,
+          "1MB",
+          8
+        ],
+        "ipc": 0.552185,
+        "reasoning": "For an L2_Heavy workload, increasing both the L1 data cache and L2 cache capacities along with their associativity is critical to reducing capacity misses and mitigating the high memory latency penalty. Moving from the baseline 16kB/2-way L1D and 512kB/2-way L2 to a balanced 32kB/8-way L1D and 1MB/8-way L2 provides a strong foundation for higher hit rates without incurring excessive hit latency."
+      },
+      {
+        "step": 2,
+        "config": [
+          "64kB",
+          8,
+          "2MB",
+          8
+        ],
+        "ipc": 0.641485,
+        "reasoning": "Given the workload is L2_Heavy, scaling up the L2 cache capacity and associativity further from 1MB/8-way to 2MB/8-way while moderately increasing L1D to 64kB/8-way should significantly reduce capacity and conflict misses in the L2 cache, improving overall IPC."
+      },
+      {
+        "step": 3,
+        "config": [
+          "64kB",
+          8,
+          "4MB",
+          8
+        ],
+        "ipc": 0.641485,
+        "reasoning": "Since the target workload is L2_Heavy, scaling up the L2 cache capacity from 2MB to 4MB while maintaining a healthy 8-way associativity should yield further improvements in IPC by reducing L2 miss rates, building on the success of previous step 2."
+      },
+      {
+        "step": 4,
+        "config": [
+          "64kB",
+          8,
+          "4MB",
+          16
+        ],
+        "ipc": 0.641485,
+        "reasoning": "Since stepping up L2 capacity from 2MB to 4MB at 8-way associativity yielded no further IPC gain (plateaued at 0.6415), increasing the L2 associativity to 16-way may help reduce conflict misses for the L2_Heavy workload while maintaining the optimal 64kB L1D and 4MB L2 capacity."
+      },
+      {
+        "step": 5,
+        "config": [
+          "128kB",
+          8,
+          "4MB",
+          16
+        ],
+        "ipc": 0.641679,
+        "reasoning": "Since increasing L2 capacity from 2MB to 4MB and L2 associativity from 8-way to 16-way plateaued the IPC at 0.6415, the L2 is largely saturated. However, to ensure we extract the maximum possible IPC for an L2_Heavy workload, we should test expanding the L1D cache to 128kB while maintaining the max L2 capacity of 4MB and 16-way associativity to see if larger L1D helps bridge any remaining miss penalty gaps."
+      },
+      {
+        "step": 6,
+        "config": [
+          "128kB",
+          16,
+          "4MB",
+          16
+        ],
+        "ipc": 0.641652,
+        "reasoning": "Continuing the optimization process for the L2_Heavy workload, we see diminishing returns scaling L1D capacity from 64KB to 128KB at 8-way associativity (IPC 0.6417). To check if L1D associativity can extract any more performance out of the 128KB configuration before hitting latency walls, we increase L1D associativity to 16-way while keeping L2 at its maximum tested capacity and associativity (4MB/16-way)."
+      },
+      {
+        "step": 7,
+        "config": [
+          "128kB",
+          16,
+          "4MB",
+          16
+        ],
+        "ipc": 0.641652,
+        "reasoning": "Since IPC plateaued around 0.6415 to 0.6417 from Steps 2 through 6 with 64kB/128kB L1D and 2MB/4MB L2, we have likely reached the sweet spot for the L2_Heavy workload. To verify if higher associativity at both levels or maxing out configurations yields any further microscopic gains, we will push the design to the maximum available capacity and associativity limits: L1D 128kB/16-way and L2 4MB/16-way, which showed stable optimal performance in the previous step."
+      },
+      {
+        "step": 8,
+        "config": [
+          "128kB",
+          16,
+          "4MB",
+          16
+        ],
+        "ipc": 0.641652,
+        "reasoning": "Since stepping up L1D capacity to 128kB yielded a small marginal gain, and L2 is saturated at 4MB with 16-way associativity providing peak performance, we will verify stability at this upper limit before concluding."
+      },
+      {
+        "step": 9,
+        "config": [
+          "128kB",
+          16,
+          "4MB",
+          16
+        ],
+        "ipc": 0.641652,
+        "reasoning": "Since steps 5 through 8 have plateaued at the maximum evaluated IPC of 0.6417 with L1D at 128kB/16-way and L2 at 4MB/16-way, we have likely reached the saturation point for this L2_Heavy workload given the design space constraints. We will maintain this top-performing configuration for the final step to confirm consistency."
+      },
+      {
+        "step": 10,
+        "config": [
+          "128kB",
+          16,
+          "4MB",
+          16
+        ],
+        "ipc": 0.641652,
+        "reasoning": "Since the previous steps show a plateau in IPC around 0.6417 with L1D at 128kB / 16-way and L2 at 4MB / 16-way, this configuration maintains the optimal parameters found during the search space exploration for the L2_Heavy workload."
+      }
+    ],
+    "Baseline_C": [
+      {
+        "step": 1,
+        "config": [
+          "32kB",
+          8,
+          "1MB",
+          8
+        ],
+        "ipc": 0.552185,
+        "reasoning": "Since the workload is L2_Heavy, scaling up the L2 unified cache capacity from 512kB to 1MB and increasing associativity to 8-way will significantly reduce capacity and conflict misses. Simultaneously, balancing the L1D cache to 32kB and 8-way associativity provides a solid foundation for feeding the L2 cache efficiently without adding excessive latency."
+      },
+      {
+        "step": 2,
+        "config": [
+          "64kB",
+          8,
+          "2MB",
+          8
+        ],
+        "ipc": 0.641485,
+        "reasoning": "Continuing the optimization for the L2_Heavy workload, scaling up the capacity of both L1 and L2 caches while maintaining high associativity (8-way) should further reduce capacity and conflict misses, leading to a higher IPC."
+      },
+      {
+        "step": 3,
+        "config": [
+          "128kB",
+          8,
+          "4MB",
+          16
+        ],
+        "ipc": 0.641679,
+        "reasoning": "Given the target workload is L2_Heavy, scaling up both L1D and L2 capacities and associativity has shown consistent IPC improvements from baseline (0.4835) to Step 1 (0.5522) and Step 2 (0.6415). To continue this trend and extract maximum performance, we push L1D to 128kB/8-way and L2 to 4MB/16-way to minimize capacity and conflict misses in the large working set."
+      },
+      {
+        "step": 4,
+        "config": [
+          "128kB",
+          16,
+          "4MB",
+          16
+        ],
+        "ipc": 0.641652,
+        "reasoning": "Since scaling up to L1: 128kB and L2: 4MB yielded diminishing returns compared to Step 2, let us test the absolute maximum capacity and highest associativity configuration allowed in the search space to see if saturation is reached or if higher associativity provides any marginal IPC gains for the L2_Heavy workload."
+      },
+      {
+        "step": 5,
+        "config": [
+          "64kB",
+          8,
+          "4MB",
+          16
+        ],
+        "ipc": 0.641485,
+        "reasoning": "Previous steps indicate that scaling L1D to 128kB and L2 to 4MB yields the peak IPC of 0.6417. Let us test a hybrid configuration with L1D at 64kB and L2 at 4MB to explore the sensitivity of L2 capacity while moderating L1 size for potential area/latency tradeoffs."
+      },
+      {
+        "step": 6,
+        "config": [
+          "64kB",
+          8,
+          "2MB",
+          8
+        ],
+        "ipc": 0.641485,
+        "reasoning": "Step 2 achieved the highest efficient IPC of 0.6415 with L1 at 64kB/8-way and L2 at 2MB/8-way. Steps 3 through 5 showed that increasing L2 to 4MB yields negligible performance gains (0.6417) while significantly increasing area and access latency. Therefore, we revert to the optimal balance point of 64kB L1D and 2MB L2 to maximize the IPC-to-cost ratio."
+      },
+      {
+        "step": 7,
+        "config": [
+          "64kB",
+          8,
+          "2MB",
+          8
+        ],
+        "ipc": 0.641485,
+        "reasoning": "Since steps 2, 5, and 6 consistently yielded an optimal IPC of 0.6415 with a 64kB/8-way L1 and a 2MB/8-way L2, and increasing L2 to 4MB provided marginal gains (0.6417) at the cost of higher latency and area, we select the balanced and cost-effective 64kB L1 and 2MB L2 configuration as the optimal design point."
+      },
+      {
+        "step": 8,
+        "config": [
+          "64kB",
+          8,
+          "2MB",
+          8
+        ],
+        "ipc": 0.641485,
+        "reasoning": "Step 8 proposes the optimal and most cost-effective configuration based on previous evaluations where L1:64kB/8-way and L2:2MB/8-way achieved near-peak IPC (0.6415) without unnecessary area and latency overheads seen in 128kB L1 and 4MB L2 configurations."
+      },
+      {
+        "step": 9,
+        "config": [
+          "64kB",
+          8,
+          "2MB",
+          8
+        ],
+        "ipc": 0.641485,
+        "reasoning": "After evaluating various larger configurations up to 128kB L1D and 4MB L2, it was observed that scaling beyond 64kB for L1D and 2MB for L2 yields negligible to zero IPC improvement (peaking at 0.6417 vs 0.6415), while incurring higher latency and area costs. The configuration of 64kB 8-way L1D and 2MB 8-way L2 represents the optimal performance-to-cost sweet spot for this L2_Heavy workload and serves as the converged optimal design point."
+      },
+      {
+        "step": 10,
+        "config": [
+          "64kB",
+          8,
+          "2MB",
+          8
+        ],
+        "ipc": 0.641485,
+        "reasoning": "Based on the previous steps, increasing L2 capacity to 4MB with higher associativity yielded negligible improvement over 2MB with 8-way associativity (0.6417 vs 0.6415). Therefore, the 64kB/8-way L1 and 2MB/8-way L2 configuration represents the optimal balance of performance and efficiency for this L2_Heavy workload."
+      }
+    ]
+  },
+  "Assoc_Heavy": {
+    "Baseline_A": [
+      {
+        "step": 1,
+        "config": [
+          "64kB",
+          8,
+          "2MB",
+          8
+        ],
+        "ipc": 0.16675,
+        "reasoning": "Since the workload is Assoc_Heavy, increasing associativity for both L1D and L2 caches along with moderately larger sizes is the primary step to mitigate conflict misses and improve IPC."
+      },
+      {
+        "step": 2,
+        "config": [
+          "128kB",
+          16,
+          "4MB",
+          16
+        ],
+        "ipc": 0.588312,
+        "reasoning": "Since the workload is Assoc_Heavy and previous scaling to 64kB/8-way and 2MB/8-way showed a positive IPC improvement, I am scaling up both L1D and L2 to their maximum size and associativity (128kB/16-way and 4MB/16-way) to minimize conflict misses and maximize performance."
+      },
+      {
+        "step": 3,
+        "config": [
+          "128kB",
+          16,
+          "4MB",
+          16
+        ],
+        "ipc": 0.588312,
+        "reasoning": "Step 2 showed a massive IPC jump to 0.5883 when pushing to the maximum configuration limits (128kB/16-way L1D and 4MB/16-way L2). Since the workload is Assoc_Heavy, maximizing both associativity and capacity yields the best performance."
+      },
+      {
+        "step": 4,
+        "config": [
+          "128kB",
+          16,
+          "4MB",
+          16
+        ],
+        "ipc": 0.588312,
+        "reasoning": "Step 2 and 3 achieved the highest IPC of 0.5883 using the maximum associativity and cache sizes available (128kB/16-way L1D and 4MB/16-way L2). Since the workload is 'Assoc_Heavy', maintaining this maximum associativity and size configuration is optimal."
+      },
+      {
+        "step": 5,
+        "config": [
+          "128kB",
+          16,
+          "4MB",
+          16
+        ],
+        "ipc": 0.588312,
+        "reasoning": "Step 2, 3, and 4 evaluated the maximum capacity and associativity configuration (128kB L1D / 4MB L2 with 16-way associativity) and achieved a significantly higher IPC of 0.5883. Given the target workload is 'Assoc_Heavy', the maximum associativity and largest sizes yield the best performance, and we should maintain this configuration to ensure optimality."
+      },
+      {
+        "step": 6,
+        "config": [
+          "128kB",
+          16,
+          "4MB",
+          16
+        ],
+        "ipc": 0.588312,
+        "reasoning": "Previous evaluations at the maximum capacity and associativity (128kB L1D with 16-way and 4MB L2 with 16-way) yielded the highest IPC of 0.5883 for this Assoc_Heavy workload. Re-evaluating this optimal configuration to confirm stability."
+      },
+      {
+        "step": 7,
+        "config": [
+          "128kB",
+          16,
+          "4MB",
+          16
+        ],
+        "ipc": 0.588312,
+        "reasoning": "The workload is heavily associative-dependent (Assoc_Heavy). Steps 2 through 6 consistently achieved the highest IPC of 0.5883 with the maximum configuration of 128kB/16-way for L1D and 4MB/16-way for L2. Re-evaluating this optimal configuration to ensure stability."
+      },
+      {
+        "step": 8,
+        "config": [
+          "128kB",
+          16,
+          "4MB",
+          16
+        ],
+        "ipc": 0.588312,
+        "reasoning": "Since the workload is heavily associative and previous evaluations of the maximum configuration (L1D: 128kB/16-way and L2: 4MB/16-way) achieved the highest IPC of 0.5883, we should maintain this optimal configuration to verify stability and convergence."
+      },
+      {
+        "step": 9,
+        "config": [
+          "128kB",
+          16,
+          "4MB",
+          16
+        ],
+        "ipc": 0.588312,
+        "reasoning": "Since previous evaluations at the maximum capacities (128kB/16-way L1D and 4MB/16-way L2) yielded the highest IPC of 0.5883 for this Assoc_Heavy workload, we will re-verify this optimal configuration to ensure consistency before concluding the search."
+      },
+      {
+        "step": 10,
+        "config": [
+          "128kB",
+          16,
+          "4MB",
+          16
+        ],
+        "ipc": 0.588312,
+        "reasoning": "Since the workload is named Assoc_Heavy and previous evaluations consistently show that maximizing both size and associativity (128kB/16-way for L1D and 4MB/16-way for L2) yields the highest IPC (0.5883), we lock in this optimal configuration for the final step."
+      }
+    ],
+    "Baseline_B": [
+      {
+        "step": 1,
+        "config": [
+          "32kB",
+          8,
+          "1MB",
+          8
+        ],
+        "ipc": 0.164581,
+        "reasoning": "Since the workload is associativity-heavy, increasing both L1D and L2 associativity from 2 to 8 while moderately scaling up capacities will significantly reduce conflict misses and improve IPC."
+      },
+      {
+        "step": 2,
+        "config": [
+          "64kB",
+          16,
+          "2MB",
+          16
+        ],
+        "ipc": 0.588312,
+        "reasoning": "Since the workload is Assoc_Heavy, increasing associativity at both L1D and L2 levels should further reduce conflict misses. Scaling capacity alongside associativity will provide a balanced configuration to maximize IPC."
+      },
+      {
+        "step": 3,
+        "config": [
+          "128kB",
+          16,
+          "4MB",
+          16
+        ],
+        "ipc": 0.588312,
+        "reasoning": "Given that the workload is Assoc_Heavy and previous steps with increased capacity and high associativity (up to 16-way and larger sizes) yielded dramatic IPC improvements, we continue scaling both L1D and L2 to their maximum capacities and maximum associativity to further reduce conflict misses and improve IPC."
+      },
+      {
+        "step": 4,
+        "config": [
+          "64kB",
+          16,
+          "2MB",
+          16
+        ],
+        "ipc": 0.588312,
+        "reasoning": "Since stepping up to L1:128kB and L2:4MB yielded no further IPC improvement over L1:64kB and L2:2MB (both reaching 0.5883), we have found the optimal performance point. We should select the more cost-effective 64kB/2MB configuration with 16-way associativity to maintain peak IPC while saving area."
+      },
+      {
+        "step": 5,
+        "config": [
+          "64kB",
+          16,
+          "2MB",
+          16
+        ],
+        "ipc": 0.588312,
+        "reasoning": "Since steps 2, 3, and 4 show that 64kB/16-way L1D and 2MB/16-way L2 achieve the peak IPC of 0.5883 without further improvement from 128kB/4MB, we re-verify and stabilize at this optimal sweet spot for Assoc_Heavy workload."
+      },
+      {
+        "step": 6,
+        "config": [
+          "64kB",
+          16,
+          "2MB",
+          16
+        ],
+        "ipc": 0.588312,
+        "reasoning": "Since steps 2, 4, and 5 consistently achieved the high IPC plateau of 0.5883 with L1D=64kB/16-way and L2=2MB/16-way, and increasing to 128kB/4MB in step 3 did not yield any further improvement, this configuration represents the optimal balance of capacity, associativity, and latency for the Assoc_Heavy workload."
+      },
+      {
+        "step": 7,
+        "config": [
+          "64kB",
+          16,
+          "2MB",
+          16
+        ],
+        "ipc": 0.588312,
+        "reasoning": "Since steps 2 through 6 consistently yielded the highest IPC of 0.5883 with L1D: 64kB/16-way and L2: 2MB/16-way, and further scaling to 128kB/4MB did not improve performance, this configuration represents the saturation point and optimal tradeoff for the Assoc_Heavy workload."
+      },
+      {
+        "step": 8,
+        "config": [
+          "64kB",
+          16,
+          "2MB",
+          16
+        ],
+        "ipc": 0.588312,
+        "reasoning": "Since steps 2 through 7 show that an L1D capacity of 64kB with 16-way associativity and an L2 capacity of 2MB with 16-way associativity achieves the peak IPC of 0.5883, and increasing it further to 128kB/4MB in step 3 yielded no additional benefit, we converge on this optimal configuration."
+      },
+      {
+        "step": 9,
+        "config": [
+          "64kB",
+          16,
+          "2MB",
+          16
+        ],
+        "ipc": 0.588312,
+        "reasoning": "Since the workload is Assoc_Heavy, stepping up to 64kB/16-way L1D and 2MB/16-way L2 previously yielded the peak IPC of 0.5883, and larger sizes (128kB/4MB) showed no further gains. We re-test and confirm this optimal design point."
+      },
+      {
+        "step": 10,
+        "config": [
+          "64kB",
+          16,
+          "2MB",
+          16
+        ],
+        "ipc": 0.588312,
+        "reasoning": "Since the workload is Assoc_Heavy, previous steps have consistently shown that high associativity and moderate-to-high capacity (L1D: 64kB/16-way and L2: 2MB/16-way) successfully achieved the peak IPC of 0.5883. We will stick with this optimal configuration."
+      }
+    ],
+    "Baseline_C": [
+      {
+        "step": 1,
+        "config": [
+          "32kB",
+          4,
+          "1MB",
+          4
+        ],
+        "ipc": 0.161683,
+        "reasoning": "Starting the optimization process for Assoc_Heavy workload by moderately increasing both L1D and L2 capacities and associativity to reduce conflict and capacity misses."
+      },
+      {
+        "step": 2,
+        "config": [
+          "64kB",
+          8,
+          "2MB",
+          8
+        ],
+        "ipc": 0.16675,
+        "reasoning": "Since the workload is Assoc_Heavy, increasing associativity along with capacity for both L1D and L2 caches should significantly reduce conflict misses and improve IPC over the baseline and step 1 configurations."
+      },
+      {
+        "step": 3,
+        "config": [
+          "128kB",
+          16,
+          "4MB",
+          16
+        ],
+        "ipc": 0.588312,
+        "reasoning": "Since the workload is Assoc_Heavy and previous steps scaling up both capacity and associativity (from 2-way/4-way to 8-way) yielded a noticeable IPC improvement (0.1617 to 0.1668), we will push the design to the maximum available capacity and highest associativity (16-way) for both L1D and L2 caches to further mitigate conflict misses."
+      },
+      {
+        "step": 4,
+        "config": [
+          "128kB",
+          16,
+          "4MB",
+          16
+        ],
+        "ipc": 0.588312,
+        "reasoning": "Since the workload is heavily associativity and capacity sensitive (Assoc_Heavy) and stepping up to L1:128kB/16-way and L2:4MB/16-way yielded a massive IPC improvement to 0.5883, we should maintain these maximum limits to ensure optimal performance on this workload."
+      },
+      {
+        "step": 5,
+        "config": [
+          "128kB",
+          16,
+          "4MB",
+          16
+        ],
+        "ipc": 0.588312,
+        "reasoning": "Since steps 3 and 4 have already identified the saturation point at L1D: 128kB/16-way and L2: 4MB/16-way which yields a significantly higher IPC of 0.5883 for the Assoc_Heavy workload, we propose to stay at this maximum configuration to confirm stability and ensure no further scaling is required."
+      },
+      {
+        "step": 6,
+        "config": [
+          "128kB",
+          16,
+          "4MB",
+          16
+        ],
+        "ipc": 0.588312,
+        "reasoning": "Since the workload Assoc_Heavy exhibits a massive jump in IPC when moving to the maximum capacity and associativity (128kB/16-way for L1D and 4MB/16-way for L2), which has been consistently verified across multiple evaluation steps, we will maintain this optimal configuration to ensure peak performance."
+      },
+      {
+        "step": 7,
+        "config": [
+          "128kB",
+          16,
+          "4MB",
+          16
+        ],
+        "ipc": 0.588312,
+        "reasoning": "Since steps 3 through 6 have established that the maximum associativity and capacity configuration (L1D: 128kB/16-way and L2: 4MB/16-way) achieves the highest observed IPC of 0.5883 for this associativity-heavy workload, we maintain this optimal configuration for step 7."
+      },
+      {
+        "step": 8,
+        "config": [
+          "128kB",
+          16,
+          "4MB",
+          16
+        ],
+        "ipc": 0.588312,
+        "reasoning": "Given that previous evaluations at maximum capacity and associativity (L1: 128kB/16-way, L2: 4MB/16-way) achieved the highest IPC of 0.5883 for the Assoc_Heavy workload, and this represents the upper limit of the design space, we maintain this configuration to ensure stability and verify the optimal design point."
+      },
+      {
+        "step": 9,
+        "config": [
+          "128kB",
+          16,
+          "4MB",
+          16
+        ],
+        "ipc": 0.588312,
+        "reasoning": "Since previous steps confirmed that the maximum capacity and associativity configuration (L1:128kB/16-way and L2:4MB/16-way) successfully achieved the highest peak IPC of 0.5883 for the Assoc_Heavy workload, we will maintain this optimal configuration for step 9 to verify stability."
+      },
+      {
+        "step": 10,
+        "config": [
+          "128kB",
+          16,
+          "4MB",
+          16
+        ],
+        "ipc": 0.588312,
+        "reasoning": "Since previous steps confirmed the maximum IPC of 0.5883 is achieved with the maximum capacity and associativity configuration (L1: 128kB/16-way, L2: 4MB/16-way), we propose maintaining this optimal configuration for the final step."
+      }
+    ]
+  }
+}

@@ -65,3 +65,4 @@ env/
 
 # Pre-commit caches & patches
 .pre-commit-config.yaml.cache
+.env
