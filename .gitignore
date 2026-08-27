@@ -38,3 +38,30 @@ configs/dram/lowp_sweep.cfg
 .vscode
 typings
 .DS_Store
+dse_env
+# Compiled DSE experiment binaries
+dse_workload
+dse_workload_fast
+dse_worload_original
+*.out
+
+# Simulation traces, statistics, and run logs
+stats.txt
+config.ini
+config.json
+*.log
+*.trace
+*.dump
+
+# Python artifacts and virtualenvs
+__pycache__/
+*.py[cod]
+*$py.class
+.venv
+venv/
+env/
+.pytest_cache/
+.coverage
+
+# Pre-commit caches & patches
+.pre-commit-config.yaml.cache
