@@ -1,0 +1,3584 @@
+{
+  "Workload_Alpha": {
+    "Baseline_B": [
+      {
+        "workload": "Workload_Alpha",
+        "baseline": "Baseline_B",
+        "seed": 42,
+        "history": [
+          {
+            "step": 1,
+            "target_subsystem": "all",
+            "config": [
+              4,
+              64,
+              4,
+              "32kB",
+              4,
+              "512kB"
+            ],
+            "ipc": 1.052865,
+            "cost": 861.6,
+            "feasible": true,
+            "active_mutations_count": 1,
+            "inactive_mutations_count": 4,
+            "reasoning": "Stepping up from the baseline, we increase issue width to 4, ROB size to 64, L1 MSHRs to 4, and double the L1D capacity to 32kB with 4-way associativity while keeping L2 at 512kB. This balances core and memory parallelism and comfortably fits within the 1500 KB budget."
+          },
+          {
+            "step": 2,
+            "target_subsystem": "all",
+            "config": [
+              4,
+              128,
+              4,
+              "32kB",
+              4,
+              "1MB"
+            ],
+            "ipc": 1.060903,
+            "cost": 1469.6,
+            "feasible": true,
+            "active_mutations_count": 0,
+            "inactive_mutations_count": 2,
+            "reasoning": "Expanding ROB to 128 and L2 capacity to 1024 KB to capture larger working sets, while keeping issue width at 4w and L1D at 32kB to ensure the total cost remains well under the 1500 KB budget constraint."
+          },
+          {
+            "step": 3,
+            "target_subsystem": "all",
+            "config": [
+              4,
+              128,
+              4,
+              "32kB",
+              4,
+              "1MB"
+            ],
+            "ipc": 1.060903,
+            "cost": 1469.6,
+            "feasible": true,
+            "active_mutations_count": 0,
+            "inactive_mutations_count": 0,
+            "reasoning": "Building upon Step 2 which reached an IPC of 1.0609 at a cost of 1469.6 KB, we are very close to the 1500 KB budget limit. Since we cannot scale L2 capacity or issue width further without violating the budget, we maintain the optimal balance found in Step 2 while exploring if minor tuning or holding the configuration stable is best to ensure no budget overflow occurs while maintaining peak performance."
+          },
+          {
+            "step": 4,
+            "target_subsystem": "all",
+            "config": [
+              4,
+              128,
+              8,
+              "32kB",
+              4,
+              "1MB"
+            ],
+            "ipc": 1.060918,
+            "cost": 1489.6,
+            "feasible": true,
+            "active_mutations_count": 0,
+            "inactive_mutations_count": 1,
+            "reasoning": "Step 4 configuration slightly increases L1 D-cache MSHRs from 4 to 8 while maintaining the successful core and cache configuration of 4-wide issue, 128 ROB, 32KB L1, and 1MB L2. This targets memory-level parallelism improvements without exceeding the 1500 KB cost budget."
+          },
+          {
+            "step": 5,
+            "target_subsystem": "all",
+            "config": [
+              4,
+              128,
+              8,
+              "32kB",
+              4,
+              "1MB"
+            ],
+            "ipc": 1.060918,
+            "cost": 1489.6,
+            "feasible": true,
+            "active_mutations_count": 0,
+            "inactive_mutations_count": 0,
+            "reasoning": "Building on Step 4 which was close to the 1500 KB budget limit (1489.6 KB), we maintain the optimal core and memory parameters that achieved the highest IPC so far while strictly staying within the 1500 KB threshold."
+          },
+          {
+            "step": 6,
+            "target_subsystem": "all",
+            "config": [
+              4,
+              128,
+              8,
+              "32kB",
+              4,
+              "1MB"
+            ],
+            "ipc": 1.060918,
+            "cost": 1489.6,
+            "feasible": true,
+            "active_mutations_count": 0,
+            "inactive_mutations_count": 0,
+            "reasoning": "Building upon Step 5 which yielded a feasible and high-performing configuration near the 1500 KB limit (1489.6 KB), we maintain these parameters as they successfully maximize IPC for Workload Alpha under the hardware budget constraint."
+          },
+          {
+            "step": 7,
+            "target_subsystem": "all",
+            "config": [
+              4,
+              128,
+              8,
+              "32kB",
+              4,
+              "1MB"
+            ],
+            "ipc": 1.060918,
+            "cost": 1489.6,
+            "feasible": true,
+            "active_mutations_count": 0,
+            "inactive_mutations_count": 0,
+            "reasoning": "Building upon the stable high-performing configuration from steps 2-6 with 4-wide issue, 128 ROB, 8 MSHRs, 32KB 4-way L1D, and 1MB L2 cache, which achieves a feasible cost of 1489.6 KB under the 1500 KB budget while maximizing IPC."
+          },
+          {
+            "step": 8,
+            "target_subsystem": "all",
+            "config": [
+              4,
+              128,
+              8,
+              "32kB",
+              4,
+              "1MB"
+            ],
+            "ipc": 1.060918,
+            "cost": 1489.6,
+            "feasible": true,
+            "active_mutations_count": 0,
+            "inactive_mutations_count": 0,
+            "reasoning": "Building upon the feasible and high-performing configuration from previous steps, we maintain IW:4, ROB:128, MSHRs:8, L1D:32kB/4-way, and L2:1024kB (1MB) to stay just under the 1500 KB budget limit (cost approx 1489.6 KB) while maximizing IPC."
+          },
+          {
+            "step": 9,
+            "target_subsystem": "all",
+            "config": [
+              4,
+              128,
+              8,
+              "32kB",
+              4,
+              "1MB"
+            ],
+            "ipc": 1.060918,
+            "cost": 1489.6,
+            "feasible": true,
+            "active_mutations_count": 0,
+            "inactive_mutations_count": 0,
+            "reasoning": "We maintain the best performing feasible configuration found so far, keeping the total cost at 1489.6 KB which is just under the 1500 KB limit, while maximizing IPC based on our exploration trajectory."
+          },
+          {
+            "step": 10,
+            "target_subsystem": "all",
+            "config": [
+              4,
+              128,
+              8,
+              "32kB",
+              4,
+              "1MB"
+            ],
+            "ipc": 1.060918,
+            "cost": 1489.6,
+            "feasible": true,
+            "active_mutations_count": 0,
+            "inactive_mutations_count": 0,
+            "reasoning": "Step 10 design maintains the optimal configuration found in steps 4-9 with issue width 4, ROB 128, 8 MSHRs, 32 KB L1D with 4-way associativity, and 1MB L2 cache, which achieves a high IPC of 1.0609 while strictly respecting the hardware budget constraint of 1500 KB (total cost 1489.6 KB)."
+          }
+        ],
+        "prompt_tokens": 6801,
+        "completion_tokens": 1617,
+        "constrained_optimal_ipc": 1.073252,
+        "constrained_optimal_cfg": [
+          8,
+          128,
+          8,
+          "64kB",
+          8,
+          "512kB"
+        ]
+      },
+      {
+        "workload": "Workload_Alpha",
+        "baseline": "Baseline_B",
+        "seed": 100,
+        "history": [
+          {
+            "step": 1,
+            "target_subsystem": "all",
+            "config": [
+              4,
+              64,
+              4,
+              "32kB",
+              4,
+              "1MB"
+            ],
+            "ipc": 1.052865,
+            "cost": 1373.6,
+            "feasible": true,
+            "active_mutations_count": 1,
+            "inactive_mutations_count": 5,
+            "reasoning": "Stepping up issue width to 4, ROB to 64, and L2 to 1MB to balance core parallelism and memory hierarchy performance while remaining well under the 1500 KB budget limit."
+          },
+          {
+            "step": 2,
+            "target_subsystem": "all",
+            "config": [
+              4,
+              64,
+              4,
+              "32kB",
+              8,
+              "1MB"
+            ],
+            "ipc": 1.052866,
+            "cost": 1375.2,
+            "feasible": true,
+            "active_mutations_count": 0,
+            "inactive_mutations_count": 1,
+            "reasoning": "Building on the successful Step 1 configuration which had a cost of 1373.6 KB, we can increase the L1D cache associativity from 4-way to 8-way to further reduce cache conflict misses with only a marginal increase in cost, keeping the total well below the 1500 KB budget while aiming to improve IPC."
+          },
+          {
+            "step": 3,
+            "target_subsystem": "all",
+            "config": [
+              4,
+              64,
+              4,
+              "32kB",
+              4,
+              "1MB"
+            ],
+            "ipc": 1.052865,
+            "cost": 1373.6,
+            "feasible": true,
+            "active_mutations_count": 0,
+            "inactive_mutations_count": 1,
+            "reasoning": "Building upon the feasible and high-performing Step 1 configuration, we retain 4-wide issue, 64 ROB entries, 4 MSHRs, 32KB 4-way L1D, and 1MB L2 cache to maintain a cost of 1373.6 KB, well within the 1500 KB limit while preserving the solid IPC of 1.0529."
+          },
+          {
+            "step": 4,
+            "target_subsystem": "all",
+            "config": [
+              4,
+              128,
+              4,
+              "32kB",
+              4,
+              "1MB"
+            ],
+            "ipc": 1.060903,
+            "cost": 1469.6,
+            "feasible": true,
+            "active_mutations_count": 0,
+            "inactive_mutations_count": 1,
+            "reasoning": "Increasing ROB size from 64 to 128 to capture more instruction-level parallelism while maintaining the feasible cost envelope below the 1500 KB limit."
+          },
+          {
+            "step": 5,
+            "target_subsystem": "all",
+            "config": [
+              4,
+              128,
+              4,
+              "32kB",
+              4,
+              "1MB"
+            ],
+            "ipc": 1.060903,
+            "cost": 1469.6,
+            "feasible": true,
+            "active_mutations_count": 0,
+            "inactive_mutations_count": 0,
+            "reasoning": "Building upon the feasible and high-performing Step 4 configuration (IW:4, ROB:128, MSHR:4, L1:32KB/4-way, L2:1024KB) which yielded an IPC of 1.0609 at a cost of 1469.6 KB, we maintain these optimal core and memory settings as they push IPC to the maximum while staying safely under the 1500 KB budget."
+          },
+          {
+            "step": 6,
+            "target_subsystem": "all",
+            "config": [
+              4,
+              128,
+              4,
+              "32kB",
+              4,
+              "1MB"
+            ],
+            "ipc": 1.060903,
+            "cost": 1469.6,
+            "feasible": true,
+            "active_mutations_count": 0,
+            "inactive_mutations_count": 0,
+            "reasoning": "Moving to step 6, we build upon the successful configuration from step 4 and 5 (IW:4w, ROB:128, MSHR:4, L1:32kB/4w, L2:1MB) which yielded an improved IPC of 1.0609 at a cost of 1469.6 KB. To maximize IPC further while strictly staying below the 1500 KB hardware budget limit, we retain these optimal parameters as they provide the best trade-off between core resources and memory subsystem capacity without exceeding constraints."
+          },
+          {
+            "step": 7,
+            "target_subsystem": "all",
+            "config": [
+              4,
+              128,
+              4,
+              "32kB",
+              4,
+              "1MB"
+            ],
+            "ipc": 1.060903,
+            "cost": 1469.6,
+            "feasible": true,
+            "active_mutations_count": 0,
+            "inactive_mutations_count": 0,
+            "reasoning": "Building upon the feasible and high-performing configuration from Step 6 (IW:4, ROB:128, MSHR:4, L1:32kB/4w, L2:1MB with cost 1469.6 KB), we maintain these optimal settings as we are very close to the 1500 KB hardware budget limit while maximizing IPC."
+          },
+          {
+            "step": 8,
+            "target_subsystem": "all",
+            "config": [
+              4,
+              128,
+              4,
+              "32kB",
+              4,
+              "1MB"
+            ],
+            "ipc": 1.060903,
+            "cost": 1469.6,
+            "feasible": true,
+            "active_mutations_count": 0,
+            "inactive_mutations_count": 0,
+            "reasoning": "Building upon the feasible and high-performing configuration from steps 4-7 with issue width 4, rob size 128, mshrs 4, L1 32kB/4w, and L2 1024kB, which yields a solid IPC of 1.0609 while strictly adhering to the 1500 KB budget limit with a total cost of 1469.6 KB."
+          },
+          {
+            "step": 9,
+            "target_subsystem": "all",
+            "config": [
+              4,
+              128,
+              4,
+              "32kB",
+              4,
+              "1MB"
+            ],
+            "ipc": 1.060903,
+            "cost": 1469.6,
+            "feasible": true,
+            "active_mutations_count": 0,
+            "inactive_mutations_count": 0,
+            "reasoning": "Based on previous feasible iterations (Steps 4-8), setting issue width to 4, ROB to 128, MSHRs to 4, L1 to 32KB 4-way, and L2 to 1024KB yields a high IPC of 1.0609 while strictly keeping the total cost at 1469.6 KB, which is below the 1500 KB limit."
+          },
+          {
+            "step": 10,
+            "target_subsystem": "all",
+            "config": [
+              4,
+              128,
+              4,
+              "32kB",
+              4,
+              "1MB"
+            ],
+            "ipc": 1.060903,
+            "cost": 1469.6,
+            "feasible": true,
+            "active_mutations_count": 0,
+            "inactive_mutations_count": 0,
+            "reasoning": "Step 10 final optimization leveraging the most balanced and highest performing configuration found within the 1500 KB budget, specifically using IW 4, ROB 128, MSHR 4, L1 32KB (4-way), and L2 1024KB yielding a feasible cost of 1469.6 KB and maximum observed IPC of 1.0609."
+          }
+        ],
+        "prompt_tokens": 6777,
+        "completion_tokens": 1725,
+        "constrained_optimal_ipc": 1.073252,
+        "constrained_optimal_cfg": [
+          8,
+          128,
+          8,
+          "64kB",
+          8,
+          "512kB"
+        ]
+      },
+      {
+        "workload": "Workload_Alpha",
+        "baseline": "Baseline_B",
+        "seed": 2026,
+        "history": [
+          {
+            "step": 1,
+            "target_subsystem": "all",
+            "config": [
+              4,
+              64,
+              4,
+              "32kB",
+              4,
+              "512kB"
+            ],
+            "ipc": 1.052865,
+            "cost": 861.6,
+            "feasible": true,
+            "active_mutations_count": 1,
+            "inactive_mutations_count": 4,
+            "reasoning": "Step 1: Increase issue width to 4, ROB to 64, and L1 cache to 32 KB with 4 MSHRs and 4-way associativity to improve IPC while keeping the estimated cost well below the 1500 KB hardware budget."
+          },
+          {
+            "step": 2,
+            "target_subsystem": "all",
+            "config": [
+              4,
+              128,
+              4,
+              "32kB",
+              4,
+              "1MB"
+            ],
+            "ipc": 1.060903,
+            "cost": 1469.6,
+            "feasible": true,
+            "active_mutations_count": 0,
+            "inactive_mutations_count": 2,
+            "reasoning": "Expanding the L2 cache capacity to 1024 KB and increasing the ROB size to 128 while keeping issue width at 4 helps capture larger working sets and exposes more instruction-level parallelism, raising IPC further while maintaining a well-balanced design within the 1500 KB budget."
+          },
+          {
+            "step": 3,
+            "target_subsystem": "all",
+            "config": [
+              4,
+              128,
+              4,
+              "32kB",
+              4,
+              "1MB"
+            ],
+            "ipc": 1.060903,
+            "cost": 1469.6,
+            "feasible": true,
+            "active_mutations_count": 0,
+            "inactive_mutations_count": 0,
+            "reasoning": "Building on Step 2 which reached an IPC of 1.0609 at 1469.6 KB, we are very close to the 1500 KB limit. To explore further without exceeding the budget, we maintain the same high-performing configuration of issue_width=4, rob_size=128, mshrs=4, L1=32kB (4-way), and L2=1024kB, ensuring we stay strictly under the budget constraint while fine-tuning other interactions if possible."
+          },
+          {
+            "step": 4,
+            "target_subsystem": "all",
+            "config": [
+              4,
+              128,
+              4,
+              "32kB",
+              4,
+              "1MB"
+            ],
+            "ipc": 1.060903,
+            "cost": 1469.6,
+            "feasible": true,
+            "active_mutations_count": 0,
+            "inactive_mutations_count": 0,
+            "reasoning": "Building upon Step 3's configuration which successfully stayed under the 1500 KB budget with an IPC of 1.0609, we maintain the optimal balance of core width, robust ROB, and memory hierarchy while exploring potential minor refinements."
+          },
+          {
+            "step": 5,
+            "target_subsystem": "all",
+            "config": [
+              4,
+              128,
+              4,
+              "32kB",
+              4,
+              "1MB"
+            ],
+            "ipc": 1.060903,
+            "cost": 1469.6,
+            "feasible": true,
+            "active_mutations_count": 0,
+            "inactive_mutations_count": 0,
+            "reasoning": "Since the previous configurations achieved stable high performance near 1.0609 IPC while maintaining a feasible cost of 1469.6 KB which is under the 1500 KB limit, we will maintain this balanced configuration for Step 5 to ensure reliable execution before further pushing edge parameters."
+          },
+          {
+            "step": 6,
+            "target_subsystem": "all",
+            "config": [
+              4,
+              128,
+              4,
+              "32kB",
+              4,
+              "1MB"
+            ],
+            "ipc": 1.060903,
+            "cost": 1469.6,
+            "feasible": true,
+            "active_mutations_count": 0,
+            "inactive_mutations_count": 0,
+            "reasoning": "Building upon the stable and feasible configuration discovered in steps 2 through 5 (Cost: 1469.6 KB, which is safely below the 1500 KB budget limit), we maintain the optimal balance of core resources (4-wide issue, 128 ROB, 4 MSHRs) and memory hierarchy (32 KB 4-way L1D and 1 MB L2 cache) to continue maximizing IPC for Workload Alpha without violating the hardware cost constraints."
+          },
+          {
+            "step": 7,
+            "target_subsystem": "all",
+            "config": [
+              4,
+              128,
+              4,
+              "32kB",
+              4,
+              "1MB"
+            ],
+            "ipc": 1.060903,
+            "cost": 1469.6,
+            "feasible": true,
+            "active_mutations_count": 0,
+            "inactive_mutations_count": 0,
+            "reasoning": "Step 7 continues with the highly tuned configuration from Step 2 which achieved an IPC of 1.0609 at a cost of 1469.6 KB, safely below the 1500 KB limit while maximizing execution performance."
+          },
+          {
+            "step": 8,
+            "target_subsystem": "all",
+            "config": [
+              4,
+              128,
+              4,
+              "32kB",
+              4,
+              "1MB"
+            ],
+            "ipc": 1.060903,
+            "cost": 1469.6,
+            "feasible": true,
+            "active_mutations_count": 0,
+            "inactive_mutations_count": 0,
+            "reasoning": "Building on the previous feasible step which achieved high IPC at 1469.6 KB, we retain the balanced configuration of 4-wide issue, 128 ROB, 4 MSHRs, 32KB 4-way L1D, and 1MB L2 cache to stay strictly within the 1500 KB budget while maximizing performance."
+          },
+          {
+            "step": 9,
+            "target_subsystem": "all",
+            "config": [
+              4,
+              128,
+              4,
+              "32kB",
+              4,
+              "1MB"
+            ],
+            "ipc": 1.060903,
+            "cost": 1469.6,
+            "feasible": true,
+            "active_mutations_count": 0,
+            "inactive_mutations_count": 0,
+            "reasoning": "Building upon the stable and high IPC design discovered in previous steps, maintaining (IW:4w, ROB:128, MSHR:4, L1:32kB/4w, L2:1MB) which yields an IPC of 1.0609 at a cost of 1469.6 KB, fully respecting the <= 1500 KB hardware budget."
+          },
+          {
+            "step": 10,
+            "target_subsystem": "all",
+            "config": [
+              4,
+              128,
+              4,
+              "32kB",
+              4,
+              "1MB"
+            ],
+            "ipc": 1.060903,
+            "cost": 1469.6,
+            "feasible": true,
+            "active_mutations_count": 0,
+            "inactive_mutations_count": 0,
+            "reasoning": "Based on the previous steps, the configuration with issue_width=4, rob_size=128, l1d_mshrs=4, l1d_capacity_kb=32, l1d_associativity=4, and l2_capacity_kb=1024 yields the highest IPC of 1.0609 while strictly respecting the hardware cost budget of 1500 KB at 1469.6 KB."
+          }
+        ],
+        "prompt_tokens": 6801,
+        "completion_tokens": 1675,
+        "constrained_optimal_ipc": 1.073252,
+        "constrained_optimal_cfg": [
+          8,
+          128,
+          8,
+          "64kB",
+          8,
+          "512kB"
+        ]
+      }
+    ],
+    "Baseline_D": [
+      {
+        "workload": "Workload_Alpha",
+        "baseline": "Baseline_D",
+        "seed": 42,
+        "history": [
+          {
+            "step": 1,
+            "target_subsystem": "core_execution",
+            "config": [
+              4,
+              64,
+              4,
+              "16kB",
+              2,
+              "512kB"
+            ],
+            "ipc": 1.052857,
+            "cost": 844.4,
+            "feasible": true,
+            "active_mutations_count": 1,
+            "inactive_mutations_count": 2,
+            "reasoning": "Starting the optimization process by targeting the core_execution subsystem to scale up the issue width, ROB size, and L1D MSHRs from the baseline configuration. This will test the impact on IPC while maintaining the memory hierarchy frozen and staying safely well within the 1500 KB budget limit."
+          },
+          {
+            "step": 2,
+            "target_subsystem": "memory_hierarchy",
+            "config": [
+              4,
+              64,
+              4,
+              "32kB",
+              4,
+              "1MB"
+            ],
+            "ipc": 1.052865,
+            "cost": 1373.6,
+            "feasible": true,
+            "active_mutations_count": 0,
+            "inactive_mutations_count": 3,
+            "reasoning": "Since core execution was successfully scaled up in Step 1 to a balanced configuration of 4-wide and ROB 64, the current memory hierarchy (16KB L1, 512KB L2) is now the primary bottleneck limiting further performance gains. We target memory_hierarchy to increase L1 capacity to 32KB and L2 capacity to 1024KB, which fits comfortably within the 1500 KB hardware budget constraint while improving IPC."
+          },
+          {
+            "step": 3,
+            "target_subsystem": "core_execution",
+            "config": [
+              8,
+              128,
+              8,
+              "32kB",
+              4,
+              "1MB"
+            ],
+            "ipc": 1.073077,
+            "cost": 1689.6,
+            "feasible": false,
+            "active_mutations_count": 1,
+            "inactive_mutations_count": 2,
+            "reasoning": "The current memory hierarchy is well-balanced at 1373.6 KB, which is close to the 1500 KB budget limit. Mutating the core execution subsystem to test higher issue width (8w), ROB size (128), and MSHRs (8) will help determine if further parallelism can boost IPC while keeping memory parameters frozen to avoid exceeding the hardware cost budget."
+          },
+          {
+            "step": 4,
+            "target_subsystem": "core_execution",
+            "config": [
+              4,
+              64,
+              4,
+              "32kB",
+              4,
+              "1MB"
+            ],
+            "ipc": 1.052865,
+            "cost": 1373.6,
+            "feasible": true,
+            "active_mutations_count": 1,
+            "inactive_mutations_count": 2,
+            "reasoning": "The previous step (Step 3) attempted to scale the core to IW:8w, ROB:128, and MSHR:8 while keeping memory at L1:32kB/4w and L2:1MB, which resulted in an infeasible cost of 1689.6 KB. To stay strictly within the 1500 KB hardware budget constraint while maintaining high performance, we must dial back the core parameters to a balanced configuration such as IW:4w, ROB:64, and MSHR:4, while keeping the memory hierarchy frozen at its current feasible state (L1:32kB/4w, L2:1024kB)."
+          },
+          {
+            "step": 5,
+            "target_subsystem": "memory_hierarchy",
+            "config": [
+              4,
+              64,
+              4,
+              "64kB",
+              4,
+              "1MB"
+            ],
+            "ipc": 1.053,
+            "cost": 1407.2,
+            "feasible": true,
+            "active_mutations_count": 0,
+            "inactive_mutations_count": 1,
+            "reasoning": "Since core execution was pushed to issue_width 4 and ROB 64 in Step 1 and an attempt to scale to 8-wide exceeded the budget, we keep the core parameters frozen at this optimal feasible point. We now target the memory hierarchy to slightly optimize L1 capacity from 32KB to 64KB while keeping the L2 capacity at 1024KB (1MB) to stay just under the 1500 KB budget limit."
+          },
+          {
+            "step": 6,
+            "target_subsystem": "core_execution",
+            "config": [
+              4,
+              128,
+              4,
+              "64kB",
+              4,
+              "1MB"
+            ],
+            "ipc": 1.061016,
+            "cost": 1503.2,
+            "feasible": false,
+            "active_mutations_count": 0,
+            "inactive_mutations_count": 1,
+            "reasoning": "The current memory hierarchy is maximized within the 1500 KB budget at 1407.2 KB using L1:64kB and L2:1MB. Scaling core execution to a 128-entry ROB while keeping issue width at 4w and MSHRs at 4 increases the core cost slightly, but it should remain well under the 1500 KB budget limit while potentially improving IPC further."
+          },
+          {
+            "step": 7,
+            "target_subsystem": "core_execution",
+            "config": [
+              4,
+              64,
+              4,
+              "64kB",
+              4,
+              "1MB"
+            ],
+            "ipc": 1.053,
+            "cost": 1407.2,
+            "feasible": true,
+            "active_mutations_count": 0,
+            "inactive_mutations_count": 1,
+            "reasoning": "The previous configuration with ROB:128 slightly exceeded the budget at 1503.2 KB. I am targeting core_execution to reduce the ROB size from 128 back to 64 while keeping issue_width at 4 and MSHRs at 4. This will bring the total cost safely below the 1500 KB hardware budget constraint while preserving high performance."
+          },
+          {
+            "step": 8,
+            "target_subsystem": "core_execution",
+            "config": [
+              4,
+              64,
+              4,
+              "64kB",
+              4,
+              "1MB"
+            ],
+            "ipc": 1.053,
+            "cost": 1407.2,
+            "feasible": true,
+            "active_mutations_count": 0,
+            "inactive_mutations_count": 0,
+            "reasoning": "The current system state is at cost 1407.2 KB, which is close to the 1500 KB hardware budget limit. Exploring memory hierarchy adjustments or higher core configurations (like ROB 128) already proved infeasible or too costly. We will probe the core_execution subsystem to test alternative mshr or issue width combinations without exceeding the 1500 KB limit."
+          },
+          {
+            "step": 9,
+            "target_subsystem": "core_execution",
+            "config": [
+              4,
+              64,
+              8,
+              "64kB",
+              4,
+              "1MB"
+            ],
+            "ipc": 1.053,
+            "cost": 1427.2,
+            "feasible": true,
+            "active_mutations_count": 0,
+            "inactive_mutations_count": 1,
+            "reasoning": "We need to maximize IPC while staying strictly under the 1500 KB budget limit. The current configuration is at 1407.2 KB with IW:4, ROB:64, MSHR:4, L1:64kB, L2:1MB. Increasing MSHRs from 4 to 8 increases the core cost slightly by 20 units (5 * 4), bringing the total cost to roughly 1427.2 KB, which remains safely below the 1500 KB budget constraint and may extract slightly higher IPC by alleviating memory-level parallelism bottlenecks."
+          },
+          {
+            "step": 10,
+            "target_subsystem": "memory_hierarchy",
+            "config": [
+              4,
+              64,
+              8,
+              "64kB",
+              8,
+              "1MB"
+            ],
+            "ipc": 1.053,
+            "cost": 1430.4,
+            "feasible": true,
+            "active_mutations_count": 0,
+            "inactive_mutations_count": 1,
+            "reasoning": "Step 10 is the final iteration. The current core configuration is solid (IW:4w, ROB:64, MSHR:8) with a cost of 1427.2 KB leaving very little margin under the 1500 KB budget. Mutating memory hierarchy associativity from 4-way to 8-way slightly increases the L1 cost formulation marginally within budget while keeping L2 at 1MB (1024 KB) and L1 capacity at 64 KB, perfectly utilizing the remaining headroom to maximize performance."
+          }
+        ],
+        "prompt_tokens": 8375,
+        "completion_tokens": 2108,
+        "constrained_optimal_ipc": 1.073252,
+        "constrained_optimal_cfg": [
+          8,
+          128,
+          8,
+          "64kB",
+          8,
+          "512kB"
+        ]
+      },
+      {
+        "workload": "Workload_Alpha",
+        "baseline": "Baseline_D",
+        "seed": 100,
+        "history": [
+          {
+            "step": 1,
+            "target_subsystem": "both",
+            "config": [
+              4,
+              64,
+              4,
+              "32kB",
+              4,
+              "1MB"
+            ],
+            "ipc": 1.052865,
+            "cost": 1373.6,
+            "feasible": true,
+            "active_mutations_count": 1,
+            "inactive_mutations_count": 5,
+            "reasoning": "Starting from the conservative baseline, I will scale both the core execution resources (doubling issue width, ROB, and MSHRs) and the memory hierarchy (doubling L1 and L2 capacities) simultaneously to evaluate IPC gains while ensuring the estimated cost remains well under the 1500 KB hardware budget."
+          },
+          {
+            "step": 2,
+            "target_subsystem": "core_execution",
+            "config": [
+              8,
+              128,
+              8,
+              "32kB",
+              4,
+              "1MB"
+            ],
+            "ipc": 1.073077,
+            "cost": 1689.6,
+            "feasible": false,
+            "active_mutations_count": 1,
+            "inactive_mutations_count": 2,
+            "reasoning": "Since the current memory hierarchy is already consuming a large portion of the 1500 KB budget at 1373.6 KB, we freeze the memory parameters and target the core_execution subsystem to test higher issue width, larger ROB, and more MSHRs while keeping the total system cost safely below the 1500 KB limit."
+          },
+          {
+            "step": 3,
+            "target_subsystem": "core_execution",
+            "config": [
+              4,
+              64,
+              4,
+              "32kB",
+              4,
+              "1MB"
+            ],
+            "ipc": 1.052865,
+            "cost": 1373.6,
+            "feasible": true,
+            "active_mutations_count": 1,
+            "inactive_mutations_count": 2,
+            "reasoning": "The previous configuration at Step 2 exceeded the hardware budget of 1500 KB with a cost of 1689.6 KB due to an aggressive core configuration combined with a 1MB L2 cache. To bring the system back to a feasible state while retaining high performance, I will scale down the core execution parameters back to issue_width 4, ROB 64, and L1 MSHRs 4, while keeping the memory hierarchy frozen at L1:32kB/4w and L2:1MB. This reduces the core cost significantly, resulting in a total cost well below the 1500 KB limit."
+          },
+          {
+            "step": 4,
+            "target_subsystem": "core_execution",
+            "config": [
+              4,
+              128,
+              4,
+              "32kB",
+              4,
+              "1MB"
+            ],
+            "ipc": 1.060903,
+            "cost": 1469.6,
+            "feasible": true,
+            "active_mutations_count": 0,
+            "inactive_mutations_count": 1,
+            "reasoning": "Since the previous attempt to scale all core parameters to 8-wide and 128-ROB exceeded the 1500 KB budget, we will incrementally increase only the ROB size to 128 while keeping issue width at 4 and MSHRs at 4. This targeted core mutation keeps the cost within the feasible budget while aiming to capture additional ILP."
+          },
+          {
+            "step": 5,
+            "target_subsystem": "memory_hierarchy",
+            "config": [
+              4,
+              128,
+              4,
+              "32kB",
+              4,
+              "1MB"
+            ],
+            "ipc": 1.060903,
+            "cost": 1469.6,
+            "feasible": true,
+            "active_mutations_count": 0,
+            "inactive_mutations_count": 0,
+            "reasoning": "The core execution configuration is already at a robust point with IW:4w and ROB:128, which consumes 1469.6 KB, leaving very little headroom under the 1500 KB budget. Since further core mutations like increasing issue width to 8w or MSHRs to 8 will cause budget violations as seen in Step 2, I will freeze the core and explore the memory hierarchy parameters to see if minor adjustments can yield efficiency gains without exceeding the strict hardware budget."
+          },
+          {
+            "step": 6,
+            "target_subsystem": "memory_hierarchy",
+            "config": [
+              4,
+              128,
+              4,
+              "32kB",
+              4,
+              "1MB"
+            ],
+            "ipc": 1.060903,
+            "cost": 1469.6,
+            "feasible": true,
+            "active_mutations_count": 0,
+            "inactive_mutations_count": 0,
+            "reasoning": "The core configuration is already at a high performance point with ROB:128 and IW:4 within the 1500 KB budget (Cost: 1469.6 KB). Attempting any larger core configuration (like issue width 8) immediately violates the budget constraint. Therefore, we should freeze the core parameters and explore memory hierarchy adjustments or keep the stable feasible point to refine the design in the remaining steps."
+          },
+          {
+            "step": 7,
+            "target_subsystem": "core_execution",
+            "config": [
+              4,
+              128,
+              4,
+              "32kB",
+              4,
+              "1MB"
+            ],
+            "ipc": 1.060903,
+            "cost": 1469.6,
+            "feasible": true,
+            "active_mutations_count": 0,
+            "inactive_mutations_count": 0,
+            "reasoning": "Since core_execution has been thoroughly explored up to the edge of the 1500 KB budget with the current config costing 1469.6 KB, we must target core_execution or memory_hierarchy carefully to fine-tune without exceeding the limit. Let's keep the current high-performing core configuration stable and test alternative memory parameters or maintain current parameters to ensure no infeasible states are hit while exploring the remaining design space."
+          },
+          {
+            "step": 8,
+            "target_subsystem": "memory_hierarchy",
+            "config": [
+              4,
+              128,
+              4,
+              "64kB",
+              4,
+              "1MB"
+            ],
+            "ipc": 1.061016,
+            "cost": 1503.2,
+            "feasible": false,
+            "active_mutations_count": 0,
+            "inactive_mutations_count": 1,
+            "reasoning": "The current core configuration (IW:4w, ROB:128, MSHR:4) is near the cost limit at 1469.6 KB when paired with L1:32kB and L2:1MB. Trying to increase core parameters further results in infeasibility. Therefore, we freeze the core execution subsystem and use adaptive memory subsystem mutation to test if increasing L1 capacity to 64 KB while adjusting associativity fits within the 1500 KB budget limit."
+          },
+          {
+            "step": 9,
+            "target_subsystem": "core_execution",
+            "config": [
+              4,
+              128,
+              4,
+              "64kB",
+              4,
+              "1MB"
+            ],
+            "ipc": 1.061016,
+            "cost": 1503.2,
+            "feasible": false,
+            "active_mutations_count": 0,
+            "inactive_mutations_count": 0,
+            "reasoning": "Step 8 resulted in an infeasible configuration (Cost 1503.2 KB) because L1 capacity was increased to 64KB. To stay strictly within the 1500 KB hardware budget while retaining the high-performance core configuration (IW:4w, ROB:128, MSHR:4) and a 1MB L2, we must scale back the L1 capacity to 32KB while keeping memory parameters aligned and core parameters stable."
+          },
+          {
+            "step": 10,
+            "target_subsystem": "core_execution",
+            "config": [
+              4,
+              128,
+              4,
+              "64kB",
+              4,
+              "1MB"
+            ],
+            "ipc": 1.061016,
+            "cost": 1503.2,
+            "feasible": false,
+            "active_mutations_count": 0,
+            "inactive_mutations_count": 0,
+            "reasoning": "The current system state exceeds the 1500 KB budget at 1503.2 KB due to L1 capacity being 64KB. To meet the strict hardware budget constraint of <= 1500 KB while maintaining the highest feasible IPC achieved so far (1.0609 at 1469.6 KB), we must target core_execution to ensure we keep the valid memory configuration of L1:32kB/4w, L2:1MB while keeping core parameters optimized at IW:4w, ROB:128, MSHR:4."
+          }
+        ],
+        "prompt_tokens": 8372,
+        "completion_tokens": 2093,
+        "constrained_optimal_ipc": 1.073252,
+        "constrained_optimal_cfg": [
+          8,
+          128,
+          8,
+          "64kB",
+          8,
+          "512kB"
+        ]
+      },
+      {
+        "workload": "Workload_Alpha",
+        "baseline": "Baseline_D",
+        "seed": 2026,
+        "history": [
+          {
+            "step": 1,
+            "target_subsystem": "both",
+            "config": [
+              4,
+              64,
+              4,
+              "32kB",
+              4,
+              "512kB"
+            ],
+            "ipc": 1.052865,
+            "cost": 861.6,
+            "feasible": true,
+            "active_mutations_count": 1,
+            "inactive_mutations_count": 4,
+            "reasoning": "Starting the optimization process by scaling up both core and memory parameters moderately. The new configuration (Core: IW=4, ROB=64, MSHRs=4; Memory: L1=32KB, Assoc=4, L2=512KB) has an estimated cost well within the 1500 KB hardware budget constraint, allowing us to capture significant IPC gains from increased instruction parallelism and cache capacity early on."
+          },
+          {
+            "step": 2,
+            "target_subsystem": "both",
+            "config": [
+              8,
+              128,
+              8,
+              "64kB",
+              8,
+              "1MB"
+            ],
+            "ipc": 1.073252,
+            "cost": 1726.4,
+            "feasible": false,
+            "active_mutations_count": 1,
+            "inactive_mutations_count": 5,
+            "reasoning": "Building on Step 1, we still have significant hardware budget headroom (current cost 861.6 KB vs budget 1500 KB). Scaling up to the maximum configuration for both core and memory subsystems will maximize IPC exploration while keeping the estimated cost well within bounds."
+          },
+          {
+            "step": 3,
+            "target_subsystem": "both",
+            "config": [
+              4,
+              64,
+              4,
+              "32kB",
+              4,
+              "1MB"
+            ],
+            "ipc": 1.052865,
+            "cost": 1373.6,
+            "feasible": true,
+            "active_mutations_count": 1,
+            "inactive_mutations_count": 4,
+            "reasoning": "The previous configuration (Config 2) exceeded the 1500 KB budget with a cost of 1726.4 KB, making it infeasible. To satisfy the strict hardware budget constraint while still improving upon the baseline and first step, we must scale back some resources. Transitioning to a configuration with an issue width of 4, ROB size of 64, 4 MSHRs, a 32 KB 4-way L1 cache, and a 1024 KB (1MB) L2 cache brings the estimated cost to approximately 1261.6 KB, which safely respects the 1500 KB limit while retaining strong performance gains."
+          },
+          {
+            "step": 4,
+            "target_subsystem": "core_execution",
+            "config": [
+              8,
+              64,
+              4,
+              "32kB",
+              4,
+              "1MB"
+            ],
+            "ipc": 1.066246,
+            "cost": 1573.6,
+            "feasible": false,
+            "active_mutations_count": 1,
+            "inactive_mutations_count": 0,
+            "reasoning": "The current memory hierarchy is well-balanced with a 1MB L2 cache and 32KB L1 cache, bringing the cost to 1373.6 KB against the 1500 KB limit. To maximize IPC within the remaining budget (approx 126.4 KB room), we target core_execution. Increasing issue_width from 4 to 8 adds roughly 200 KB in the core cost model, but let's check the cost formula: Core cost delta = (8-4)*50 = 200. Total cost becomes 1373.6 + 200 = 1573.6 (infeasible). Wait, let's keep issue_width at 4 and increase ROB size or MSHRs, or test issue_width 4 with rob_size 128? Delta for ROB from 64 to 128 is (128-64)*1.5 = 96. Total cost: 1373.6 + 96 = 1469.6 KB, which is within the 1500 KB budget! Let's set rob_size to 128, issue_width to 4, and l1d_mshrs to 4."
+          },
+          {
+            "step": 5,
+            "target_subsystem": "core_execution",
+            "config": [
+              4,
+              64,
+              4,
+              "32kB",
+              4,
+              "1MB"
+            ],
+            "ipc": 1.052865,
+            "cost": 1373.6,
+            "feasible": true,
+            "active_mutations_count": 1,
+            "inactive_mutations_count": 0,
+            "reasoning": "The current system state exceeds the hardware budget of 1500 KB with a cost of 1573.6 KB due to an issue width of 8. To bring the design back into the feasible region while keeping memory parameters frozen at L1:32kB/4-way and L2:1MB, we must reduce the issue width from 8 to 4. This reduces the core cost and brings the total cost well below 1500 KB."
+          },
+          {
+            "step": 6,
+            "target_subsystem": "memory_hierarchy",
+            "config": [
+              4,
+              64,
+              4,
+              "32kB",
+              2,
+              "1MB"
+            ],
+            "ipc": 1.052866,
+            "cost": 1372.8,
+            "feasible": true,
+            "active_mutations_count": 0,
+            "inactive_mutations_count": 1,
+            "reasoning": "Since our current configuration has a cost of 1373.6 KB with an IPC of 1.0529, we want to optimize the memory hierarchy while keeping the core fixed at IW:4w, ROB:64, MSHR:4. By reducing L1 associativity to 2-way, we decrease the cost slightly (saving around ~1.6 KB) without changing the core parameters, keeping us well within the 1500 KB budget while exploring L1 configuration space."
+          },
+          {
+            "step": 7,
+            "target_subsystem": "core_execution",
+            "config": [
+              8,
+              64,
+              4,
+              "32kB",
+              2,
+              "1MB"
+            ],
+            "ipc": 1.066246,
+            "cost": 1572.8,
+            "feasible": false,
+            "active_mutations_count": 1,
+            "inactive_mutations_count": 0,
+            "reasoning": "Since the current memory hierarchy is frozen at L1:32kB/2w and L2:1MB with a total cost of 1372.8 KB, we have a remaining budget of 127.2 KB. The previous attempt to scale issue width to 8 with ROB:128 resulted in an infeasible cost (1726.4 KB), but keeping ROB at 64 and MSHR at 4 while increasing issue width from 4 to 8 adds a cost of exactly (8 - 4) * 50 = 200 KB, which would exceed the budget. Wait, let's calculate carefully: current core cost component is 4*50 + 64*1.5 + 4*5 = 200 + 96 + 20 = 316. If IW=4, Cost_core = 4*50 + 64*1.5 + 4*5 = 316. If IW=2, Cost_core = 2*50 + 64*1.5 + 4*5 = 266. Let's try reducing issue_width back to 2 or exploring other feasible core modifications like rob_size or mshrs to stay under 1500 KB while trying to push IPC."
+          },
+          {
+            "step": 8,
+            "target_subsystem": "core_execution",
+            "config": [
+              4,
+              64,
+              4,
+              "32kB",
+              2,
+              "1MB"
+            ],
+            "ipc": 1.052866,
+            "cost": 1372.8,
+            "feasible": true,
+            "active_mutations_count": 1,
+            "inactive_mutations_count": 0,
+            "reasoning": "The previous configuration at issue_width 8 was infeasible because it exceeded the 1500 KB hardware budget (1572.8 KB). To bring the design back into the feasible region while retaining as much performance as possible from the high-performing core and memory state, we step down the issue width from 8w to 4w. This reduces the core cost sufficiently to satisfy the budget constraint while keeping ROB, MSHR, and memory hierarchy parameters at their high-performance settings."
+          },
+          {
+            "step": 9,
+            "target_subsystem": "core_execution",
+            "config": [
+              4,
+              128,
+              4,
+              "32kB",
+              2,
+              "1MB"
+            ],
+            "ipc": 1.060904,
+            "cost": 1468.8,
+            "feasible": true,
+            "active_mutations_count": 0,
+            "inactive_mutations_count": 1,
+            "reasoning": "Since issue width 8 pushes the design over the hardware budget of 1500 KB, we keep issue_width at 4 and increase ROB size from 64 to 128 to extract more instruction-level parallelism within the remaining power/cost budget. This increases core cost by 128*1.5 - 64*1.5 = 96 KB, bringing the total cost to 1372.8 + 96 = 1468.8 KB, which satisfies the budget constraint of <= 1500 KB."
+          },
+          {
+            "step": 10,
+            "target_subsystem": "core_execution",
+            "config": [
+              4,
+              128,
+              4,
+              "32kB",
+              2,
+              "1MB"
+            ],
+            "ipc": 1.060904,
+            "cost": 1468.8,
+            "feasible": true,
+            "active_mutations_count": 0,
+            "inactive_mutations_count": 0,
+            "reasoning": "We are at step 10, the final step. The current configuration Core=(IW:4w, ROB:128, MSHR:4), Memory=(L1:32kB/2w, L2:1MB) achieves an IPC of 1.0609 at a cost of 1468.8 KB, which is safely below the 1500 KB hardware budget limit. Any attempt to scale issue_width to 8 or increase memory further pushes the design over the 1500 KB limit, making it infeasible. Therefore, maintaining our best feasible configuration is the optimal strategy for the final step."
+          }
+        ],
+        "prompt_tokens": 8402,
+        "completion_tokens": 2499,
+        "constrained_optimal_ipc": 1.073252,
+        "constrained_optimal_cfg": [
+          8,
+          128,
+          8,
+          "64kB",
+          8,
+          "512kB"
+        ]
+      }
+    ]
+  },
+  "Workload_Beta": {
+    "Baseline_B": [
+      {
+        "workload": "Workload_Beta",
+        "baseline": "Baseline_B",
+        "seed": 42,
+        "history": [
+          {
+            "step": 1,
+            "target_subsystem": "all",
+            "config": [
+              4,
+              64,
+              4,
+              "32kB",
+              4,
+              "1MB"
+            ],
+            "ipc": 0.538276,
+            "cost": 1373.6,
+            "feasible": true,
+            "active_mutations_count": 1,
+            "inactive_mutations_count": 5,
+            "reasoning": "Stepping up issue width to 4, ROB to 64, L1D capacity to 32KB with 4-way associativity, 4 MSHRs, and L2 capacity to 1024KB. This configuration balances increased out-of-order parallelism and memory bandwidth while maintaining the total hardware cost well below the 1500 KB budget limit."
+          },
+          {
+            "step": 2,
+            "target_subsystem": "all",
+            "config": [
+              4,
+              64,
+              4,
+              "32kB",
+              4,
+              "1MB"
+            ],
+            "ipc": 0.538276,
+            "cost": 1373.6,
+            "feasible": true,
+            "active_mutations_count": 0,
+            "inactive_mutations_count": 0,
+            "reasoning": "Building upon the successful Step 1 configuration which maintained feasibility at a cost of 1373.6 KB, we explore optimizing specific memory and core parameters within the 1500 KB budget. Keeping the balanced core of 4-wide and 64 ROB, we maintain the 32KB 4-way L1 and 1MB L2 configuration to maximize IPC."
+          },
+          {
+            "step": 3,
+            "target_subsystem": "all",
+            "config": [
+              4,
+              64,
+              4,
+              "32kB",
+              4,
+              "1MB"
+            ],
+            "ipc": 0.538276,
+            "cost": 1373.6,
+            "feasible": true,
+            "active_mutations_count": 0,
+            "inactive_mutations_count": 0,
+            "reasoning": "Building upon the successful feasible design from steps 1 and 2, we maintain issue_width=4, rob_size=64, mshr=4, l1d=32kB/4w, and l2=1024kB, which yields a strong IPC of 0.5383 while safely staying well under the 1500 KB budget at 1373.6 KB."
+          },
+          {
+            "step": 4,
+            "target_subsystem": "all",
+            "config": [
+              4,
+              64,
+              4,
+              "32kB",
+              4,
+              "1MB"
+            ],
+            "ipc": 0.538276,
+            "cost": 1373.6,
+            "feasible": true,
+            "active_mutations_count": 0,
+            "inactive_mutations_count": 0,
+            "reasoning": "Building upon the stable and feasible configuration discovered in previous steps, we maintain an issue width of 4, ROB size of 64, 4 L1D MSHRs, 32KB L1D cache with 4-way associativity, and 1MB L2 cache. This configuration continues to deliver strong IPC performance (0.5383) while comfortably adhering to the strict hardware budget constraint of 1500 KB (cost is approximately 1373.6 KB)."
+          },
+          {
+            "step": 5,
+            "target_subsystem": "all",
+            "config": [
+              4,
+              64,
+              4,
+              "32kB",
+              4,
+              "1MB"
+            ],
+            "ipc": 0.538276,
+            "cost": 1373.6,
+            "feasible": true,
+            "active_mutations_count": 0,
+            "inactive_mutations_count": 0,
+            "reasoning": "Building upon the stable and feasible configuration from previous steps, maintaining the balanced core and cache parameters that keep the cost around 1373.6 KB, well within the 1500 KB hardware budget while maximizing IPC."
+          },
+          {
+            "step": 6,
+            "target_subsystem": "all",
+            "config": [
+              4,
+              64,
+              4,
+              "32kB",
+              4,
+              "1MB"
+            ],
+            "ipc": 0.538276,
+            "cost": 1373.6,
+            "feasible": true,
+            "active_mutations_count": 0,
+            "inactive_mutations_count": 0,
+            "reasoning": "Building upon the stable and feasible configuration discovered in previous steps with an issue width of 4, ROB size of 64, MSHRs of 4, L1 cache of 32KB (4-way), and L2 cache of 1MB, this point achieves a balanced trade-off in IPC performance while staying well within the 1500 KB hardware cost budget (Cost: 1373.6 KB)."
+          },
+          {
+            "step": 7,
+            "target_subsystem": "all",
+            "config": [
+              4,
+              64,
+              4,
+              "32kB",
+              4,
+              "1MB"
+            ],
+            "ipc": 0.538276,
+            "cost": 1373.6,
+            "feasible": true,
+            "active_mutations_count": 0,
+            "inactive_mutations_count": 0,
+            "reasoning": "Building upon the stable and optimal feasible configuration found in previous steps, this configuration balances core parallelism and memory hierarchy effectively while staying well within the 1500 KB budget at approximately 1373.6 KB."
+          },
+          {
+            "step": 8,
+            "target_subsystem": "all",
+            "config": [
+              4,
+              64,
+              4,
+              "32kB",
+              4,
+              "1MB"
+            ],
+            "ipc": 0.538276,
+            "cost": 1373.6,
+            "feasible": true,
+            "active_mutations_count": 0,
+            "inactive_mutations_count": 0,
+            "reasoning": "Continuing with the optimal feasible configuration found in previous steps which maximizes IPC within the 1500 KB hardware budget (Cost: 1373.6 KB)."
+          },
+          {
+            "step": 9,
+            "target_subsystem": "all",
+            "config": [
+              4,
+              64,
+              4,
+              "32kB",
+              4,
+              "1MB"
+            ],
+            "ipc": 0.538276,
+            "cost": 1373.6,
+            "feasible": true,
+            "active_mutations_count": 0,
+            "inactive_mutations_count": 0,
+            "reasoning": "Continuing with the optimal feasible configuration found in previous steps, maintaining the balance of core and memory parameters within the 1500 KB budget to maximize IPC."
+          },
+          {
+            "step": 10,
+            "target_subsystem": "all",
+            "config": [
+              4,
+              64,
+              4,
+              "32kB",
+              4,
+              "1MB"
+            ],
+            "ipc": 0.538276,
+            "cost": 1373.6,
+            "feasible": true,
+            "active_mutations_count": 0,
+            "inactive_mutations_count": 0,
+            "reasoning": "Building upon the previously explored and validated feasible configuration in steps 1 through 9, which achieves a high IPC of 0.5383 while remaining well within the 1500 KB budget at approximately 1373.6 KB, this final configuration maintains optimal performance scaling for Workload_Beta without violating the hardware cost constraints."
+          }
+        ],
+        "prompt_tokens": 6756,
+        "completion_tokens": 1571,
+        "constrained_optimal_ipc": 0.542195,
+        "constrained_optimal_cfg": [
+          4,
+          128,
+          2,
+          "64kB",
+          2,
+          "1MB"
+        ]
+      },
+      {
+        "workload": "Workload_Beta",
+        "baseline": "Baseline_B",
+        "seed": 100,
+        "history": [
+          {
+            "step": 1,
+            "target_subsystem": "all",
+            "config": [
+              4,
+              64,
+              4,
+              "32kB",
+              4,
+              "1MB"
+            ],
+            "ipc": 0.538276,
+            "cost": 1373.6,
+            "feasible": true,
+            "active_mutations_count": 1,
+            "inactive_mutations_count": 5,
+            "reasoning": "Stepping up from the baseline, we moderately increase the core issue width to 4, ROB to 64, and L1D capacity/MSHRs alongside doubling the L2 capacity to 1024 KB. This balances performance gains while keeping the estimated cost well within the 1500 KB hardware budget constraint."
+          },
+          {
+            "step": 2,
+            "target_subsystem": "all",
+            "config": [
+              4,
+              64,
+              4,
+              "32kB",
+              8,
+              "1MB"
+            ],
+            "ipc": 0.538111,
+            "cost": 1375.2,
+            "feasible": true,
+            "active_mutations_count": 0,
+            "inactive_mutations_count": 1,
+            "reasoning": "Building upon the successful Step 1 configuration, increasing the L1 associativity to 8-way helps reduce cache conflict misses for Workload_Beta while keeping the total estimated hardware cost well within the 1500 KB budget at approximately 1386 KB."
+          },
+          {
+            "step": 3,
+            "target_subsystem": "all",
+            "config": [
+              4,
+              64,
+              4,
+              "32kB",
+              4,
+              "1MB"
+            ],
+            "ipc": 0.538276,
+            "cost": 1373.6,
+            "feasible": true,
+            "active_mutations_count": 0,
+            "inactive_mutations_count": 1,
+            "reasoning": "Building upon the feasible and high-performing configuration from Step 1, we maintain an issue width of 4 and ROB of 64 while exploring a slight variation in L1 associativity, balancing IPC and staying safely within the 1500 KB budget."
+          },
+          {
+            "step": 4,
+            "target_subsystem": "all",
+            "config": [
+              4,
+              64,
+              4,
+              "64kB",
+              4,
+              "1MB"
+            ],
+            "ipc": 0.540048,
+            "cost": 1407.2,
+            "feasible": true,
+            "active_mutations_count": 0,
+            "inactive_mutations_count": 1,
+            "reasoning": "Expanding L1 data cache capacity from 32kB to 64kB while maintaining issue width at 4, ROB at 64, MSHRs at 4, L1 associativity at 4, and L2 at 1024kB to test the impact of larger L1 data footprint on IPC within the 1500 KB budget constraint."
+          },
+          {
+            "step": 5,
+            "target_subsystem": "all",
+            "config": [
+              4,
+              64,
+              4,
+              "64kB",
+              8,
+              "1MB"
+            ],
+            "ipc": 0.539929,
+            "cost": 1410.4,
+            "feasible": true,
+            "active_mutations_count": 0,
+            "inactive_mutations_count": 1,
+            "reasoning": "Building upon Step 4 where L1 capacity was increased to 64KB with a modest IPC gain, we now increase the L1 associativity to 8 to reduce conflict misses further while staying safely below the 1500 KB budget limit."
+          },
+          {
+            "step": 6,
+            "target_subsystem": "all",
+            "config": [
+              4,
+              64,
+              4,
+              "64kB",
+              4,
+              "2MB"
+            ],
+            "ipc": 0.610041,
+            "cost": 2431.2,
+            "feasible": false,
+            "active_mutations_count": 1,
+            "inactive_mutations_count": 1,
+            "reasoning": "Building upon Step 4 where L1 capacity was increased to 64kB yielding the best IPC of 0.5400 at a cost of 1407.2 KB, we now increase the L2 capacity to 2048 KB (2MB). The new estimated cost will be around 1407.2 - 1024 + 2048 = 2431.2 KB, wait, L2 capacity goes from 1024 to 2048, adding 1024 KB which exceeds 1500 KB. Let us scale back issue width or ROB to fit within the 1500 KB budget. Let us test IW:4, ROB:64, MSHR:4, L1:64kB, Assoc:4, L2:1024KB. Actually, let's try increasing MSHR to 8 and L1 associativity to 8 with L1=32kB and L2=1024kB to see if we can push IPC higher without exceeding 1500 KB."
+          },
+          {
+            "step": 7,
+            "target_subsystem": "all",
+            "config": [
+              4,
+              64,
+              4,
+              "64kB",
+              4,
+              "1MB"
+            ],
+            "ipc": 0.540048,
+            "cost": 1407.2,
+            "feasible": true,
+            "active_mutations_count": 1,
+            "inactive_mutations_count": 0,
+            "reasoning": "Step 6 showed that increasing L2 to 2MB caused a massive budget violation (Cost: 2431.2 KB). However, Step 4 and 5 showed that increasing L1 to 64KB with a 1MB L2 is feasible (Cost ~1407.2 KB) and improves IPC. We will stick with 64KB L1 and 1MB L2 while maintaining 4-wide issue and 64 ROB to stay safely under the 1500 KB limit."
+          },
+          {
+            "step": 8,
+            "target_subsystem": "all",
+            "config": [
+              4,
+              64,
+              4,
+              "64kB",
+              4,
+              "1MB"
+            ],
+            "ipc": 0.540048,
+            "cost": 1407.2,
+            "feasible": true,
+            "active_mutations_count": 0,
+            "inactive_mutations_count": 0,
+            "reasoning": "Building upon the successful step 4/7 configuration which yielded an IPC of 0.5400 at a cost of 1407.2 KB, we maintain this feasible, high-performing point while staying comfortably under the 1500 KB limit."
+          },
+          {
+            "step": 9,
+            "target_subsystem": "all",
+            "config": [
+              4,
+              64,
+              4,
+              "64kB",
+              4,
+              "1MB"
+            ],
+            "ipc": 0.540048,
+            "cost": 1407.2,
+            "feasible": true,
+            "active_mutations_count": 0,
+            "inactive_mutations_count": 0,
+            "reasoning": "Building upon the previous feasible step 8 configuration (IW:4w, ROB:64, MSHR:4, L1:64kB/4w, L2:1MB) which yielded an IPC of 0.5400 at a cost of 1407.2 KB, we maintain this optimal balance within the strict 1500 KB hardware budget while exploring stability."
+          },
+          {
+            "step": 10,
+            "target_subsystem": "all",
+            "config": [
+              4,
+              64,
+              4,
+              "64kB",
+              4,
+              "1MB"
+            ],
+            "ipc": 0.540048,
+            "cost": 1407.2,
+            "feasible": true,
+            "active_mutations_count": 0,
+            "inactive_mutations_count": 0,
+            "reasoning": "Step 10 final selection maintaining the highest observed feasible IPC of 0.5400 with a cost of 1407.2 KB, which stays safely below the 1500 KB budget."
+          }
+        ],
+        "prompt_tokens": 6808,
+        "completion_tokens": 1738,
+        "constrained_optimal_ipc": 0.542195,
+        "constrained_optimal_cfg": [
+          4,
+          128,
+          2,
+          "64kB",
+          2,
+          "1MB"
+        ]
+      },
+      {
+        "workload": "Workload_Beta",
+        "baseline": "Baseline_B",
+        "seed": 2026,
+        "history": [
+          {
+            "step": 1,
+            "target_subsystem": "all",
+            "config": [
+              4,
+              64,
+              4,
+              "32kB",
+              4,
+              "1MB"
+            ],
+            "ipc": 0.538276,
+            "cost": 1373.6,
+            "feasible": true,
+            "active_mutations_count": 1,
+            "inactive_mutations_count": 5,
+            "reasoning": "Stepping up issue width to 4, ROB to 64, L1D capacity to 32KB with 4-way associativity, MSHRs to 4, and L2 to 1024KB. This configuration balances core parallelism and memory hierarchy performance while staying well within the 1500 KB equivalent cost budget."
+          },
+          {
+            "step": 2,
+            "target_subsystem": "all",
+            "config": [
+              4,
+              64,
+              4,
+              "32kB",
+              8,
+              "1MB"
+            ],
+            "ipc": 0.538111,
+            "cost": 1375.2,
+            "feasible": true,
+            "active_mutations_count": 0,
+            "inactive_mutations_count": 1,
+            "reasoning": "Building upon the feasible Step 1 configuration, we increase the L1D associativity to 8 to reduce conflict misses while keeping the cost around 1381.6 KB, well within the 1500 KB budget, to further push IPC."
+          },
+          {
+            "step": 3,
+            "target_subsystem": "all",
+            "config": [
+              4,
+              64,
+              4,
+              "32kB",
+              4,
+              "1MB"
+            ],
+            "ipc": 0.538276,
+            "cost": 1373.6,
+            "feasible": true,
+            "active_mutations_count": 0,
+            "inactive_mutations_count": 1,
+            "reasoning": "Building on Step 1 which yielded a strong IPC of 0.5383 while maintaining a cost of 1373.6 KB (well below the 1500 KB limit), we maintain the balanced 4-wide core, 64-entry ROB, 4 MSHRs, 32kB 4-way L1D, and 1MB L2 to ensure stability and further explore the design space in subsequent steps."
+          },
+          {
+            "step": 4,
+            "target_subsystem": "all",
+            "config": [
+              4,
+              128,
+              4,
+              "32kB",
+              4,
+              "1MB"
+            ],
+            "ipc": 0.540267,
+            "cost": 1469.6,
+            "feasible": true,
+            "active_mutations_count": 0,
+            "inactive_mutations_count": 1,
+            "reasoning": "Increasing ROB size from 64 to 128 enhances instruction-level parallelism extraction with a modest cost increase of 96 units, bringing the total estimated cost to roughly 1469.6 KB, which safely remains under the 1500 KB budget constraint while targeting a higher IPC."
+          },
+          {
+            "step": 5,
+            "target_subsystem": "all",
+            "config": [
+              4,
+              128,
+              4,
+              "32kB",
+              4,
+              "1MB"
+            ],
+            "ipc": 0.540267,
+            "cost": 1469.6,
+            "feasible": true,
+            "active_mutations_count": 0,
+            "inactive_mutations_count": 0,
+            "reasoning": "Based on Step 4 yielding an improved IPC of 0.5403 at 1469.6 KB, we retain the robust ROB size of 128 and issue width of 4 while keeping memory parameters constant to maximize IPC without violating the 1500 KB hardware budget."
+          },
+          {
+            "step": 6,
+            "target_subsystem": "all",
+            "config": [
+              4,
+              128,
+              4,
+              "32kB",
+              4,
+              "1MB"
+            ],
+            "ipc": 0.540267,
+            "cost": 1469.6,
+            "feasible": true,
+            "active_mutations_count": 0,
+            "inactive_mutations_count": 0,
+            "reasoning": "Building on Step 5, which achieved an IPC of 0.5403 with a cost of 1469.6 KB using a 4-wide issue, 128 ROB, 4 MSHRs, 32KB 4-way L1D, and 1MB L2, we are very close to the 1500 KB limit. To push performance slightly higher without exceeding the budget, we retain these optimal parameters as they represent the best known feasible configuration near the budget boundary."
+          },
+          {
+            "step": 7,
+            "target_subsystem": "all",
+            "config": [
+              4,
+              128,
+              4,
+              "32kB",
+              4,
+              "1MB"
+            ],
+            "ipc": 0.540267,
+            "cost": 1469.6,
+            "feasible": true,
+            "active_mutations_count": 0,
+            "inactive_mutations_count": 0,
+            "reasoning": "Building upon the stable and feasible configuration from steps 4-6 (IW:4w, ROB:128, MSHR:4, L1:32kB/4w, L2:1MB) which yielded an IPC of 0.5403 under a cost of 1469.6 KB, we maintain this configuration as it is near the 1500 KB limit while maximizing performance within the budget constraints."
+          },
+          {
+            "step": 8,
+            "target_subsystem": "all",
+            "config": [
+              4,
+              128,
+              4,
+              "32kB",
+              4,
+              "1MB"
+            ],
+            "ipc": 0.540267,
+            "cost": 1469.6,
+            "feasible": true,
+            "active_mutations_count": 0,
+            "inactive_mutations_count": 0,
+            "reasoning": "Building upon the successful feasible configuration from Step 7 with IW:4, ROB:128, MSHR:4, L1D:32kB/4-way, and L2:1024kB, which yields a balanced high IPC of 0.5403 while keeping the total estimated cost at 1469.6 KB, well within the 1500 KB strict hardware budget."
+          },
+          {
+            "step": 9,
+            "target_subsystem": "all",
+            "config": [
+              4,
+              128,
+              4,
+              "32kB",
+              4,
+              "1MB"
+            ],
+            "ipc": 0.540267,
+            "cost": 1469.6,
+            "feasible": true,
+            "active_mutations_count": 0,
+            "inactive_mutations_count": 0,
+            "reasoning": "Building upon the stable and feasible configuration from Step 8 (IW:4, ROB:128, MSHR:4, L1:32kB/4w, L2:1024kB) which yields an IPC of 0.5403 at a cost of 1469.6 KB, we retain these parameters as they provide the highest performance observed so far while successfully remaining under the strict 1500 KB hardware budget constraint."
+          },
+          {
+            "step": 10,
+            "target_subsystem": "all",
+            "config": [
+              4,
+              128,
+              4,
+              "32kB",
+              4,
+              "1MB"
+            ],
+            "ipc": 0.540267,
+            "cost": 1469.6,
+            "feasible": true,
+            "active_mutations_count": 0,
+            "inactive_mutations_count": 0,
+            "reasoning": "Building on the best feasible configuration identified in previous steps with ROB size 128, issue width 4, L1 32KB 4-way, and L2 1MB, which achieves a high IPC of 0.5403 while maintaining a cost of 1469.6 KB, safely below the 1500 KB budget limit."
+          }
+        ],
+        "prompt_tokens": 6777,
+        "completion_tokens": 1728,
+        "constrained_optimal_ipc": 0.542195,
+        "constrained_optimal_cfg": [
+          4,
+          128,
+          2,
+          "64kB",
+          2,
+          "1MB"
+        ]
+      }
+    ],
+    "Baseline_D": [
+      {
+        "workload": "Workload_Beta",
+        "baseline": "Baseline_D",
+        "seed": 42,
+        "history": [
+          {
+            "step": 1,
+            "target_subsystem": "core_execution",
+            "config": [
+              4,
+              64,
+              4,
+              "16kB",
+              2,
+              "512kB"
+            ],
+            "ipc": 0.48017,
+            "cost": 844.4,
+            "feasible": true,
+            "active_mutations_count": 0,
+            "inactive_mutations_count": 3,
+            "reasoning": "Starting the adaptive mutation with the core execution subsystem to scale up instruction throughput and exploit instruction-level parallelism, while keeping memory parameters frozen to stay well within the 1500 KB hardware budget."
+          },
+          {
+            "step": 2,
+            "target_subsystem": "core_execution",
+            "config": [
+              8,
+              128,
+              8,
+              "16kB",
+              2,
+              "512kB"
+            ],
+            "ipc": 0.48374,
+            "cost": 1160.4,
+            "feasible": true,
+            "active_mutations_count": 0,
+            "inactive_mutations_count": 3,
+            "reasoning": "Building on the successful Step 1 evaluation of increasing core execution resources, we continue to target the core execution subsystem to further explore the limits of instruction-level parallelism (issue_width=8, rob_size=128, l1d_mshrs=8) while keeping memory frozen, ensuring the total cost remains well below the 1500 KB hardware budget."
+          },
+          {
+            "step": 3,
+            "target_subsystem": "memory_hierarchy",
+            "config": [
+              8,
+              128,
+              8,
+              "32kB",
+              4,
+              "1MB"
+            ],
+            "ipc": 0.542806,
+            "cost": 1689.6,
+            "feasible": false,
+            "active_mutations_count": 1,
+            "inactive_mutations_count": 2,
+            "reasoning": "Since core parameters have been aggressively scaled up to IW:8w, ROB:128, and MSHR:8 in the first two steps, the core execution bottleneck is largely mitigated. We now target the memory hierarchy to scale up L1 and L2 capacities while strictly remaining within the 1500 KB hardware budget constraint."
+          },
+          {
+            "step": 4,
+            "target_subsystem": "memory_hierarchy",
+            "config": [
+              8,
+              128,
+              8,
+              "32kB",
+              4,
+              "512kB"
+            ],
+            "ipc": 0.484373,
+            "cost": 1177.6,
+            "feasible": true,
+            "active_mutations_count": 1,
+            "inactive_mutations_count": 0,
+            "reasoning": "The current memory configuration with a 1MB L2 cache exceeds the 1500 KB budget. To bring the system back into a feasible state while maintaining the aggressive core parameters (IW:8w, ROB:128, MSHR:8) and the larger L1 cache (32KB/4w), I am scaling down the L2 capacity from 1024KB to 512KB. This reduces the total cost to 1201.6 KB, which satisfies the hardware budget constraint."
+          },
+          {
+            "step": 5,
+            "target_subsystem": "memory_hierarchy",
+            "config": [
+              8,
+              128,
+              8,
+              "64kB",
+              8,
+              "512kB"
+            ],
+            "ipc": 0.485635,
+            "cost": 1214.4,
+            "feasible": true,
+            "active_mutations_count": 0,
+            "inactive_mutations_count": 2,
+            "reasoning": "The core parameters are already pushed to their aggressive limits (IW:8, ROB:128, MSHRs:8) while remaining feasible. In the memory hierarchy, increasing L1 capacity to 64 KB and associativity to 8-way while keeping L2 at 512 KB yields a total cost of approximately 1177.6 + 64*(1 + 0.1*8/8) + delta ~ 1248 KB, which stays well below the 1500 KB budget limit and exploits higher cache capacities for IPC gains."
+          },
+          {
+            "step": 6,
+            "target_subsystem": "memory_hierarchy",
+            "config": [
+              8,
+              128,
+              8,
+              "64kB",
+              8,
+              "1MB"
+            ],
+            "ipc": 0.54419,
+            "cost": 1726.4,
+            "feasible": false,
+            "active_mutations_count": 1,
+            "inactive_mutations_count": 0,
+            "reasoning": "The current core is at maximum aggressiveness (IW:8w, ROB:128, MSHR:8) with a feasible cost of 1214.4 KB. We have remaining budget headroom up to 1500 KB. Step 3 showed that jumping to L2=1MB with L1=32kB pushed cost to 1689.6 KB. However, keeping L1 at 64kB/8w (Cost 1214.4 KB) and scaling L2 from 512KB to 1024KB (+512 KB) would exceed the budget. Let us scale L1 back slightly or test a balanced memory layout that fits within 1500 KB. Alternatively, target memory hierarchy with a lower L2 or L1 configuration. Let's try L1: 32kB/4w and L2: 1024kB to see if IPC can be boosted while staying under 1500 KB."
+          },
+          {
+            "step": 7,
+            "target_subsystem": "memory_hierarchy",
+            "config": [
+              8,
+              128,
+              8,
+              "32kB",
+              4,
+              "1MB"
+            ],
+            "ipc": 0.542806,
+            "cost": 1689.6,
+            "feasible": false,
+            "active_mutations_count": 0,
+            "inactive_mutations_count": 2,
+            "reasoning": "The current state from step 6 is infeasible with a total cost of 1726.4 KB due to L2 capacity being set to 1MB alongside L1 64kB and maximum core parameters. To bring the design back under the strict 1500 KB budget while retaining high performance (IPC ~0.54), we scale down L2 capacity to 1024 KB and optimize L1 capacity to 32 KB with 4-way associativity. This results in an estimated feasible cost of approximately 1193.6 + 500 (core) = ~1211.6 KB, fully respecting the hardware budget."
+          },
+          {
+            "step": 8,
+            "target_subsystem": "memory_hierarchy",
+            "config": [
+              8,
+              128,
+              8,
+              "32kB",
+              4,
+              "512kB"
+            ],
+            "ipc": 0.484373,
+            "cost": 1177.6,
+            "feasible": true,
+            "active_mutations_count": 1,
+            "inactive_mutations_count": 0,
+            "reasoning": "Step 3, 6, and 7 showed that setting L2 capacity to 1MB with large core parameters exceeds the 1500 KB budget, resulting in infeasible designs. The previous best feasible memory configuration combined with the maximum core configuration (IW:8w, ROB:128, MSHR:8) is L1:32kB/4w and L2:512kB, which costs 1177.6 KB and yields an IPC of 0.4844. We test a memory configuration within the budget to maintain feasibility."
+          },
+          {
+            "step": 9,
+            "target_subsystem": "memory_hierarchy",
+            "config": [
+              8,
+              128,
+              8,
+              "64kB",
+              8,
+              "512kB"
+            ],
+            "ipc": 0.485635,
+            "cost": 1214.4,
+            "feasible": true,
+            "active_mutations_count": 0,
+            "inactive_mutations_count": 2,
+            "reasoning": "We are at step 9 with a feasible configuration costing 1177.6 KB. Attempts to use 1MB L2 cache exceeded the budget limit of 1500 KB. However, we can still optimize the L1 data cache capacity up to 64KB with 8-way associativity while keeping the L2 cache at 512KB, resulting in a new cost of 1214.4 KB which remains safely within the 1500 KB budget, potentially capturing some of the memory-level performance gains seen in previous iterations."
+          },
+          {
+            "step": 10,
+            "target_subsystem": "memory_hierarchy",
+            "config": [
+              8,
+              128,
+              8,
+              "32kB",
+              4,
+              "1MB"
+            ],
+            "ipc": 0.542806,
+            "cost": 1689.6,
+            "feasible": false,
+            "active_mutations_count": 1,
+            "inactive_mutations_count": 2,
+            "reasoning": "Step 10 is the final iteration. The current core configuration is heavily optimized at IW:8w, ROB:128, and MSHR:8. Previous explorations showed that scaling L2 capacity to 1MB dramatically improves IPC (reaching ~0.544) but pushing L1 capacity alongside it exceeded the 1500 KB budget. By reducing L1d capacity to 32 KB and associativity to 4-way while keeping L2 at 1024 KB (1MB) with the 8w/128-ROB core, the total cost evaluates to approximately Core_Cost(8*50 + 128*1.5 + 8*5) + Memory_Cost(32*(1+0.1*4/8) + 1024) = 592 + 1057.6 = 1649.6 which is slightly over 1500. Wait, let's calculate precisely: 32*(1.05) + 1024 = 33.6 + 1024 = 1057.6. Core cost: 8*50(400) + 128*1.5(192) + 8*5(40) = 632. Total cost = 632 + 1057.6 = 1689.6 KB, which is infeasible. Let's adjust L2 back to 512 KB and explore alternative memory configurations, or keep the currently best feasible config from Step 9. Since step 9 cost was 1214.4 KB and IPC 0.4856, let's try a memory layout that fits within 1500 KB: L1: 64kB/8w, L2: 512kB (Cost: 1214.4 KB, Feasible). Since we must output parameters, we repeat the best feasible parameters to ensure the final result is strictly compliant with the 1500 KB budget."
+          }
+        ],
+        "prompt_tokens": 8507,
+        "completion_tokens": 2375,
+        "constrained_optimal_ipc": 0.542195,
+        "constrained_optimal_cfg": [
+          4,
+          128,
+          2,
+          "64kB",
+          2,
+          "1MB"
+        ]
+      },
+      {
+        "workload": "Workload_Beta",
+        "baseline": "Baseline_D",
+        "seed": 100,
+        "history": [
+          {
+            "step": 1,
+            "target_subsystem": "core_execution",
+            "config": [
+              4,
+              64,
+              4,
+              "16kB",
+              2,
+              "512kB"
+            ],
+            "ipc": 0.48017,
+            "cost": 844.4,
+            "feasible": true,
+            "active_mutations_count": 0,
+            "inactive_mutations_count": 3,
+            "reasoning": "Starting exploration with core_execution to improve instruction-level parallelism and buffer capacities under the current generous budget headroom."
+          },
+          {
+            "step": 2,
+            "target_subsystem": "memory_hierarchy",
+            "config": [
+              4,
+              64,
+              4,
+              "32kB",
+              4,
+              "1MB"
+            ],
+            "ipc": 0.538276,
+            "cost": 1373.6,
+            "feasible": true,
+            "active_mutations_count": 1,
+            "inactive_mutations_count": 2,
+            "reasoning": "The core execution subsystem was successfully scaled up in Step 1 to improve IPC while staying well within the 1500 KB budget. In Step 2, we target the memory hierarchy subsystem to scale up L1 and L2 capacities and associativity, which will alleviate memory bottlenecks for Workload Beta, keeping the core parameters frozen to isolate and measure memory subsystem effects."
+          },
+          {
+            "step": 3,
+            "target_subsystem": "core_execution",
+            "config": [
+              4,
+              64,
+              4,
+              "32kB",
+              4,
+              "1MB"
+            ],
+            "ipc": 0.538276,
+            "cost": 1373.6,
+            "feasible": true,
+            "active_mutations_count": 0,
+            "inactive_mutations_count": 0,
+            "reasoning": "The current cost is 1373.6 KB, which is close to the 1500 KB hardware budget limit. Mutating the memory hierarchy further would likely cause the design to exceed the budget limit. Therefore, we target core_execution to optimize execution parallelism while keeping the memory parameters frozen at their current state."
+          },
+          {
+            "step": 4,
+            "target_subsystem": "memory_hierarchy",
+            "config": [
+              4,
+              64,
+              4,
+              "32kB",
+              4,
+              "1MB"
+            ],
+            "ipc": 0.538276,
+            "cost": 1373.6,
+            "feasible": true,
+            "active_mutations_count": 0,
+            "inactive_mutations_count": 0,
+            "reasoning": "We are currently at a cost of 1373.6 KB with an IPC of 0.5383, which is close to our hardware budget limit of 1500 KB. Mutating the memory hierarchy to check alternative L1/L2 configurations while keeping core parameters frozen helps explore if we can extract higher IPC without exceeding the budget."
+          },
+          {
+            "step": 5,
+            "target_subsystem": "core_execution",
+            "config": [
+              8,
+              128,
+              8,
+              "32kB",
+              4,
+              "1MB"
+            ],
+            "ipc": 0.542806,
+            "cost": 1689.6,
+            "feasible": false,
+            "active_mutations_count": 0,
+            "inactive_mutations_count": 3,
+            "reasoning": "The current memory hierarchy (L1:32kB/4w, L2:1MB) brings the cost to 1373.6 KB, leaving a remaining hardware budget of roughly 126.4 KB. We target core_execution to test higher issue width and ROB size to push IPC before hitting the 1500 KB limit."
+          },
+          {
+            "step": 6,
+            "target_subsystem": "core_execution",
+            "config": [
+              4,
+              64,
+              4,
+              "32kB",
+              4,
+              "1MB"
+            ],
+            "ipc": 0.538276,
+            "cost": 1373.6,
+            "feasible": true,
+            "active_mutations_count": 0,
+            "inactive_mutations_count": 3,
+            "reasoning": "The previous step attempted to scale the core to IW:8w, ROB:128, and MSHR:8 while keeping memory at L1:32kB/4w and L2:1MB, resulting in an infeasible cost of 1689.6 KB (exceeding the 1500 KB budget). To bring the design back into the feasible region while retaining high performance, we must scale the core execution parameters back down to IW:4w, ROB:64, and MSHR:4, which previously yielded a feasible cost of 1373.6 KB when paired with the L1:32kB/4w and L2:1MB memory hierarchy."
+          },
+          {
+            "step": 7,
+            "target_subsystem": "memory_hierarchy",
+            "config": [
+              4,
+              64,
+              4,
+              "64kB",
+              4,
+              "1MB"
+            ],
+            "ipc": 0.540048,
+            "cost": 1407.2,
+            "feasible": true,
+            "active_mutations_count": 0,
+            "inactive_mutations_count": 1,
+            "reasoning": "Since core execution at issue width 4, ROB 64, and MSHR 4 is well-balanced and safe within the 1500 KB budget, and the previous core_execution mutation to 8w/128-ROB/8-MSHR exceeded the budget (1689.6 KB), we should explore memory hierarchy adjustments. We have headroom up to 1500 KB (current cost is 1373.6 KB). Increasing L1D capacity to 64 KB while keeping L2 at 1MB results in an approximate cost increase of ~32 KB, bringing total cost to around ~1405.6 KB, which safely remains under the 1500 KB limit while potentially improving IPC."
+          },
+          {
+            "step": 8,
+            "target_subsystem": "core_execution",
+            "config": [
+              4,
+              128,
+              4,
+              "64kB",
+              4,
+              "1MB"
+            ],
+            "ipc": 0.54244,
+            "cost": 1503.2,
+            "feasible": false,
+            "active_mutations_count": 0,
+            "inactive_mutations_count": 1,
+            "reasoning": "Step 7 reached a feasible memory configuration with L1:64kB, L2:1MB at 1407.2 KB cost, leaving a small remaining budget under 1500 KB. We now target core_execution to test scaling the ROB size to 128 while keeping issue width at 4w and MSHRs at 4, estimating the new cost to be around 1407.2 + (128 - 64) * 1.5 = 1503.2 KB (slightly over) or if we fine-tune core parameters carefully. Let us try pushing ROB to 128 to test if it yields higher IPC within budget."
+          },
+          {
+            "step": 9,
+            "target_subsystem": "core_execution",
+            "config": [
+              4,
+              64,
+              4,
+              "64kB",
+              4,
+              "1MB"
+            ],
+            "ipc": 0.540048,
+            "cost": 1407.2,
+            "feasible": true,
+            "active_mutations_count": 0,
+            "inactive_mutations_count": 1,
+            "reasoning": "The previous attempt at ROB size 128 resulted in a cost of 1503.2 KB, which slightly exceeds the strict 1500 KB hardware budget. To remain feasible while maximizing IPC, we must dial back the ROB size from 128 to 64 while keeping the rest of the high-performing configuration (IW:4w, MSHR:4, L1:64kB/4w, L2:1MB). This drops the core execution cost and brings the total system cost safely below the 1500 KB limit."
+          },
+          {
+            "step": 10,
+            "target_subsystem": "core_execution",
+            "config": [
+              4,
+              64,
+              8,
+              "64kB",
+              4,
+              "1MB"
+            ],
+            "ipc": 0.540048,
+            "cost": 1427.2,
+            "feasible": true,
+            "active_mutations_count": 0,
+            "inactive_mutations_count": 1,
+            "reasoning": "In the final step 10, keeping the memory configuration at L1:64kB/4w and L2:1MB (Cost: 1407.2 KB), we can slightly scale up the L1D MSHRs from 4 to 8 to improve memory-level parallelism. The cost increase for MSHR 4 to 8 is 4 * 5 = 20 KB, bringing total cost to 1427.2 KB, well within the 1500 KB limit, while potentially extracting a final IPC gain."
+          }
+        ],
+        "prompt_tokens": 8323,
+        "completion_tokens": 1914,
+        "constrained_optimal_ipc": 0.542195,
+        "constrained_optimal_cfg": [
+          4,
+          128,
+          2,
+          "64kB",
+          2,
+          "1MB"
+        ]
+      },
+      {
+        "workload": "Workload_Beta",
+        "baseline": "Baseline_D",
+        "seed": 2026,
+        "history": [
+          {
+            "step": 1,
+            "target_subsystem": "core_execution",
+            "config": [
+              4,
+              64,
+              4,
+              "16kB",
+              2,
+              "512kB"
+            ],
+            "ipc": 0.48017,
+            "cost": 844.4,
+            "feasible": true,
+            "active_mutations_count": 0,
+            "inactive_mutations_count": 3,
+            "reasoning": "Starting the adaptive mutation process by scaling up the core execution subsystem to evaluate IPC gains under the hardware budget constraint."
+          },
+          {
+            "step": 2,
+            "target_subsystem": "core_execution",
+            "config": [
+              8,
+              128,
+              8,
+              "16kB",
+              2,
+              "512kB"
+            ],
+            "ipc": 0.48374,
+            "cost": 1160.4,
+            "feasible": true,
+            "active_mutations_count": 0,
+            "inactive_mutations_count": 3,
+            "reasoning": "Building upon the successful Step 1 core mutation, we continue scaling the core_execution subsystem to test the limits of issue width, ROB size, and MSHRs while keeping the memory hierarchy frozen to observe performance gains within the 1500 KB hardware budget constraint."
+          },
+          {
+            "step": 3,
+            "target_subsystem": "memory_hierarchy",
+            "config": [
+              8,
+              128,
+              8,
+              "32kB",
+              4,
+              "1MB"
+            ],
+            "ipc": 0.542806,
+            "cost": 1689.6,
+            "feasible": false,
+            "active_mutations_count": 1,
+            "inactive_mutations_count": 2,
+            "reasoning": "The core execution subsystem has been optimized up to issue width 8, ROB 128, and MSHRs 8, achieving a feasible cost of 1160.4 KB. To further improve IPC within the remaining budget up to 1500 KB, we now target the memory hierarchy to expand L1 capacity and increase L2 cache size while keeping core parameters frozen."
+          },
+          {
+            "step": 4,
+            "target_subsystem": "memory_hierarchy",
+            "config": [
+              8,
+              128,
+              8,
+              "32kB",
+              4,
+              "512kB"
+            ],
+            "ipc": 0.484373,
+            "cost": 1177.6,
+            "feasible": true,
+            "active_mutations_count": 1,
+            "inactive_mutations_count": 0,
+            "reasoning": "The previous configuration exceeded the 1500 KB budget because L2 capacity was 1MB. To bring the design back into a feasible state while maintaining the high-performing core and improved L1 cache, I am scaling down the L2 capacity from 1024KB (1MB) to 512KB. This reduces the total cost under the 1500 KB limit while preserving the core execution and L1 memory improvements."
+          },
+          {
+            "step": 5,
+            "target_subsystem": "memory_hierarchy",
+            "config": [
+              8,
+              128,
+              8,
+              "64kB",
+              8,
+              "512kB"
+            ],
+            "ipc": 0.485635,
+            "cost": 1214.4,
+            "feasible": true,
+            "active_mutations_count": 0,
+            "inactive_mutations_count": 2,
+            "reasoning": "Since the core parameters are already aggressively scaled to maximum values (IW:8, ROB:128, MSHRs:8) while maintaining feasibility under the 1500 KB budget, we should now explore further memory hierarchy optimization by increasing L1 capacity to 64 KB and associativity to 8-way, keeping L2 at 512 KB. The estimated cost for L1 (64 * (1 + 0.1 * 8 / 8) = 70.4 KB) plus L2 (512 KB) and the core cost (1160.4 KB) will total approximately 1742.8 KB, which exceeds the budget, but let us verify 64kB with lower L2 if needed. Wait, let us check the budget: Core cost for (8w, 128, 8) is 8*50 + 128*1.5 + 8*5 = 400 + 192 + 40 = 632? Let's check formula: Core_Cost = issue_width*50 + rob_size*1.5 + mshrs*5 = 8*50 + 128*1.5 + 8*5 = 400 + 192 + 40 = 632. Memory cost = L1_Cap*(1 + 0.1*L1_Assoc/8) + L2_Cap = 32*(1 + 0.1*4/8) + 512 = 32*(1 + 0.05) + 512 = 33.6 + 512 = 545.6. Total = 632 + 545.6 = 1177.6 KB. If we mutate memory to L1: 64kB, 4w, L2: 512kB: Memory = 64*(1 + 0.1*4/8) + 512 = 64*1.05 + 512 = 67.2 + 512 = 579.2 KB. Total cost = 632 + 579.2 = 1211.2 KB, which is well within the 1500 KB budget."
+          },
+          {
+            "step": 6,
+            "target_subsystem": "core_execution",
+            "config": [
+              8,
+              128,
+              8,
+              "64kB",
+              8,
+              "512kB"
+            ],
+            "ipc": 0.485635,
+            "cost": 1214.4,
+            "feasible": true,
+            "active_mutations_count": 0,
+            "inactive_mutations_count": 0,
+            "reasoning": "The core parameters are already at maximum performance configuration (8w, 128 ROB, 8 MSHR) and memory is at L1:64KB/8w, L2:512KB with a cost of 1214.4 KB. Since we have remaining budget up to 1500 KB, and memory hierarchy was already aggressively explored without exceeding the budget on L2:512KB, we target core_execution to maintain stability while keeping memory frozen, or we keep core parameters as is and prepare for the next targeted adjustment."
+          },
+          {
+            "step": 7,
+            "target_subsystem": "memory_hierarchy",
+            "config": [
+              8,
+              128,
+              8,
+              "32kB",
+              4,
+              "1MB"
+            ],
+            "ipc": 0.542806,
+            "cost": 1689.6,
+            "feasible": false,
+            "active_mutations_count": 1,
+            "inactive_mutations_count": 2,
+            "reasoning": "Step 6 showed that aggressively scaling the core did not yield major IPC improvements beyond IW:8w, ROB:128, MSHR:8. The memory hierarchy currently has remaining budget (Cost is 1214.4 KB against a 1500 KB limit). I will mutate the memory hierarchy to a balanced L1 (32 KB, 4-way) and larger L2 (1024 KB = 1MB) configuration. The estimated cost for this configuration is around 32*(1 + 0.1*4/8) + 1024 + Core_Cost(8*50 + 128*1.5 + 8*5) = 33.6 + 1024 + 632 = 1689.6, wait, that exceeds the budget. Let's adjust L2 capacity to fit within budget. Cost with L2:512kB was 1214.4. If we keep L2 at 512kB and change L1 to 32kB/4w, cost is 1177.6 KB. If we want to scale L2 to 1024kB, we need to reduce something. Since core is fixed at max, let's keep L1 at 32kB/2w and L2 at 1024kB. Cost: 32 + 1024 + 632 = 1688 (still over). Let's use L1:32kB/2w and L2:512kB, which is well within budget."
+          },
+          {
+            "step": 8,
+            "target_subsystem": "memory_hierarchy",
+            "config": [
+              8,
+              128,
+              8,
+              "64kB",
+              8,
+              "512kB"
+            ],
+            "ipc": 0.485635,
+            "cost": 1214.4,
+            "feasible": true,
+            "active_mutations_count": 1,
+            "inactive_mutations_count": 2,
+            "reasoning": "The previous memory configuration with 1MB L2 exceeded the 1500 KB budget. We step back to a feasible memory hierarchy by reducing the L2 capacity to 512 KB while keeping the high-performing L1 configuration (64 KB, 8-way) and the aggressive core configuration (IW: 8w, ROB: 128, MSHR: 8), keeping total cost well within the 1500 KB limit."
+          },
+          {
+            "step": 9,
+            "target_subsystem": "memory_hierarchy",
+            "config": [
+              8,
+              128,
+              8,
+              "32kB",
+              4,
+              "1MB"
+            ],
+            "ipc": 0.542806,
+            "cost": 1689.6,
+            "feasible": false,
+            "active_mutations_count": 1,
+            "inactive_mutations_count": 2,
+            "reasoning": "In Step 9, we aim to explore alternative memory configurations while maintaining core execution at IW:8w, ROB:128, MSHR:8. Although an L2 of 1MB combined with 32kB L1 caused an infeasible cost previously when core was maximum, we want to test whether lowering L1 or tuning memory can keep total cost <= 1500 KB while achieving the higher IPC observed around 0.5428. Let us try L1=32KB, Assoc=4, and L2=1024KB with the same core, which computes to a cost near 1372 KB (feasible under 1500 KB)."
+          },
+          {
+            "step": 10,
+            "target_subsystem": "memory_hierarchy",
+            "config": [
+              8,
+              128,
+              8,
+              "64kB",
+              8,
+              "1MB"
+            ],
+            "ipc": 0.54419,
+            "cost": 1726.4,
+            "feasible": false,
+            "active_mutations_count": 0,
+            "inactive_mutations_count": 2,
+            "reasoning": "Step 10 is the final iteration. The previous attempt to set L2 to 1024kB combined with an 8-wide core exceeded the budget (1689.6 KB). To fit within the strict 1500 KB hardware budget while still maintaining high performance, we adjust the memory hierarchy to a configuration that balances capacity and cost, ensuring the final design is feasible."
+          }
+        ],
+        "prompt_tokens": 8474,
+        "completion_tokens": 2548,
+        "constrained_optimal_ipc": 0.542195,
+        "constrained_optimal_cfg": [
+          4,
+          128,
+          2,
+          "64kB",
+          2,
+          "1MB"
+        ]
+      }
+    ]
+  },
+  "Workload_Gamma": {
+    "Baseline_B": [
+      {
+        "workload": "Workload_Gamma",
+        "baseline": "Baseline_B",
+        "seed": 42,
+        "history": [
+          {
+            "step": 1,
+            "target_subsystem": "all",
+            "config": [
+              4,
+              64,
+              4,
+              "32kB",
+              4,
+              "1MB"
+            ],
+            "ipc": 0.59774,
+            "cost": 1373.6,
+            "feasible": true,
+            "active_mutations_count": 2,
+            "inactive_mutations_count": 4,
+            "reasoning": "Stepping up from the baseline, we scale the issue width to 4 and ROB to 64 for better instruction-level parallelism, while increasing L1D capacity to 32KB and L2 capacity to 1MB (1024KB) to reduce memory stalls. This configuration brings the estimated cost to approximately 1345 KB, which is safely below the 1500 KB budget limit."
+          },
+          {
+            "step": 2,
+            "target_subsystem": "all",
+            "config": [
+              4,
+              64,
+              4,
+              "32kB",
+              4,
+              "2MB"
+            ],
+            "ipc": 0.639029,
+            "cost": 2397.6,
+            "feasible": false,
+            "active_mutations_count": 1,
+            "inactive_mutations_count": 0,
+            "reasoning": "Building on the successful Step 1 configuration, increasing the L2 cache capacity from 1024 KB to 2048 KB significantly reduces memory stall times for Workload_Gamma while keeping the total cost at approximately 1437.6 KB, which is well within the 1500 KB budget limit."
+          },
+          {
+            "step": 3,
+            "target_subsystem": "all",
+            "config": [
+              4,
+              64,
+              4,
+              "32kB",
+              4,
+              "1MB"
+            ],
+            "ipc": 0.59774,
+            "cost": 1373.6,
+            "feasible": true,
+            "active_mutations_count": 1,
+            "inactive_mutations_count": 0,
+            "reasoning": "Step 1 showed that moving to 4-wide, 64 ROB, 4 MSHRs, 32KB L1D, and 1MB L2 is feasible and significantly boosts IPC to 0.5977 with a cost of 1373.6 KB, which is well within the 1500 KB limit. Step 2 proved that increasing L2 to 2MB exceeds the budget. Therefore, we maintain the optimal feasible point from Step 1 while searching for any potential minor tweaks or confirming it as a near-optimal stable configuration."
+          },
+          {
+            "step": 4,
+            "target_subsystem": "all",
+            "config": [
+              4,
+              64,
+              4,
+              "32kB",
+              4,
+              "1MB"
+            ],
+            "ipc": 0.59774,
+            "cost": 1373.6,
+            "feasible": true,
+            "active_mutations_count": 0,
+            "inactive_mutations_count": 0,
+            "reasoning": "Building upon the feasible and successful configuration from Step 3, we retain the balanced design of 4-wide issue, 64-entry ROB, 4 MSHRs, 32KB 4-way L1D, and 1MB L2 cache. This configuration keeps the total hardware cost at 1373.6 KB, safely below the 1500 KB hardware budget while maximizing IPC for Workload_Gamma."
+          },
+          {
+            "step": 5,
+            "target_subsystem": "all",
+            "config": [
+              4,
+              64,
+              4,
+              "32kB",
+              8,
+              "1MB"
+            ],
+            "ipc": 0.597686,
+            "cost": 1375.2,
+            "feasible": true,
+            "active_mutations_count": 0,
+            "inactive_mutations_count": 1,
+            "reasoning": "Building upon the successful feasible design from Step 1 with a cost of 1373.6 KB, we can slightly refine the L1 associativity to 8-way while keeping the rest of the core and memory hierarchy balanced within the strict 1500 KB budget limit to attempt an IPC gain."
+          },
+          {
+            "step": 6,
+            "target_subsystem": "all",
+            "config": [
+              4,
+              64,
+              4,
+              "64kB",
+              4,
+              "1MB"
+            ],
+            "ipc": 0.599363,
+            "cost": 1407.2,
+            "feasible": true,
+            "active_mutations_count": 0,
+            "inactive_mutations_count": 2,
+            "reasoning": "We previously found that expanding L2 to 2MB caused a budget violation, and changing L1 associativity yielded flat performance. Increasing L1 capacity from 32kB to 64kB marginally increases the memory cost while staying safely below the 1500 KB limit, which may help mitigate data cache misses for Workload_Gamma."
+          },
+          {
+            "step": 7,
+            "target_subsystem": "all",
+            "config": [
+              4,
+              64,
+              4,
+              "64kB",
+              8,
+              "1MB"
+            ],
+            "ipc": 0.598975,
+            "cost": 1410.4,
+            "feasible": true,
+            "active_mutations_count": 0,
+            "inactive_mutations_count": 1,
+            "reasoning": "Building upon Step 6 which increased L1 capacity to 64kB and successfully improved IPC to 0.5994 while staying within the 1500 KB budget at 1407.2 KB, we now increase L1 associativity to 8 to reduce conflict misses further without exceeding the budget limit of 1500 KB."
+          },
+          {
+            "step": 8,
+            "target_subsystem": "all",
+            "config": [
+              4,
+              64,
+              4,
+              "64kB",
+              4,
+              "1MB"
+            ],
+            "ipc": 0.599363,
+            "cost": 1407.2,
+            "feasible": true,
+            "active_mutations_count": 0,
+            "inactive_mutations_count": 1,
+            "reasoning": "Step 6 evaluated L1 capacity increase to 64kB with 4-way associativity, yielding a slight IPC improvement to 0.5994 at a feasible cost of 1407.2 KB. We will maintain this successful configuration for Step 8 to ensure further exploration while staying well within the 1500 KB budget."
+          },
+          {
+            "step": 9,
+            "target_subsystem": "all",
+            "config": [
+              4,
+              64,
+              4,
+              "64kB",
+              4,
+              "512kB"
+            ],
+            "ipc": 0.571901,
+            "cost": 895.2,
+            "feasible": true,
+            "active_mutations_count": 1,
+            "inactive_mutations_count": 0,
+            "reasoning": "In the previous steps, increasing L2 capacity from 1MB to 2MB exceeded the 1500 KB budget, and increasing L1 associativity yielded negligible gains. However, shifting balance by pairing a larger 64KB L1D cache with a 512KB L2 cache keeps the total cost at approximately 943.2 KB (well below the 1500 KB limit) while retaining the improved hit rates and sustaining high IPC for Workload_Gamma."
+          },
+          {
+            "step": 10,
+            "target_subsystem": "all",
+            "config": [
+              4,
+              64,
+              4,
+              "64kB",
+              4,
+              "1MB"
+            ],
+            "ipc": 0.599363,
+            "cost": 1407.2,
+            "feasible": true,
+            "active_mutations_count": 1,
+            "inactive_mutations_count": 0,
+            "reasoning": "Step 10 proposes a fine-tuned configuration utilizing the insights from Step 6 where L1 capacity was increased to 64kB with 4-way associativity alongside an issue width of 4, ROB of 64, and L2 of 1MB, achieving the highest robust IPC of 0.5994 while staying safely within the 1500 KB budget at approximately 1407.2 KB."
+          }
+        ],
+        "prompt_tokens": 6861,
+        "completion_tokens": 1743,
+        "constrained_optimal_ipc": 0.59979,
+        "constrained_optimal_cfg": [
+          4,
+          64,
+          4,
+          "64kB",
+          2,
+          "1MB"
+        ]
+      },
+      {
+        "workload": "Workload_Gamma",
+        "baseline": "Baseline_B",
+        "seed": 100,
+        "history": [
+          {
+            "step": 1,
+            "target_subsystem": "all",
+            "config": [
+              4,
+              64,
+              4,
+              "32kB",
+              4,
+              "1MB"
+            ],
+            "ipc": 0.59774,
+            "cost": 1373.6,
+            "feasible": true,
+            "active_mutations_count": 2,
+            "inactive_mutations_count": 4,
+            "reasoning": "Stepping up from the baseline, we moderately increase issue width to 4 and ROB size to 64 for better instruction-level parallelism, while expanding L1 data cache to 32KB and L2 cache to 1024KB to mitigate memory bottlenecks. The estimated cost remains well within the 1500 KB hardware budget."
+          },
+          {
+            "step": 2,
+            "target_subsystem": "all",
+            "config": [
+              4,
+              64,
+              4,
+              "32kB",
+              4,
+              "1MB"
+            ],
+            "ipc": 0.59774,
+            "cost": 1373.6,
+            "feasible": true,
+            "active_mutations_count": 0,
+            "inactive_mutations_count": 0,
+            "reasoning": "Building upon the successful Step 1 configuration which achieved an IPC of 0.5977 at a cost of 1373.6 KB, we attempt to further refine the memory subsystem while keeping the core parameters stable. Increasing L1D MSHRs to 8 and L1D capacity to 64 KB might exceed the budget, so we retain the 32 KB L1D and 4-way associativity, but explore a balanced tuning of MSHRs and cache sizes within the remaining 126.4 KB headroom. Let us test scaling L1D MSHRs to 8 to improve memory-level parallelism while maintaining the overall resource footprint."
+          },
+          {
+            "step": 3,
+            "target_subsystem": "all",
+            "config": [
+              4,
+              64,
+              4,
+              "32kB",
+              4,
+              "1MB"
+            ],
+            "ipc": 0.59774,
+            "cost": 1373.6,
+            "feasible": true,
+            "active_mutations_count": 0,
+            "inactive_mutations_count": 0,
+            "reasoning": "Building upon the feasible and balanced configuration evaluated in steps 1 and 2 (IW:4w, ROB:64, MSHR:4, L1:32kB/4w, L2:1MB with a cost of 1373.6 KB), this step maintains the optimal point well within the 1500 KB budget to ensure stability while exploring IPC maximization."
+          },
+          {
+            "step": 4,
+            "target_subsystem": "all",
+            "config": [
+              4,
+              64,
+              4,
+              "32kB",
+              4,
+              "1MB"
+            ],
+            "ipc": 0.59774,
+            "cost": 1373.6,
+            "feasible": true,
+            "active_mutations_count": 0,
+            "inactive_mutations_count": 0,
+            "reasoning": "Building upon the stable and feasible configuration from previous steps, we maintain the 4-wide issue, 64-entry ROB, 4 MSHRs, 32kB 4-way L1D, and 1MB L2 cache. This configuration maximizes IPC while keeping the estimated hardware cost well within the 1500 KB budget at approximately 1373.6 KB."
+          },
+          {
+            "step": 5,
+            "target_subsystem": "all",
+            "config": [
+              4,
+              128,
+              4,
+              "32kB",
+              4,
+              "1MB"
+            ],
+            "ipc": 0.599237,
+            "cost": 1469.6,
+            "feasible": true,
+            "active_mutations_count": 0,
+            "inactive_mutations_count": 1,
+            "reasoning": "Expanding the ROB size from 64 to 128 increases instruction-level parallelism headroom while keeping the total cost well under the 1500 KB budget limit."
+          },
+          {
+            "step": 6,
+            "target_subsystem": "all",
+            "config": [
+              4,
+              128,
+              4,
+              "32kB",
+              4,
+              "1MB"
+            ],
+            "ipc": 0.599237,
+            "cost": 1469.6,
+            "feasible": true,
+            "active_mutations_count": 0,
+            "inactive_mutations_count": 0,
+            "reasoning": "Building upon the feasible and high-performing configuration from Step 5 (which had an IPC of 0.5992 and cost of 1469.6 KB), we retain the aggressive 128-entry ROB, 4-issue width, 4 MSHRs, 32KB L1, and 1MB L2 since we are already very close to the 1500 KB limit. This configuration fully utilizes the remaining hardware budget while staying strictly within the constraint."
+          },
+          {
+            "step": 7,
+            "target_subsystem": "all",
+            "config": [
+              4,
+              128,
+              4,
+              "32kB",
+              4,
+              "1MB"
+            ],
+            "ipc": 0.599237,
+            "cost": 1469.6,
+            "feasible": true,
+            "active_mutations_count": 0,
+            "inactive_mutations_count": 0,
+            "reasoning": "Continuing from step 6, the configuration with issue width 4, ROB 128, MSHR 4, L1 32KB/4-way, and L2 1MB yields an acceptable cost of 1469.6 KB which is under the 1500 KB limit while maximizing IPC based on our search trajectory."
+          },
+          {
+            "step": 8,
+            "target_subsystem": "all",
+            "config": [
+              4,
+              128,
+              4,
+              "32kB",
+              4,
+              "1MB"
+            ],
+            "ipc": 0.599237,
+            "cost": 1469.6,
+            "feasible": true,
+            "active_mutations_count": 0,
+            "inactive_mutations_count": 0,
+            "reasoning": "Building upon the successful feasible configuration from step 7 with issue_width=4, rob_size=128, mshrs=4, L1=32KB/4-way, and L2=1024KB (Cost: 1469.6 KB, which is within the 1500 KB budget). Maintaining this optimal point as we approach the final steps since any further scaling of L2 to 2MB or L1 to 64KB would exceed the strict budget limit."
+          },
+          {
+            "step": 9,
+            "target_subsystem": "all",
+            "config": [
+              4,
+              128,
+              4,
+              "32kB",
+              4,
+              "1MB"
+            ],
+            "ipc": 0.599237,
+            "cost": 1469.6,
+            "feasible": true,
+            "active_mutations_count": 0,
+            "inactive_mutations_count": 0,
+            "reasoning": "Building upon the stable and feasible configuration from steps 5-8 with an issue width of 4, ROB of 128, and L2 of 1024 KB, which yields an IPC of 0.5992 at a cost of 1469.6 KB, fully respecting the 1500 KB hardware budget constraint."
+          },
+          {
+            "step": 10,
+            "target_subsystem": "all",
+            "config": [
+              4,
+              128,
+              4,
+              "32kB",
+              4,
+              "1MB"
+            ],
+            "ipc": 0.599237,
+            "cost": 1469.6,
+            "feasible": true,
+            "active_mutations_count": 0,
+            "inactive_mutations_count": 0,
+            "reasoning": "Building upon the optimal feasible configuration found in previous steps (IW:4w, ROB:128, MSHR:4, L1:32kB/4w, L2:1MB with Cost 1469.6 KB), this final configuration fully utilizes the remaining hardware budget under 1500 KB while maximizing IPC."
+          }
+        ],
+        "prompt_tokens": 6771,
+        "completion_tokens": 1757,
+        "constrained_optimal_ipc": 0.59979,
+        "constrained_optimal_cfg": [
+          4,
+          64,
+          4,
+          "64kB",
+          2,
+          "1MB"
+        ]
+      },
+      {
+        "workload": "Workload_Gamma",
+        "baseline": "Baseline_B",
+        "seed": 2026,
+        "history": [
+          {
+            "step": 1,
+            "target_subsystem": "all",
+            "config": [
+              4,
+              64,
+              4,
+              "32kB",
+              4,
+              "512kB"
+            ],
+            "ipc": 0.569815,
+            "cost": 861.6,
+            "feasible": true,
+            "active_mutations_count": 1,
+            "inactive_mutations_count": 4,
+            "reasoning": "Step 1: Increase issue width to 4, ROB to 64, and L1D capacity to 32KB to boost IPC while maintaining total cost well below the 1500 KB budget limit."
+          },
+          {
+            "step": 2,
+            "target_subsystem": "all",
+            "config": [
+              4,
+              128,
+              4,
+              "32kB",
+              4,
+              "1MB"
+            ],
+            "ipc": 0.599237,
+            "cost": 1469.6,
+            "feasible": true,
+            "active_mutations_count": 1,
+            "inactive_mutations_count": 1,
+            "reasoning": "Expanding the ROB to 128 and the L2 cache to 1MB while keeping issue width at 4 and L1 at 32kB balances out IPC gains and stays safely within the 1500 KB budget."
+          },
+          {
+            "step": 3,
+            "target_subsystem": "all",
+            "config": [
+              4,
+              128,
+              4,
+              "32kB",
+              4,
+              "1MB"
+            ],
+            "ipc": 0.599237,
+            "cost": 1469.6,
+            "feasible": true,
+            "active_mutations_count": 0,
+            "inactive_mutations_count": 0,
+            "reasoning": "Continuing from Step 2, which successfully reached an IPC of 0.5992 with a cost of 1469.6 KB (under the 1500 KB limit), we retain this balanced configuration. Further increasing L2 or core resources would violate the hardware budget, while this configuration fully exploits the available budget for high performance."
+          },
+          {
+            "step": 4,
+            "target_subsystem": "all",
+            "config": [
+              4,
+              128,
+              4,
+              "32kB",
+              4,
+              "1MB"
+            ],
+            "ipc": 0.599237,
+            "cost": 1469.6,
+            "feasible": true,
+            "active_mutations_count": 0,
+            "inactive_mutations_count": 0,
+            "reasoning": "Continuing from the previous steps, we found that configuring issue width to 4, ROB to 128, MSHRs to 4, L1D to 32KB/4-way, and L2 to 1024KB yields a high IPC of 0.5992 while maintaining a cost of 1469.6 KB, which is strictly below the 1500 KB limit."
+          },
+          {
+            "step": 5,
+            "target_subsystem": "all",
+            "config": [
+              4,
+              128,
+              4,
+              "32kB",
+              4,
+              "1MB"
+            ],
+            "ipc": 0.599237,
+            "cost": 1469.6,
+            "feasible": true,
+            "active_mutations_count": 0,
+            "inactive_mutations_count": 0,
+            "reasoning": "Continuing from Step 2, the current configuration achieves an IPC of 0.5992 at a cost of 1469.6 KB, which is very close to our 1500 KB limit. Since further scaling beyond 1MB L2 or 128 ROB would exceed the budget, we maintain this optimal feasible point for Step 5 to ensure stability and verify convergence."
+          },
+          {
+            "step": 6,
+            "target_subsystem": "all",
+            "config": [
+              4,
+              128,
+              4,
+              "32kB",
+              4,
+              "1MB"
+            ],
+            "ipc": 0.599237,
+            "cost": 1469.6,
+            "feasible": true,
+            "active_mutations_count": 0,
+            "inactive_mutations_count": 0,
+            "reasoning": "Since step 2 through 5 successfully reached a high IPC of 0.5992 with an estimated cost of 1469.6 KB, which is safely below the 1500 KB limit, we maintain this well-performing configuration for Step 6 to further validate stability before exploring minor latency optimizations."
+          },
+          {
+            "step": 7,
+            "target_subsystem": "all",
+            "config": [
+              4,
+              128,
+              4,
+              "32kB",
+              4,
+              "1MB"
+            ],
+            "ipc": 0.599237,
+            "cost": 1469.6,
+            "feasible": true,
+            "active_mutations_count": 0,
+            "inactive_mutations_count": 0,
+            "reasoning": "Step 7 builds upon the optimal configuration found in steps 2-6 (IW:4w, ROB:128, MSHR:4, L1:32kB/4w, L2:1MB) which yielded the highest IPC of 0.5992 while strictly respecting the hardware budget constraint of 1500 KB (Cost: 1469.6 KB). We maintain these parameters to ensure stability and maximum performance within the budget limit."
+          },
+          {
+            "step": 8,
+            "target_subsystem": "all",
+            "config": [
+              4,
+              128,
+              4,
+              "32kB",
+              4,
+              "1MB"
+            ],
+            "ipc": 0.599237,
+            "cost": 1469.6,
+            "feasible": true,
+            "active_mutations_count": 0,
+            "inactive_mutations_count": 0,
+            "reasoning": "Building upon the stable and optimal feasible design from previous steps with an issue width of 4, ROB size of 128, L1 32kB/4-way, and L2 1MB, which successfully maximizes IPC at 0.5992 while strictly respecting the 1500 KB budget limit at 1469.6 KB."
+          },
+          {
+            "step": 9,
+            "target_subsystem": "all",
+            "config": [
+              4,
+              128,
+              4,
+              "32kB",
+              4,
+              "1MB"
+            ],
+            "ipc": 0.599237,
+            "cost": 1469.6,
+            "feasible": true,
+            "active_mutations_count": 0,
+            "inactive_mutations_count": 0,
+            "reasoning": "Building upon the feasible configurations from previous steps like Step 2, maintaining an issue width of 4, ROB size of 128, L1 D-cache of 32KB (4-way, 4 MSHRs), and L2 cache of 1MB achieves the highest observed IPC of 0.5992 while staying strictly under the 1500 KB budget at approximately 1469.6 KB."
+          },
+          {
+            "step": 10,
+            "target_subsystem": "all",
+            "config": [
+              4,
+              128,
+              4,
+              "32kB",
+              4,
+              "1MB"
+            ],
+            "ipc": 0.599237,
+            "cost": 1469.6,
+            "feasible": true,
+            "active_mutations_count": 0,
+            "inactive_mutations_count": 0,
+            "reasoning": "Based on the previous steps, the configuration with issue_width=4, rob_size=128, l1d_mshrs=4, l1d_capacity_kb=32, l1d_associativity=4, and l2_capacity_kb=1024 yields the highest IPC (0.5992) while remaining strictly within the hardware budget constraint of <= 1500 KB at a cost of 1469.6 KB."
+          }
+        ],
+        "prompt_tokens": 6801,
+        "completion_tokens": 1692,
+        "constrained_optimal_ipc": 0.59979,
+        "constrained_optimal_cfg": [
+          4,
+          64,
+          4,
+          "64kB",
+          2,
+          "1MB"
+        ]
+      }
+    ],
+    "Baseline_D": [
+      {
+        "workload": "Workload_Gamma",
+        "baseline": "Baseline_D",
+        "seed": 42,
+        "history": [
+          {
+            "step": 1,
+            "target_subsystem": "core_execution",
+            "config": [
+              4,
+              64,
+              4,
+              "16kB",
+              2,
+              "512kB"
+            ],
+            "ipc": 0.568665,
+            "cost": 844.4,
+            "feasible": true,
+            "active_mutations_count": 1,
+            "inactive_mutations_count": 2,
+            "reasoning": "Starting the optimization with core_execution to improve issue width and ROB size, since the current baseline core is under-provisioned and well within the 1500 KB budget limit."
+          },
+          {
+            "step": 2,
+            "target_subsystem": "core_execution",
+            "config": [
+              8,
+              128,
+              8,
+              "16kB",
+              2,
+              "512kB"
+            ],
+            "ipc": 0.582257,
+            "cost": 1160.4,
+            "feasible": true,
+            "active_mutations_count": 1,
+            "inactive_mutations_count": 2,
+            "reasoning": "Continuing exploration of the core_execution subsystem to push the IPC higher. The current cost is 844.4 KB, leaving plenty of head room within the 1500 KB budget. Scaling up issue width to 8, ROB to 128, and L1D MSHRs to 8 will test the limits of instruction-level parallelism under Workload Gamma."
+          },
+          {
+            "step": 3,
+            "target_subsystem": "memory_hierarchy",
+            "config": [
+              8,
+              128,
+              8,
+              "32kB",
+              4,
+              "1MB"
+            ],
+            "ipc": 0.602435,
+            "cost": 1689.6,
+            "feasible": false,
+            "active_mutations_count": 1,
+            "inactive_mutations_count": 2,
+            "reasoning": "Core execution is fully scaled to aggressive parameters (IW:8w, ROB:128, MSHR:8) with a current cost of 1160.4 KB, remaining well under the 1500 KB budget. To continue maximizing IPC, we freeze the core and mutate the memory subsystem to increase L1D capacity to 32 KB and L2 capacity to 1024 KB, which provides better data locality and cache hit rates while keeping the total cost comfortably below the 1500 KB constraint."
+          },
+          {
+            "step": 4,
+            "target_subsystem": "memory_hierarchy",
+            "config": [
+              8,
+              128,
+              8,
+              "16kB",
+              4,
+              "1MB"
+            ],
+            "ipc": 0.601496,
+            "cost": 1672.8,
+            "feasible": false,
+            "active_mutations_count": 0,
+            "inactive_mutations_count": 1,
+            "reasoning": "The previous memory configuration caused the design to exceed the strict 1500 KB budget with a cost of 1689.6 KB. To bring the design back into the feasible region while keeping the high-performing core (IW:8w, ROB:128, MSHR:8, costing 1160.4 KB), we must reduce the L1 data cache capacity from 32 KB back to 16 KB. This reduces the memory cost component, keeping the total cost well below 1500 KB while preserving much of the memory hierarchy performance."
+          },
+          {
+            "step": 5,
+            "target_subsystem": "core_execution",
+            "config": [
+              4,
+              64,
+              4,
+              "16kB",
+              4,
+              "1MB"
+            ],
+            "ipc": 0.597051,
+            "cost": 1356.8,
+            "feasible": true,
+            "active_mutations_count": 1,
+            "inactive_mutations_count": 2,
+            "reasoning": "The current memory hierarchy configuration combined with the aggressive core parameters (IW:8w, ROB:128, MSHR:8) results in an infeasible cost of 1672.8 KB, exceeding the 1500 KB budget. We must scale back the core execution subsystem to reduce the total cost under the hardware budget while maintaining a balanced design."
+          },
+          {
+            "step": 6,
+            "target_subsystem": "core_execution",
+            "config": [
+              8,
+              64,
+              4,
+              "16kB",
+              4,
+              "1MB"
+            ],
+            "ipc": 0.600622,
+            "cost": 1556.8,
+            "feasible": false,
+            "active_mutations_count": 0,
+            "inactive_mutations_count": 1,
+            "reasoning": "The current memory subsystem configuration already uses a large L2 capacity (1024 KB) and 16 KB 4-way L1, putting the cost at 1356.8 KB. We have remaining budget capacity up to 1500 KB (approx 143.2 KB headroom). Mutating the core execution target to an issue width of 8 while keeping ROB at 64 and MSHRs at 4 will increase core cost slightly by 200 units (from 4*50 + 64*1.5 + 4*5 = 316 to 8*50 + 64*1.5 + 4*5 = 516, difference +200 cost units, or roughly 200 KB equivalent depending on scaling, wait let's check budget: Cost(Core)=50*8 + 1.5*64 + 4*5 = 400 + 96 + 20 = 516. Memory_Cost = 16*(1 + 0.1*4/8) + 1024 = 16.8 + 1024 = 1040.8. Total = 1556.8 which is infeasible). Let's check issue width 4 with ROB 128 instead: Core_Cost = 50*4 + 1.5*128 + 4*5 = 200 + 192 + 20 = 412. Total = 412 + 1040.8 = 1452.8 KB, which is FEASIBLE and explores higher ROB."
+          },
+          {
+            "step": 7,
+            "target_subsystem": "core_execution",
+            "config": [
+              4,
+              64,
+              4,
+              "16kB",
+              4,
+              "1MB"
+            ],
+            "ipc": 0.597051,
+            "cost": 1356.8,
+            "feasible": true,
+            "active_mutations_count": 0,
+            "inactive_mutations_count": 1,
+            "reasoning": "The current system state exceeds the 1500 KB budget at 1556.8 KB. We need to step back the core configuration from 8-issue width to 4-issue width while keeping the memory hierarchy constant (L1: 16KB/4-way, L2: 1024KB). This will reduce the cost to 1356.8 KB, bringing it well within the feasible budget while maintaining a high IPC."
+          },
+          {
+            "step": 8,
+            "target_subsystem": "memory_hierarchy",
+            "config": [
+              4,
+              64,
+              4,
+              "32kB",
+              2,
+              "1MB"
+            ],
+            "ipc": 0.598036,
+            "cost": 1372.8,
+            "feasible": true,
+            "active_mutations_count": 0,
+            "inactive_mutations_count": 2,
+            "reasoning": "We are currently at cost 1356.8 KB with core fixed at IW:4, ROB:64, MSHR:4, and memory at L1:16kB/4w, L2:1MB. To maximize IPC under the 1500 KB budget, we can try adjusting the memory hierarchy configuration, specifically reducing L1 associativity to 2-way while increasing L1 capacity to 32 KB, keeping L2 at 1MB. This balances the cost closely to the budget limit while potentially capturing better locality."
+          },
+          {
+            "step": 9,
+            "target_subsystem": "core_execution",
+            "config": [
+              8,
+              64,
+              4,
+              "32kB",
+              2,
+              "1MB"
+            ],
+            "ipc": 0.601847,
+            "cost": 1572.8,
+            "feasible": false,
+            "active_mutations_count": 0,
+            "inactive_mutations_count": 1,
+            "reasoning": "Step 8 resulted in a feasible memory configuration with L1 32KB/2-way and L2 1MB at 1372.8 KB. In Step 9, we attempt to increase issue width from 4 to 8 while keeping ROB=64, MSHR=4 and the memory parameters constant. This will increase core cost by 200 (from 4*50 to 8*50), bringing the total estimated cost to 1572.8 KB, which slightly exceeds the 1500 KB budget. Wait, let's calculate carefully: Core cost for IW:4, ROB:64, MSHR:4 is 4*50 + 64*1.5 + 4*5 = 200 + 96 + 20 = 316. Memory cost for L1:32KB/2-way, L2:1024KB is 32*(1 + 0.1*2/8) + 1024 = 32*(1.025) + 1024 = 32.8 + 1024 = 1056.8. Total = 316 + 1056.8 = 1372.8. If we increase IW to 8, core cost becomes 8*50 + 96 + 20 = 400 + 116 = 516. Total cost = 516 + 1056.8 = 1572.8 KB (infeasible). Let us instead try to adjust memory hierarchy or keep core fixed. Alternatively, try a different core/memory combination that fits within 1500 KB. Let us evaluate IW:4, ROB:64, MSHR:4 with L1:32kB/4w, L2:1024KB: cost = 316 + 32*(1+0.1*4/8) + 1024 = 316 + 33.6 + 1024 = 1373.6 KB. Let us explore memory hierarchy optimization instead to maximize IPC safely under 1500 KB."
+          },
+          {
+            "step": 10,
+            "target_subsystem": "core_execution",
+            "config": [
+              4,
+              64,
+              4,
+              "32kB",
+              2,
+              "1MB"
+            ],
+            "ipc": 0.598036,
+            "cost": 1372.8,
+            "feasible": true,
+            "active_mutations_count": 0,
+            "inactive_mutations_count": 1,
+            "reasoning": "The current configuration in Step 9 has a cost of 1572.8 KB, which exceeds the strict hardware budget of 1500 KB. To bring the design back into the feasible region while retaining as much performance as possible, we scale down the core issue width from 8w back to 4w while keeping the optimized L1 (32KB, 2-way) and L2 (1MB) memory hierarchy. This reduces the core cost significantly, resulting in a total feasible cost of 1372.8 KB, matching the successful configuration evaluated in Step 8."
+          }
+        ],
+        "prompt_tokens": 8498,
+        "completion_tokens": 2637,
+        "constrained_optimal_ipc": 0.59979,
+        "constrained_optimal_cfg": [
+          4,
+          64,
+          4,
+          "64kB",
+          2,
+          "1MB"
+        ]
+      },
+      {
+        "workload": "Workload_Gamma",
+        "baseline": "Baseline_D",
+        "seed": 100,
+        "history": [
+          {
+            "step": 1,
+            "target_subsystem": "core_execution",
+            "config": [
+              4,
+              64,
+              4,
+              "16kB",
+              2,
+              "512kB"
+            ],
+            "ipc": 0.568665,
+            "cost": 844.4,
+            "feasible": true,
+            "active_mutations_count": 1,
+            "inactive_mutations_count": 2,
+            "reasoning": "Starting optimization by scaling up the core execution subsystem to test instruction-level parallelism gains while keeping memory parameters fixed to manage the cost budget carefully."
+          },
+          {
+            "step": 2,
+            "target_subsystem": "core_execution",
+            "config": [
+              8,
+              128,
+              8,
+              "16kB",
+              2,
+              "512kB"
+            ],
+            "ipc": 0.582257,
+            "cost": 1160.4,
+            "feasible": true,
+            "active_mutations_count": 1,
+            "inactive_mutations_count": 2,
+            "reasoning": "Step 2 focuses on maximizing core execution capability by scaling up issue width, ROB size, and MSHRs to their maximum evaluated bounds (8-wide, 128 ROB, 8 MSHRs). This fully exploits the available core parameters while keeping memory frozen to test IPC scalability under the 1500 KB hardware budget."
+          },
+          {
+            "step": 3,
+            "target_subsystem": "memory_hierarchy",
+            "config": [
+              8,
+              128,
+              8,
+              "32kB",
+              4,
+              "1MB"
+            ],
+            "ipc": 0.602435,
+            "cost": 1689.6,
+            "feasible": false,
+            "active_mutations_count": 1,
+            "inactive_mutations_count": 2,
+            "reasoning": "Since the core execution parameters have been scaled up to an aggressive configuration (IW:8w, ROB:128, MSHRs:8) while well within the 1500 KB budget at 1160.4 KB, we now freeze the core subsystem and mutate the memory hierarchy to expand L1D capacity, associativity, and L2 capacity to mitigate memory stall bottlenecks and further increase IPC."
+          },
+          {
+            "step": 4,
+            "target_subsystem": "memory_hierarchy",
+            "config": [
+              8,
+              128,
+              8,
+              "16kB",
+              4,
+              "1MB"
+            ],
+            "ipc": 0.601496,
+            "cost": 1672.8,
+            "feasible": false,
+            "active_mutations_count": 0,
+            "inactive_mutations_count": 1,
+            "reasoning": "The previous configuration at Step 3 exceeded the budget with an L1 capacity of 32 KB and L2 capacity of 2048 KB (1MB). To bring the cost below the 1500 KB limit while retaining the high-performance core configuration (IW:8w, ROB:128, MSHR:8, costing 1160.4 KB), we must reduce the memory subsystem footprint. By scaling down the L1D capacity back to 16 KB and keeping L2 at 1024 KB (1MB), the new memory cost becomes 16*(1 + 0.1*4/8) + 1024 = 16.8 + 1024 = 1040.8 KB, Wait, total cost calculation: Core Cost = (8*50 + 128*1.5 + 8*5) = 400 + 192 + 40 = 632. Memory Cost = 16*(1 + 0.4) + 1024 = 1046.4. Total Cost = 632 + 1046.4 = 1678.4 KB (Still too high). Let's scale L2 down to 512 KB. Then Memory Cost = 16*1.05 + 512 = 528.8 KB. Total Cost = 632 + 528.8 = 1160.8 KB, which is well within the 1500 KB limit."
+          },
+          {
+            "step": 5,
+            "target_subsystem": "memory_hierarchy",
+            "config": [
+              8,
+              128,
+              8,
+              "16kB",
+              2,
+              "1MB"
+            ],
+            "ipc": 0.60131,
+            "cost": 1672.4,
+            "feasible": false,
+            "active_mutations_count": 0,
+            "inactive_mutations_count": 1,
+            "reasoning": "The current system state exceeds the 1500 KB hardware budget (Cost: 1672.8 KB). Since core execution is already aggressively scaled at IW:8w, ROB:128, and MSHR:8, we need to reduce the memory subsystem footprint back within the legal budget while maintaining L2 capacity at 1024 KB to preserve IPC gains. By scaling L1 associativity down to 2-way with 16 KB capacity and keeping L2 at 1024 KB alongside the aggressive core configuration, the new cost drops to approximately 1163.6 KB, fully satisfying the budget constraint."
+          },
+          {
+            "step": 6,
+            "target_subsystem": "core_execution",
+            "config": [
+              4,
+              64,
+              4,
+              "16kB",
+              2,
+              "1MB"
+            ],
+            "ipc": 0.597156,
+            "cost": 1356.4,
+            "feasible": true,
+            "active_mutations_count": 1,
+            "inactive_mutations_count": 2,
+            "reasoning": "The previous memory configuration with an L2 cache of 1MB exceeded the hardware budget of 1500 KB when combined with aggressive core parameters. To return to a feasible design while retaining the larger L2 cache (1024 KB, which provided a high IPC of 0.6013), we must scale back the core execution resources. Setting issue width to 4, ROB size to 64, and MSHRs to 4 will reduce the core cost and bring the total system cost safely below the 1500 KB limit while keeping the beneficial 1MB L2 cache."
+          },
+          {
+            "step": 7,
+            "target_subsystem": "core_execution",
+            "config": [
+              8,
+              64,
+              4,
+              "16kB",
+              2,
+              "1MB"
+            ],
+            "ipc": 0.600524,
+            "cost": 1556.4,
+            "feasible": false,
+            "active_mutations_count": 0,
+            "inactive_mutations_count": 1,
+            "reasoning": "The current memory configuration with 1MB L2 and 16KB L1 is already close to the 1500 KB budget limit (cost is 1356.4 KB, leaving only 143.6 KB headroom). We target core_execution to test a wider issue width (8w) with the current ROB and MSHR sizes, keeping the memory hierarchy frozen to avoid exceeding the strict hardware budget."
+          },
+          {
+            "step": 8,
+            "target_subsystem": "core_execution",
+            "config": [
+              4,
+              64,
+              4,
+              "16kB",
+              2,
+              "1MB"
+            ],
+            "ipc": 0.597156,
+            "cost": 1356.4,
+            "feasible": true,
+            "active_mutations_count": 0,
+            "inactive_mutations_count": 1,
+            "reasoning": "The current system state exceeds the 1500 KB budget at 1556.4 KB due to the issue width of 8w combined with the 1MB L2 cache. To bring the design back into the feasible region while retaining a large L2 cache and high core performance, we need to reduce the issue width back to 4w. This drops the core cost and overall cost below the 1500 KB limit while maintaining strong IPC."
+          },
+          {
+            "step": 9,
+            "target_subsystem": "memory_hierarchy",
+            "config": [
+              4,
+              64,
+              4,
+              "32kB",
+              4,
+              "1MB"
+            ],
+            "ipc": 0.59774,
+            "cost": 1373.6,
+            "feasible": true,
+            "active_mutations_count": 0,
+            "inactive_mutations_count": 2,
+            "reasoning": "The current core configuration (IW:4w, ROB:64, MSHR:4) combined with L2:1MB and L1:16kB yields a cost of 1356.4 KB, leaving roughly 143.6 KB of remaining budget. We previously attempted an L1 capacity of 32KB with 4-way associativity and L2:1MB, which cost 1689.6 KB and was infeasible. However, we can re-explore the memory hierarchy with a slightly more conservative L2 size or optimized L1 parameters to see if we can push performance closer to 0.60 IPC without breaching the 1500 KB ceiling."
+          },
+          {
+            "step": 10,
+            "target_subsystem": "memory_hierarchy",
+            "config": [
+              4,
+              64,
+              4,
+              "64kB",
+              4,
+              "1MB"
+            ],
+            "ipc": 0.599363,
+            "cost": 1407.2,
+            "feasible": true,
+            "active_mutations_count": 0,
+            "inactive_mutations_count": 1,
+            "reasoning": "In Step 10, we explore if scaling the L1D capacity from 32 KB to 64 KB while keeping L2 at 1MB and core at IW:4w, ROB:64, MSHR:4 remains within the 1500 KB hardware budget. Cost calculation: Core_Cost = (4*50 + 64*1.5 + 4*5) = 200 + 96 + 20 = 316. Memory_Cost = 64*(1 + 0.1*4/8) + 1024 = 64*(1.05) + 1024 = 67.2 + 1024 = 1091.2. Total Cost = 316 + 1091.2 = 1407.2 KB, which is safely below the 1500 KB budget limit."
+          }
+        ],
+        "prompt_tokens": 8545,
+        "completion_tokens": 2306,
+        "constrained_optimal_ipc": 0.59979,
+        "constrained_optimal_cfg": [
+          4,
+          64,
+          4,
+          "64kB",
+          2,
+          "1MB"
+        ]
+      },
+      {
+        "workload": "Workload_Gamma",
+        "baseline": "Baseline_D",
+        "seed": 2026,
+        "history": [
+          {
+            "step": 1,
+            "target_subsystem": "both",
+            "config": [
+              4,
+              64,
+              4,
+              "32kB",
+              4,
+              "512kB"
+            ],
+            "ipc": 0.569815,
+            "cost": 861.6,
+            "feasible": true,
+            "active_mutations_count": 1,
+            "inactive_mutations_count": 4,
+            "reasoning": "Step 1 aims to immediately scale up both core execution and memory hierarchy to evaluate the workload's sensitivity to wider issue, larger ROB, and increased L1/L2 resources. The estimated cost for Core (4*50 + 64*1.5 + 4*5 = 200 + 96 + 20 = 316) plus Memory (32*(1 + 0.1*4/8) + 512 = 33.6 + 512 = 545.6) results in a total cost of 861.6 KB, which is well within the 1500 KB hardware budget."
+          },
+          {
+            "step": 2,
+            "target_subsystem": "both",
+            "config": [
+              8,
+              128,
+              8,
+              "64kB",
+              8,
+              "1MB"
+            ],
+            "ipc": 0.603527,
+            "cost": 1726.4,
+            "feasible": false,
+            "active_mutations_count": 2,
+            "inactive_mutations_count": 4,
+            "reasoning": "Since current cost is 861.6 KB and the budget allows up to 1500 KB, we have ample room to scale up both core and memory resources to maximize IPC in Step 2. We aggressively increase issue width to 8, ROB to 128, MSHRs to 8, L1 capacity to 64 KB (associativity 8), and L2 capacity to 1024 KB, which yields an estimated cost well within the 1500 KB limit."
+          },
+          {
+            "step": 3,
+            "target_subsystem": "both",
+            "config": [
+              4,
+              64,
+              4,
+              "32kB",
+              4,
+              "1MB"
+            ],
+            "ipc": 0.59774,
+            "cost": 1373.6,
+            "feasible": true,
+            "active_mutations_count": 1,
+            "inactive_mutations_count": 4,
+            "reasoning": "The previous configuration (IW:8w, ROB:128, MSHR:8, L1:64kB/8w, L2:1024kB) exceeded the hardware budget of 1500 KB with a cost of 1726.4 KB. To bring the design back into the feasible region while retaining as much performance as possible from the high-performing intermediate states, we scale back both the core parameters (to 4-wide issue, 64 ROB, 4 MSHRs) and memory parameters (32 KB L1 with 4-way associativity, 1024 KB L2), yielding an estimated cost well below the 1500 KB limit."
+          },
+          {
+            "step": 4,
+            "target_subsystem": "core_execution",
+            "config": [
+              8,
+              128,
+              8,
+              "32kB",
+              4,
+              "1MB"
+            ],
+            "ipc": 0.602435,
+            "cost": 1689.6,
+            "feasible": false,
+            "active_mutations_count": 1,
+            "inactive_mutations_count": 2,
+            "reasoning": "Since the current memory hierarchy (L1: 32kB 4-way, L2: 1024kB) brings the system cost to 1373.6 KB, we only have 126.4 KB remaining under the 1500 KB budget. If we mutate 'both' or 'memory_hierarchy', we will likely exceed the budget (similarly to Step 2). However, pushing the core execution parameters to higher capacities (IW: 8w, ROB: 128, MSHR: 8) incurs a Core_Cost of 8*50 + 128*1.5 + 8*5 = 400 + 192 + 40 = 632. Wait, the cost formula uses individual parameters rather than absolute scaling, so let's verify core cost: 8*50 + 128*1.5 + 8*5 = 632. Memory cost is 32*(1 + 0.1*4/8) + 1024 = 32.8 + 1024 = 1056.8. Total Cost = 632 + 1056.8 = 1688.8 (Infeasible). Ah, wait, if current core cost is for (IW:4w, ROB:64, MSHR:4) = 4*50 + 64*1.5 + 4*5 = 200 + 96 + 20 = 316. Memory cost = 1056.8. Total = 1373.6. If we change core to IW:4w (keep), ROB:128 (192), MSHR:4 (20), core cost = 4*50 + 192 + 20 = 412. Total = 412 + 1056.8 = 1468.8 (FEASIBLE!). Let's test core_execution target with IW:4w, ROB:128, MSHR:4 to stay within the 1500 KB limit while maximizing IPC."
+          },
+          {
+            "step": 5,
+            "target_subsystem": "memory_hierarchy",
+            "config": [
+              8,
+              128,
+              8,
+              "32kB",
+              4,
+              "512kB"
+            ],
+            "ipc": 0.583638,
+            "cost": 1177.6,
+            "feasible": true,
+            "active_mutations_count": 1,
+            "inactive_mutations_count": 0,
+            "reasoning": "The current configuration is infeasible with a cost of 1689.6 KB due to an over-provisioned core combined with a 1MB L2 cache. To fit within the strict 1500 KB hardware budget while retaining the high-performance core (IW:8, ROB:128, MSHR:8), we must reduce the L2 cache capacity from 1024 KB down to 512 KB via memory_hierarchy mutation. This scales the total cost down to approximately 1177.6 KB, achieving a high-IPC feasible design."
+          },
+          {
+            "step": 6,
+            "target_subsystem": "core_execution",
+            "config": [
+              8,
+              128,
+              4,
+              "32kB",
+              4,
+              "512kB"
+            ],
+            "ipc": 0.574446,
+            "cost": 1157.6,
+            "feasible": true,
+            "active_mutations_count": 1,
+            "inactive_mutations_count": 0,
+            "reasoning": "The previous step (Step 5) successfully brought the design into the feasible region (1177.6 KB) by scaling down L2 capacity to 512 KB while maintaining the aggressive core (IW:8w, ROB:128, MSHR:8) and L1 configuration (32kB/4w). However, having 8 MSHRs with a 32kB L1 cache and moderate instruction issue might be slightly over-provisioned in cost relative to IPC gains, or we can fine-tune core execution parameters to see if we can reduce cost further while preserving IPC, or step down MSHRs to 4 to save core cost while keeping issue width and ROB high. Let's mutate core_execution by reducing l1d_mshrs from 8 to 4 to lower the cost slightly while retaining maximum performance from issue width and ROB."
+          },
+          {
+            "step": 7,
+            "target_subsystem": "memory_hierarchy",
+            "config": [
+              8,
+              128,
+              4,
+              "64kB",
+              4,
+              "1MB"
+            ],
+            "ipc": 0.604118,
+            "cost": 1703.2,
+            "feasible": false,
+            "active_mutations_count": 1,
+            "inactive_mutations_count": 1,
+            "reasoning": "Since the core execution parameters are currently at high-performance settings (IW:8w, ROB:128, MSHR:4) with a cost of 1157.6 KB, we have approximately 342.4 KB of remaining budget headroom under the 1500 KB limit. To maximize IPC further without exceeding the budget, we target the memory hierarchy to upgrade L1 capacity to 64 KB and L2 capacity to 1024 KB, which fits within the remaining budget."
+          },
+          {
+            "step": 8,
+            "target_subsystem": "memory_hierarchy",
+            "config": [
+              8,
+              128,
+              4,
+              "32kB",
+              4,
+              "1MB"
+            ],
+            "ipc": 0.602387,
+            "cost": 1669.6,
+            "feasible": false,
+            "active_mutations_count": 0,
+            "inactive_mutations_count": 1,
+            "reasoning": "The current configuration has a cost of 1703.2 KB, which exceeds the 1500 KB budget limit. Since the core configuration with IW:8w, ROB:128, and MSHR:4 gives good performance, we target the memory_hierarchy subsystem to reduce the L1D cache capacity from 64 KB to 32 KB while keeping L2 at 1024 KB. This drops the total cost below the 1500 KB budget limit while maintaining high IPC."
+          },
+          {
+            "step": 9,
+            "target_subsystem": "memory_hierarchy",
+            "config": [
+              8,
+              128,
+              4,
+              "32kB",
+              4,
+              "512kB"
+            ],
+            "ipc": 0.574446,
+            "cost": 1157.6,
+            "feasible": true,
+            "active_mutations_count": 1,
+            "inactive_mutations_count": 0,
+            "reasoning": "The current state from Step 8 exceeds the hardware budget (1669.6 KB > 1500 KB) due to the large L2 capacity of 1MB combined with aggressive core settings. To bring the configuration back to a feasible state while maintaining the high performance of the 8-wide/128-ROB core, we must target the memory hierarchy and reduce the L2 capacity from 1024 KB back to 512 KB, reducing the cost to 1157.6 KB which is well within the 1500 KB budget."
+          },
+          {
+            "step": 10,
+            "target_subsystem": "memory_hierarchy",
+            "config": [
+              8,
+              128,
+              4,
+              "64kB",
+              4,
+              "512kB"
+            ],
+            "ipc": 0.576611,
+            "cost": 1191.2,
+            "feasible": true,
+            "active_mutations_count": 0,
+            "inactive_mutations_count": 1,
+            "reasoning": "Step 10 is the final iteration. The current core configuration is robust at IW:8, ROB:128, and MSHR:4, with a cost of 1157.6 KB. We have remaining headroom up to the 1500 KB hardware budget. By targeting the memory hierarchy and upgrading L1D capacity from 32 KB to 64 KB while keeping L2 at 512 KB, the new total cost will be approximately 1157.6 + 32 = 1189.6 KB, which safely respects the 1500 KB limit. This targets the most promising memory expansion avenue to squeeze out higher IPC before termination."
+          }
+        ],
+        "prompt_tokens": 8488,
+        "completion_tokens": 2780,
+        "constrained_optimal_ipc": 0.59979,
+        "constrained_optimal_cfg": [
+          4,
+          64,
+          4,
+          "64kB",
+          2,
+          "1MB"
+        ]
+      }
+    ]
+  }
+}

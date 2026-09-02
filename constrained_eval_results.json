@@ -1,0 +1,2556 @@
+{
+  "Budget_1100KB": {
+    "L1_Heavy": {
+      "Baseline_A": {
+        "history": [
+          {
+            "step": 1,
+            "config": [
+              "32kB",
+              4,
+              "512kB",
+              4
+            ],
+            "ipc": 0.625831,
+            "cost": 557.6,
+            "feasible": true,
+            "reasoning": "Since the workload is L1_Heavy, increasing the L1 data cache size and associativity from the baseline (16kB/2-way) to 32kB/4-way provides a significant performance boost while easily remaining well within the 1100 KB hardware cost budget."
+          },
+          {
+            "step": 2,
+            "config": [
+              "64kB",
+              4,
+              "512kB",
+              8
+            ],
+            "ipc": 0.727058,
+            "cost": 603.2,
+            "feasible": true,
+            "reasoning": "Moving L1D from 32kB to 64kB to better capture the L1_Heavy workload working set while keeping the cost well within the 1100 KB budget."
+          },
+          {
+            "step": 3,
+            "config": [
+              "128kB",
+              8,
+              "512kB",
+              8
+            ],
+            "ipc": 0.727554,
+            "cost": 672.0,
+            "feasible": true,
+            "reasoning": "Given the L1_Heavy workload, expanding the L1 data cache to 128kB with an 8-way associativity maximizes performance while keeping the total cost well within the 1100 KB budget at approximately 695 KB."
+          },
+          {
+            "step": 4,
+            "config": [
+              "128kB",
+              8,
+              "1MB",
+              8
+            ],
+            "ipc": 0.727554,
+            "cost": 1209.6,
+            "feasible": false,
+            "reasoning": "Since the workload is L1_Heavy, increasing L1D size yielded massive IPC gains, but stepping L2 up from 512kB to 1MB while keeping L1D at 128kB/8-way will test if moderate L2 capacity increases help bridge remaining miss penalties without violating the 1100 KB budget."
+          },
+          {
+            "step": 5,
+            "config": [
+              "64kB",
+              8,
+              "1MB",
+              8
+            ],
+            "ipc": 0.727058,
+            "cost": 1142.4,
+            "feasible": false,
+            "reasoning": "Step 4 showed that 128kB L1D combined with 1MB L2 exceeds the 1100 KB budget (Cost: 1209.6 KB). To maximize L1_Heavy workload performance while staying strictly within the 1100 KB budget, we scale back L1D to 64kB/8-way and pair it with a larger 1MB L2 cache (8-way). The estimated cost is 64*(1 + 0.1*8/16) + 1024*(1 + 0.1*8/16) = 67.2 + 1075.2 = 1142.4 KB... wait, that exceeds 1100 KB. Let's use L2=512kB and increase L1 to 128kB with lower associativity, or use 64kB L1D with 1MB L2 (Cost = 64*1.05 + 1024*1.05 = 67.2 + 1075.2 = 1142.4 KB - infeasible). Let's use 64kB L1D with 512kB L2 (already done). Let's try 32kB L1D with 2MB L2: Cost = 32*1.025 + 2048*1.025 = 32.8 + 2099.2 (infeasible). Let's try 64kB L1D (8-way) and 512kB L2 (16-way): Cost = 67.2 + 537.6 = 604.8 KB. Wait, let's explore L1:64kB/8-way, L2:1MB/4-way: Cost = 67.2 + 1024*1.025 = 67.2 + 1049.6 = 1116.8 KB (still slightly over). Let's use L1:64kB/4-way, L2:1MB/4-way: Cost = 64*1.025 + 1024*1.025 = 65.6 + 1049.6 = 1115.2 KB. Let's use L1:64kB/4-way, L2:512kB/16-way: Cost = 65.6 + 557.6 = 623.2 KB. Let's try L1:128kB/4-way, L2:512kB/4-way: Cost = 128*1.025 + 512*1.025 = 131.2 + 524.8 = 656.0 KB. This is well within the 1100 KB budget and provides a large L1D capacity for the L1_Heavy workload."
+          },
+          {
+            "step": 6,
+            "config": [
+              "128kB",
+              8,
+              "512kB",
+              8
+            ],
+            "ipc": 0.727554,
+            "cost": 672.0,
+            "feasible": true,
+            "reasoning": "Step 3 achieved the highest feasible IPC of 0.7276 with L1D at 128kB/8-way and L2 at 512kB/8-way for a cost of 672.0 KB, which is well within the 1100 KB budget. Since larger L2 sizes (1MB) cause the design to exceed the budget, we retain the optimal Step 3 configuration."
+          },
+          {
+            "step": 7,
+            "config": [
+              "128kB",
+              8,
+              "512kB",
+              8
+            ],
+            "ipc": 0.727554,
+            "cost": 672.0,
+            "feasible": true,
+            "reasoning": "Step 6 showed that L1:128kB/8-way and L2:512kB/8-way gives the highest feasible IPC of 0.7276 at a cost of 672.0 KB, which safely satisfies the 1100 KB budget. We will maintain this optimal configuration."
+          },
+          {
+            "step": 8,
+            "config": [
+              "128kB",
+              8,
+              "512kB",
+              8
+            ],
+            "ipc": 0.727554,
+            "cost": 672.0,
+            "feasible": true,
+            "reasoning": "Since previous steps successfully hit a peak feasible IPC of 0.7276 with L1 128kB/8-way and L2 512kB/8-way at a cost of 672.0 KB, and any attempt to scale L2 to 1MB violates the 1100 KB budget, we maintain the optimal feasible design found thus far."
+          },
+          {
+            "step": 9,
+            "config": [
+              "128kB",
+              8,
+              "512kB",
+              8
+            ],
+            "ipc": 0.727554,
+            "cost": 672.0,
+            "feasible": true,
+            "reasoning": "Step 9 configuration maintains the optimal feasible point found at 128kB L1D and 512kB L2 with 8-way associativity, yielding maximum IPC (0.7276) while keeping the cost at 672.0 KB, well below the 1100 KB budget."
+          },
+          {
+            "step": 10,
+            "config": [
+              "128kB",
+              8,
+              "512kB",
+              8
+            ],
+            "ipc": 0.727554,
+            "cost": 672.0,
+            "feasible": true,
+            "reasoning": "Since the target workload is L1_Heavy, maximizing L1 data cache capacity yields the highest IPC return. From the previous steps, L1:128kB/8-way combined with L2:512kB/8-way achieves an optimal IPC of 0.7276 while keeping the cost strictly under the 1100 KB budget at 672.0 KB. Further L2 expansion or higher associativity leads to infeasible configurations."
+          }
+        ],
+        "constrained_optimal_ipc": 0.727554,
+        "constrained_optimal_cfg": [
+          "128kB",
+          16,
+          "512kB",
+          16
+        ]
+      },
+      "Baseline_B": {
+        "history": [
+          {
+            "step": 1,
+            "config": [
+              "32kB",
+              4,
+              "512kB",
+              4
+            ],
+            "ipc": 0.625831,
+            "cost": 557.6,
+            "feasible": true,
+            "reasoning": "To balance the L1_Heavy workload demands while strictly keeping the total cost below the 1100 KB budget, we moderately scale up the L1 data cache capacity to 32 KB and associativity to 4-way to reduce L1 misses, while keeping the L2 cache at 512 KB with 4-way associativity. The estimated cost is 32 * (1 + 0.1 * 4 / 16) + 512 * (1 + 0.1 * 4 / 16) = 32.8 + 524.8 = 557.6 KB, which is well within the 1100 KB hardware budget."
+          },
+          {
+            "step": 2,
+            "config": [
+              "64kB",
+              4,
+              "512kB",
+              4
+            ],
+            "ipc": 0.727058,
+            "cost": 590.4,
+            "feasible": true,
+            "reasoning": "Increasing L1D capacity to 64kB while keeping L2 at 512kB helps significantly for an L1_Heavy workload, staying well within the 1100 KB budget at approximately 589.6 KB."
+          },
+          {
+            "step": 3,
+            "config": [
+              "64kB",
+              8,
+              "512kB",
+              4
+            ],
+            "ipc": 0.727058,
+            "cost": 592.0,
+            "feasible": true,
+            "reasoning": "Building upon the progress in Step 2, increasing the L1D associativity from 4 to 8 for the 64kB size reduces conflict misses for this L1_Heavy workload with minimal area cost increase, well within the 1100 KB budget."
+          },
+          {
+            "step": 4,
+            "config": [
+              "64kB",
+              8,
+              "1MB",
+              4
+            ],
+            "ipc": 0.727058,
+            "cost": 1116.8,
+            "feasible": false,
+            "reasoning": "Since L1D is already at an optimal 64KB size, we now scale the L2 capacity from 512KB to 1024KB (1MB) to further reduce memory access latency for the L1_Heavy workload. The resulting cost is approximately 592 + 1024 * (1 + 0.1 * 4/16) = 592 + 1050.6 = 1642.6 KB, which exceeds the budget. Wait, let me adjust the L1D to 32KB to fit L2 1024KB within the budget: L1D=32kB/4w (Cost ~35.5) + L2=1024kB/4w (Cost ~1050.6) = 1086.1 KB. Let's try L1D=32kB/4-way and L2=1024kB/4-way to stay under 1100 KB."
+          },
+          {
+            "step": 5,
+            "config": [
+              "64kB",
+              8,
+              "512kB",
+              8
+            ],
+            "ipc": 0.727058,
+            "cost": 604.8,
+            "feasible": true,
+            "reasoning": "Since upgrading L2 to 1MB exceeded the budget in Step 4, we maintain L2 at 512KB and explore higher L1D capacity or associativity to maximize IPC. Step 3 used 64kB/8-way L1D and 512kB/4-way L2 with a safe cost of 592.0 KB. Testing L2 associativity of 8 with the same 64kB/8-way L1D will yield a valid cost well below the 1100 KB limit while maintaining or improving hit rates."
+          },
+          {
+            "step": 6,
+            "config": [
+              "64kB",
+              8,
+              "512kB",
+              16
+            ],
+            "ipc": 0.727058,
+            "cost": 630.4,
+            "feasible": true,
+            "reasoning": "In previous steps, increasing L1D capacity to 64kB yielded significant IPC improvements while remaining well within the 1100 KB budget. Since L2 capacity increases like 1MB violate the budget constraint, we continue exploring L2 associativity scaling while keeping L2 size at 512kB to extract maximum performance efficiently under the hardware limit."
+          },
+          {
+            "step": 7,
+            "config": [
+              "128kB",
+              4,
+              "512kB",
+              8
+            ],
+            "ipc": 0.727554,
+            "cost": 668.8,
+            "feasible": true,
+            "reasoning": "Since scaling L2 causes budget violations, we explore scaling L1D capacity further to 128 KB with a moderate associativity of 4, keeping L2 at 512 KB with 8-way associativity to stay within the 1100 KB hardware cost limit."
+          },
+          {
+            "step": 8,
+            "config": [
+              "128kB",
+              8,
+              "512kB",
+              8
+            ],
+            "ipc": 0.727554,
+            "cost": 672.0,
+            "feasible": true,
+            "reasoning": "Increasing L1D associativity from 4-way to 8-way with 128KB capacity improves hit rates for L1_Heavy workloads while keeping the total cost well below the 1100 KB budget at approximately 672 KB."
+          },
+          {
+            "step": 9,
+            "config": [
+              "64kB",
+              4,
+              "512kB",
+              4
+            ],
+            "ipc": 0.727058,
+            "cost": 590.4,
+            "feasible": true,
+            "reasoning": "Step 9 explores returning to the optimal L1D configuration of 64kB/4-way combined with 512kB L2 which previously demonstrated near-peak IPC with very low cost, allowing safe exploration within the 1100 KB budget limit."
+          },
+          {
+            "step": 10,
+            "config": [
+              "128kB",
+              4,
+              "512kB",
+              8
+            ],
+            "ipc": 0.727554,
+            "cost": 668.8,
+            "feasible": true,
+            "reasoning": "Building upon the successful exploration of steps 7 and 8, an L1D capacity of 128KB with 4-way associativity combined with a 512KB L2 cache of 8-way associativity maximizes IPC while safely keeping the total cost around 668.8 KB, well within the 1100 KB hardware budget."
+          }
+        ],
+        "constrained_optimal_ipc": 0.727554,
+        "constrained_optimal_cfg": [
+          "128kB",
+          16,
+          "512kB",
+          16
+        ]
+      },
+      "Baseline_C": {
+        "history": [
+          {
+            "step": 1,
+            "config": [
+              "32kB",
+              4,
+              "512kB",
+              4
+            ],
+            "ipc": 0.625831,
+            "cost": 557.6,
+            "feasible": true,
+            "reasoning": "For an L1_Heavy workload, increasing the L1 data cache capacity and associativity yields the highest IPC return while keeping the total cost well below the 1100 KB hardware budget (estimated cost: 32*(1 + 0.1*4/16) + 512*(1 + 0.1*4/16) = 32.8 + 524.8 = 557.6 KB)."
+          },
+          {
+            "step": 2,
+            "config": [
+              "64kB",
+              8,
+              "512kB",
+              4
+            ],
+            "ipc": 0.727058,
+            "cost": 592.0,
+            "feasible": true,
+            "reasoning": "Building on the successful IPC gains from Step 1 while remaining well within the 1100 KB budget, we increase the L1 capacity to 64 KB and associativity to 8-way to better capture working sets for the L1_Heavy workload. The calculated cost is approximately 64*(1 + 0.1*8/16) + 512*(1 + 0.1*4/16) = 67.2 + 524.8 = 592 KB, which is fully feasible."
+          },
+          {
+            "step": 3,
+            "config": [
+              "128kB",
+              8,
+              "512kB",
+              4
+            ],
+            "ipc": 0.727554,
+            "cost": 659.2,
+            "feasible": true,
+            "reasoning": "Step 3 explores scaling the L1 Data Cache capacity to 128KB with 8-way associativity to maximize IPC for the L1_Heavy workload. The calculated cost is approximately 128*(1 + 0.1*8/16) + 512*(1 + 0.1*4/16) = 134.4 + 524.8 = 659.2 KB, which is well within the 1100 KB budget limit."
+          },
+          {
+            "step": 4,
+            "config": [
+              "64kB",
+              8,
+              "1MB",
+              8
+            ],
+            "ipc": 0.727058,
+            "cost": 1142.4,
+            "feasible": false,
+            "reasoning": "Since the L1D capacity was scaled effectively to 64KB with diminishing returns observed at 128KB in Step 3, scaling the L2 unified cache from 512KB to 1024KB will help mitigate capacity misses for the L1_Heavy workload while keeping the total cost well below the 1100 KB budget limit."
+          },
+          {
+            "step": 5,
+            "config": [
+              "64kB",
+              8,
+              "512kB",
+              8
+            ],
+            "ipc": 0.727058,
+            "cost": 604.8,
+            "feasible": true,
+            "reasoning": "Step 4 configuration exceeded the 1100 KB hardware budget by increasing L2 to 1MB. To maximize IPC for the L1_Heavy workload within the remaining budget, we retain the optimal L1D configuration of 64kB/8-way from Step 2, and scale back L2 to 512kB with 8-way associativity (Cost: 64*(1 + 0.1*8/16) + 512*(1 + 0.1*8/16) = 64*1.05 + 512*1.05 = 67.2 + 537.6 = 604.8 KB), which strictly satisfies the <= 1100 KB constraint."
+          },
+          {
+            "step": 6,
+            "config": [
+              "64kB",
+              8,
+              "1MB",
+              4
+            ],
+            "ipc": 0.727058,
+            "cost": 1116.8,
+            "feasible": false,
+            "reasoning": "Since 1MB L2 with 8-way associativity exceeded the budget in Step 4 (Cost: 1142.4 KB), scaling back the L2 associativity to 4-way reduces the cost formula factor slightly. For L2=1024KB (1MB) and 4-way associativity, the cost is 1024 * (1 + 0.1 * 4 / 16) = 1024 * 1.025 = 1049.6 KB. Adding the L1D (64kB/8-way = 592.0 KB total component cost, but using the hardware cost breakdown: L1=64*(1+0.8/16)=65.2, wait: L1_Cap*(1+0.1*Assoc/16) -> 64*(1+0.1*8/16) = 67.2 KB; L2=1024*(1+0.1*4/16) = 1049.6 KB; Total Cost = 67.2 + 1049.6 = 1116.8 KB - wait, this is slightly above 1100 KB. Let us scale L2 back to 512KB and increase L1 to 128KB/16-way or explore a feasible combination. Wait, L1=64kB/8-way (67.2 KB) and L2=1024kB/2-way (1024 * 1.0125 = 1036.8 KB). Total cost = 67.2 + 1036.8 = 1104 KB - still slightly above. Let us use L1=64kB/8-way (67.2 KB) and L2=512kB/16-way (512 * 1.1 = 563.2 KB). Total cost = 630.4 KB, which is well within budget. But to push IPC for L1_Heavy, increasing L1 capacity to 128kB with 4-way associativity: 128 * (1 + 0.1 * 4 / 16) = 131.2 KB. Combined with L2=512kB/8-way (cost: 512 * 1.05 = 537.6 KB). Total cost = 131.2 + 537.6 = 668.8 KB, completely feasible and maximizes L1 capacity effectively."
+          },
+          {
+            "step": 7,
+            "config": [
+              "64kB",
+              8,
+              "512kB",
+              16
+            ],
+            "ipc": 0.727058,
+            "cost": 630.4,
+            "feasible": true,
+            "reasoning": "Since the 1MB L2 configurations consistently exceed the 1100 KB budget limit (costs around 1116.8 KB to 1142.4 KB), we revert to the maximum feasible L1 size of 64KB (8-way) combined with the 512kB L2 cache, and push L2 associativity to its maximum available value of 16-way to extract any potential performance gains while strictly maintaining a feasible hardware cost well under the 1100 KB threshold (Cost: 617.6 KB)."
+          },
+          {
+            "step": 8,
+            "config": [
+              "128kB",
+              8,
+              "512kB",
+              8
+            ],
+            "ipc": 0.727554,
+            "cost": 672.0,
+            "feasible": true,
+            "reasoning": "Step 8 proposes scaling up L1 D-cache capacity to 128 KB with 8-way associativity while keeping the L2 cache at 512 KB with 8-way associativity. This configuration is well within the 1100 KB budget (cost: ~672 KB) and aims to push IPC beyond the diminishing returns of 64 KB L1 configurations observed in earlier steps."
+          },
+          {
+            "step": 9,
+            "config": [
+              "128kB",
+              16,
+              "512kB",
+              16
+            ],
+            "ipc": 0.727554,
+            "cost": 704.0,
+            "feasible": true,
+            "reasoning": "Building upon Step 8 (Cost: 672.0 KB, IPC: 0.7276), increasing L1D associativity from 8-way to 16-way while keeping L2 at 512KB/8-way increases the L1D cost slightly to ~140.8 KB, bringing the total cost well within the 1100 KB budget at approximately 684.8 KB, which helps mitigate conflict misses for the L1_Heavy workload."
+          },
+          {
+            "step": 10,
+            "config": [
+              "128kB",
+              8,
+              "512kB",
+              4
+            ],
+            "ipc": 0.727554,
+            "cost": 659.2,
+            "feasible": true,
+            "reasoning": "Since the workload is L1_Heavy, prioritizing L1 capacity yields the best IPC gains. Stepping up to 128KB L1 with 8-way associativity combined with 512KB L2 and 4-way associativity achieves the highest feasible IPC of 0.7276 while keeping the total hardware cost well within the strict 1100 KB budget at approximately 659.2 KB."
+          }
+        ],
+        "constrained_optimal_ipc": 0.727554,
+        "constrained_optimal_cfg": [
+          "128kB",
+          16,
+          "512kB",
+          16
+        ]
+      }
+    },
+    "L2_Heavy": {
+      "Baseline_A": {
+        "history": [
+          {
+            "step": 1,
+            "config": [
+              "32kB",
+              4,
+              "1MB",
+              8
+            ],
+            "ipc": 0.552361,
+            "cost": 1108.0,
+            "feasible": false,
+            "reasoning": "Since the workload is L2_Heavy, scaling up the L2 cache size from 512kB to 1MB will provide a significant IPC boost. Increasing L1D slightly to 32kB/4-way also helps feed the L2 pipeline better while keeping the total cost well below the 1100 KB budget."
+          },
+          {
+            "step": 2,
+            "config": [
+              "32kB",
+              4,
+              "1MB",
+              2
+            ],
+            "ipc": 0.552428,
+            "cost": 1069.6,
+            "feasible": true,
+            "reasoning": "Step 1 proposed L1D 32kB/4-way and L2 1MB/8-way, which resulted in a cost of 1108.0 KB (exceeding the 1100 KB budget). To bring the design within the valid hardware budget, we keep the high-performing 32kB/4-way L1D cache and reduce the L2 associativity from 8-way to 2-way for the 1MB L2 cache. The new cost is approximately 32*(1 + 0.1*4/16) + 1024*(1 + 0.1*2/16) = 32.8 + 1036.8 = 1069.6 KB, which successfully respects the <= 1100 KB constraint while maintaining a large L2 capacity for the L2_Heavy workload."
+          },
+          {
+            "step": 3,
+            "config": [
+              "32kB",
+              4,
+              "1MB",
+              4
+            ],
+            "ipc": 0.552413,
+            "cost": 1082.4,
+            "feasible": true,
+            "reasoning": "Step 2 evaluated L2 associativity reduction from 8 to 2 for 1MB L2 and 32kB/4-way L1, yielding a feasible cost of 1069.6 KB. To improve hit latency and potentially IPC without exceeding the 1100 KB budget, we can slightly increase L2 associativity from 2 to 4. The cost for L1 (32kB with 4-way assoc) is 32 * (1 + 0.1 * 4 / 16) = 32.8 KB, and the cost for L2 (1MB = 1024kB with 4-way assoc) is 1024 * (1 + 0.1 * 4 / 16) = 1050.6 KB, total cost = 1083.4 KB, which is safely below the 1100 KB limit."
+          },
+          {
+            "step": 4,
+            "config": [
+              "32kB",
+              4,
+              "1MB",
+              8
+            ],
+            "ipc": 0.552361,
+            "cost": 1108.0,
+            "feasible": false,
+            "reasoning": "Since L2 association 8-way slightly increased cost to 1108KB exceeding the budget, but 2-way and 4-way were tested and feasible, let's try pushing L2 capacity or finding the optimal point with 1MB and 8-way within budget, wait, 1MB with 8-way is 1095KB. Let's select L2 8-way which gives 1095KB cost."
+          },
+          {
+            "step": 5,
+            "config": [
+              "32kB",
+              4,
+              "1MB",
+              4
+            ],
+            "ipc": 0.552413,
+            "cost": 1082.4,
+            "feasible": true,
+            "reasoning": "Step 3 evaluated L1:32kB/4-way and L2:1MB/4-way, resulting in a valid cost of 1082.4 KB, which is within the 1100 KB budget, while maintaining optimal IPC for this L2_Heavy workload."
+          },
+          {
+            "step": 6,
+            "config": [
+              "32kB",
+              4,
+              "1MB",
+              4
+            ],
+            "ipc": 0.552413,
+            "cost": 1082.4,
+            "feasible": true,
+            "reasoning": "Since 1MB L2 with 4-way associativity yields high IPC (0.5524) at a cost of 1082.4 KB (well within the 1100 KB budget), we select this feasible and high-performing configuration for Step 6."
+          },
+          {
+            "step": 7,
+            "config": [
+              "32kB",
+              4,
+              "1MB",
+              4
+            ],
+            "ipc": 0.552413,
+            "cost": 1082.4,
+            "feasible": true,
+            "reasoning": "Building upon previous feasible steps and remaining strictly under the 1100 KB budget, configuring L1D as 32kB/4-way and L2 as 1MB/4-way yields a cost of 1082.4 KB, which meets the hardware constraints while sustaining optimal IPC for the L2_Heavy workload."
+          },
+          {
+            "step": 8,
+            "config": [
+              "32kB",
+              4,
+              "1MB",
+              4
+            ],
+            "ipc": 0.552413,
+            "cost": 1082.4,
+            "feasible": true,
+            "reasoning": "Since previous steps successfully validated that L1:32kB/4-way and L2:1MB/4-way achieves the maximum observed IPC of 0.5524 while staying safely within the 1100 KB budget at a cost of 1082.4 KB, we maintain this optimal feasible configuration."
+          },
+          {
+            "step": 9,
+            "config": [
+              "32kB",
+              4,
+              "1MB",
+              4
+            ],
+            "ipc": 0.552413,
+            "cost": 1082.4,
+            "feasible": true,
+            "reasoning": "Continuing with the optimal feasible configuration found in step 3/5/6/7/8 (L1D: 32kB/4-way, L2: 1MB/4-way) which yields the highest IPC of 0.5524 while maintaining a safe cost of 1082.4 KB, well within the 1100 KB budget."
+          },
+          {
+            "step": 10,
+            "config": [
+              "32kB",
+              4,
+              "1MB",
+              4
+            ],
+            "ipc": 0.552413,
+            "cost": 1082.4,
+            "feasible": true,
+            "reasoning": "Step 10 proposes maintaining the optimal feasible configuration found in previous steps (L1:32kB/4-way, L2:1MB/4-way) which yields a high IPC of 0.5524 while strictly adhering to the hardware cost budget of 1082.4 KB, remaining well under the 1100 KB limit."
+          }
+        ],
+        "constrained_optimal_ipc": 0.552428,
+        "constrained_optimal_cfg": [
+          "32kB",
+          4,
+          "1MB",
+          2
+        ]
+      },
+      "Baseline_B": {
+        "history": [
+          {
+            "step": 1,
+            "config": [
+              "32kB",
+              4,
+              "512kB",
+              4
+            ],
+            "ipc": 0.484122,
+            "cost": 557.6,
+            "feasible": true,
+            "reasoning": "Starting from the baseline, L2_Heavy workload benefits significantly from increased L2 capacity and associativity, but to respect the 1100 KB budget, we first moderately increase L1D size and associativity while keeping L2 at 512KB to test the cost impact and IPC improvement."
+          },
+          {
+            "step": 2,
+            "config": [
+              "32kB",
+              4,
+              "1MB",
+              8
+            ],
+            "ipc": 0.552361,
+            "cost": 1108.0,
+            "feasible": false,
+            "reasoning": "Since the workload is L2_Heavy, increasing the L2 cache size from 512KB to 1024KB (1MB) will significantly reduce capacity misses. The cost remains well within the 1100 KB budget at approximately 1083.5 KB."
+          },
+          {
+            "step": 3,
+            "config": [
+              "32kB",
+              4,
+              "1MB",
+              4
+            ],
+            "ipc": 0.552413,
+            "cost": 1082.4,
+            "feasible": true,
+            "reasoning": "Step 2 exceeded the budget because L2 associativity 8 pushed the cost to 1108 KB. By reducing L2 associativity to 4 while keeping the large 1 MB L2 capacity and 32KB/4-way L1, the cost becomes 32*(1 + 0.1*4/16) + 1024*(1 + 0.1*4/16) = 32.8 + 1049.6 = 1082.4 KB, which fits safely within the 1100 KB budget while retaining most of the IPC benefits of a 1MB L2."
+          },
+          {
+            "step": 4,
+            "config": [
+              "64kB",
+              4,
+              "1MB",
+              4
+            ],
+            "ipc": 0.554254,
+            "cost": 1115.2,
+            "feasible": false,
+            "reasoning": "Step 3 evaluated a 32kB L1 and 1MB L2 with 4-way associativity resulting in 1082.4 KB cost and 0.5524 IPC. To further push IPC for an L2_Heavy workload while staying within the 1100 KB budget, we can scale L1D up to 64kB with 4-way associativity. Cost: 64*(1 + 0.1*4/16) + 1024*(1 + 0.1*4/16) = 65.6 + 1050.4 = 1116.0 KB which is slightly over. Wait, let's check: 64*(1.025) = 65.6. 1024*(1.025) = 1050.4. Total = 1116 KB (INFEASIBLE). Let's use L1:32kB/4-way and L2:1MB/8-way was 1108 KB. How about L1:32kB/8-way and L2:1MB/4-way? Cost: 32*(1 + 0.1*8/16) + 1024*(1 + 0.1*4/16) = 33.6 + 1050.4 = 1084 KB. Let's try to increase L1 associativity or capacity carefully. Let's try L1:64kB/2-way and L2:1024kB/4-way: Cost = 64*(1 + 0.1*2/16) + 1024*(1 + 0.1*4/16) = 64.8 + 1050.4 = 1115.2 KB (INFEASIBLE). Let's reduce L2 associativity to 2 for 1MB: Cost = 32*(1 + 0.1*4/16) + 1024*(1 + 0.1*2/16) = 33.6 + 1044.4 = 1078 KB, or L1:32kB/4-way, L2:1MB/2-way."
+          },
+          {
+            "step": 5,
+            "config": [
+              "32kB",
+              4,
+              "1MB",
+              2
+            ],
+            "ipc": 0.552428,
+            "cost": 1069.6,
+            "feasible": true,
+            "reasoning": "Step 3 showed that L1:32kB/4-way and L2:1MB/4-way yields a high IPC of 0.5524 with a cost of 1082.4 KB. To explore if we can slightly reduce cost and potentially accommodate minor variations or free up margin under the 1100 KB budget while maintaining the 1MB L2 capacity, we can reduce the L2 associativity from 4-way to 2-way. The cost formula for L2_Capacity(1 + 0.1 * L2_Assoc / 16) with 1024 KB and 2-way associativity gives 1024 * (1 + 0.1 * 2 / 16) = 1036.8 KB. Combined with L1D (32 KB with 4-way cost is 32.8 KB), the total cost will be approximately 1069.6 KB, which is well within the 1100 KB limit and trades off negligible miss rate for guaranteed feasibility."
+          },
+          {
+            "step": 6,
+            "config": [
+              "32kB",
+              4,
+              "1MB",
+              2
+            ],
+            "ipc": 0.552428,
+            "cost": 1069.6,
+            "feasible": true,
+            "reasoning": "Step 5 configuration (L1:32kB/4-way, L2:1MB/2-way) yielded the highest IPC of 0.5524 while fitting well within the 1100 KB budget with a cost of 1069.6 KB. We will maintain this optimal configuration as the final design point."
+          },
+          {
+            "step": 7,
+            "config": [
+              "32kB",
+              4,
+              "1MB",
+              2
+            ],
+            "ipc": 0.552428,
+            "cost": 1069.6,
+            "feasible": true,
+            "reasoning": "Step 5 and Step 6 evaluated L1:32kB/4-way, L2:1MB/2-way yielding an IPC of 0.5524 at a cost of 1069.6 KB, which safely respects the 1100 KB hardware budget. To further explore optimal performance for the L2_Heavy workload while staying within budget, this configuration represents the best trade-off found so far."
+          },
+          {
+            "step": 8,
+            "config": [
+              "32kB",
+              4,
+              "1MB",
+              2
+            ],
+            "ipc": 0.552428,
+            "cost": 1069.6,
+            "feasible": true,
+            "reasoning": "Based on the previous steps, setting L1D to 32kB with 4-way associativity and L2 to 1024kB (1MB) with 2-way associativity yields a high IPC of 0.5524 while keeping the total cost at 1069.6 KB, which safely respects the strict 1100 KB hardware budget."
+          },
+          {
+            "step": 9,
+            "config": [
+              "32kB",
+              4,
+              "1MB",
+              4
+            ],
+            "ipc": 0.552413,
+            "cost": 1082.4,
+            "feasible": true,
+            "reasoning": "Step 3 achieved a high IPC of 0.5524 with a feasible cost of 1082.4 KB, which is well within the 1100 KB budget limit. We will maintain this optimal configuration."
+          },
+          {
+            "step": 10,
+            "config": [
+              "32kB",
+              4,
+              "1MB",
+              4
+            ],
+            "ipc": 0.552413,
+            "cost": 1082.4,
+            "feasible": true,
+            "reasoning": "Based on the search space exploration, L1:32kB/4-way and L2:1MB/4-way achieves the best IPC of 0.5524 while strictly adhering to the 1100 KB budget with a cost of 1082.4 KB."
+          }
+        ],
+        "constrained_optimal_ipc": 0.552428,
+        "constrained_optimal_cfg": [
+          "32kB",
+          4,
+          "1MB",
+          2
+        ]
+      },
+      "Baseline_C": {
+        "history": [
+          {
+            "step": 1,
+            "config": [
+              "32kB",
+              4,
+              "1MB",
+              4
+            ],
+            "ipc": 0.552413,
+            "cost": 1082.4,
+            "feasible": true,
+            "reasoning": "Step 1: Increase L1D capacity to 32KB and L2 capacity to 1024KB with moderate associativity of 4 to better handle the L2_Heavy workload while keeping the total cost well below the 1100 KB budget."
+          },
+          {
+            "step": 2,
+            "config": [
+              "32kB",
+              4,
+              "1MB",
+              8
+            ],
+            "ipc": 0.552361,
+            "cost": 1108.0,
+            "feasible": false,
+            "reasoning": "Building upon the successful step 1 configuration, we slightly increase the L2 associativity from 4-way to 8-way to reduce conflict misses for the L2_Heavy workload while keeping the estimated hardware cost at approximately 1088.9 KB, strictly under the 1100 KB budget."
+          },
+          {
+            "step": 3,
+            "config": [
+              "32kB",
+              4,
+              "1MB",
+              4
+            ],
+            "ipc": 0.552413,
+            "cost": 1082.4,
+            "feasible": true,
+            "reasoning": "Step 1 achieved a high IPC of 0.5524 with a cost of 1082.4 KB, which is within the 1100 KB budget. Step 2 showed that increasing L2 associativity to 8 pushes the cost to 1108.0 KB (infeasible). Therefore, we retain the optimal feasible configuration from Step 1 (32kB/4-way L1 and 1MB/4-way L2) as the best design candidate while we explore alternative tuning steps."
+          },
+          {
+            "step": 4,
+            "config": [
+              "32kB",
+              8,
+              "1MB",
+              4
+            ],
+            "ipc": 0.552203,
+            "cost": 1083.2,
+            "feasible": true,
+            "reasoning": "Step 4 proposes increasing L1D associativity from 4-way to 8-way while keeping L2 at 1MB/4-way and L1D at 32kB. The estimated cost is 32 * (1 + 0.1 * 8 / 16) + 1024 * (1 + 0.1 * 4 / 16) = 33.6 + 1050.6 = 1084.2 KB, which is strictly within the 1100 KB budget, aiming to slightly improve L1 hit rates and overall IPC for the L2_Heavy workload without incurring the infeasible cost of higher L2 associativity."
+          },
+          {
+            "step": 5,
+            "config": [
+              "32kB",
+              4,
+              "1MB",
+              4
+            ],
+            "ipc": 0.552413,
+            "cost": 1082.4,
+            "feasible": true,
+            "reasoning": "Building on previous feasible steps for the L2_Heavy workload, we maintain the optimal L1D (32kB/4-way) and L2 (1MB/4-way) configuration which stays well within the 1100 KB budget at 1082.4 KB while delivering the highest observed IPC of 0.5524."
+          },
+          {
+            "step": 6,
+            "config": [
+              "32kB",
+              4,
+              "1MB",
+              4
+            ],
+            "ipc": 0.552413,
+            "cost": 1082.4,
+            "feasible": true,
+            "reasoning": "Step 6: Building upon the previous feasible evaluations, the configuration with L1D: 32kB/4-way and L2: 1MB/4-way consistently achieves the optimal IPC of 0.5524 while maintaining a valid cost of 1082.4 KB, which is strictly below the 1100 KB budget constraint. Further associativity scaling led to infeasible designs."
+          },
+          {
+            "step": 7,
+            "config": [
+              "32kB",
+              4,
+              "1MB",
+              4
+            ],
+            "ipc": 0.552413,
+            "cost": 1082.4,
+            "feasible": true,
+            "reasoning": "Step 7 builds upon the optimal feasible configuration from previous exploration steps, maintaining L1D at 32kB/4-way and L2 at 1MB/4-way which yields the highest IPC of 0.5524 while safely adhering to the strict hardware budget constraint of 1100 KB with a cost of 1082.4 KB."
+          },
+          {
+            "step": 8,
+            "config": [
+              "32kB",
+              4,
+              "1MB",
+              4
+            ],
+            "ipc": 0.552413,
+            "cost": 1082.4,
+            "feasible": true,
+            "reasoning": "Step 8 evaluation confirms that the configuration of L1D at 32kB/4-way and L2 at 1MB/4-way yields the optimal IPC of 0.5524 while strictly remaining within the 1100 KB budget at a cost of 1082.4 KB. Further modifications increase associativity or capacity beyond the feasible hardware budget without performance benefits."
+          },
+          {
+            "step": 9,
+            "config": [
+              "32kB",
+              4,
+              "1MB",
+              4
+            ],
+            "ipc": 0.552413,
+            "cost": 1082.4,
+            "feasible": true,
+            "reasoning": "Step 9 configuration maintains the optimal feasible point found in previous iterations (L1D: 32kB/4-way, L2: 1024kB/4-way) yielding an IPC of 0.5524 while strictly adhering to the 1100 KB hardware cost budget with a calculated cost of 1082.4 KB."
+          },
+          {
+            "step": 10,
+            "config": [
+              "32kB",
+              4,
+              "1MB",
+              4
+            ],
+            "ipc": 0.552413,
+            "cost": 1082.4,
+            "feasible": true,
+            "reasoning": "Step 10 concludes the optimization process for the L2_Heavy workload. The configuration of L1D: 32kB / 4-way and L2: 1MB (1024kB) / 4-way yields a cost of 1082.4 KB, which strictly satisfies the <= 1100 KB hardware budget constraint while consistently achieving the peak observed IPC of 0.5524 across the exploration steps."
+          }
+        ],
+        "constrained_optimal_ipc": 0.552428,
+        "constrained_optimal_cfg": [
+          "32kB",
+          4,
+          "1MB",
+          2
+        ]
+      }
+    },
+    "Assoc_Heavy": {
+      "Baseline_A": {
+        "history": [
+          {
+            "step": 1,
+            "config": [
+              "32kB",
+              4,
+              "512kB",
+              4
+            ],
+            "ipc": 0.161683,
+            "cost": 557.6,
+            "feasible": true,
+            "reasoning": "Since the workload is association-heavy and we are well within the 1100 KB budget (current cost is ~546 KB), we increase both L1D and L2 associativity and size slightly to improve hit rates while keeping total cost under the hard limit."
+          },
+          {
+            "step": 2,
+            "config": [
+              "64kB",
+              8,
+              "512kB",
+              8
+            ],
+            "ipc": 0.16675,
+            "cost": 604.8,
+            "feasible": true,
+            "reasoning": "Since the workload is Assoc_Heavy, increasing associativity for both L1 and L2 while keeping L2 size manageable will maximize IPC within the 1100 KB hardware budget."
+          },
+          {
+            "step": 3,
+            "config": [
+              "128kB",
+              16,
+              "512kB",
+              16
+            ],
+            "ipc": 0.588312,
+            "cost": 704.0,
+            "feasible": true,
+            "reasoning": "Given the Assoc_Heavy workload, maximizing associativity and L1 capacity within the 1100 KB budget yields the best performance gains. Moving to 128kB L1D with 16-way associativity while keeping L2 at 512kB/16-way results in a cost of approximately 140.8 KB + 563.2 KB = 704 KB, well below the 1100 KB limit."
+          },
+          {
+            "step": 4,
+            "config": [
+              "128kB",
+              16,
+              "1MB",
+              16
+            ],
+            "ipc": 0.588312,
+            "cost": 1267.2,
+            "feasible": false,
+            "reasoning": "Building upon the successful step 3 configuration which showed a massive IPC jump with 128kB/16-way L1, we now scale the L2 cache from 512kB to 1MB while maintaining 16-way associativity to further exploit capacity and associativity for the Assoc_Heavy workload. The estimated cost is 128*(1 + 0.1) + 1024*(1 + 0.1) = 140.8 + 1126.4 -> wait, 1MB L2 with 16-way is 1024*1.1 = 1126.4 which exceeds 1100 KB. Let us scale L2 to 512kB with 16-way and increase L1, but since L1 is already maxed at 128kB/16-way (Cost: 140.8 KB), we can keep L1 at 128kB/16-way and increase L2 to 1MB with 8-way (Cost: 128*1.1 + 1024*1.05 = 140.8 + 1075.2 = 1216 KB - still too high). Let us use L2: 512kB/16-way with L1: 128kB/16-way (Cost: 704 KB). Wait, if 1MB L2 is too big, let's look at the options: L2 options are 512kB, 1MB, 2MB, 4MB. 512kB is the only one fitting with 128kB L1 if we want high assoc. Let's try to adjust L2 to 512kB with 16-way and L1 to 128kB/16-way which is 704 KB. To test another feasible point, let's step down L1 assoc to 8 and L2 to 1MB/8-way: 64k/8-way L1 and 1MB/8-way L2 gives 64*1.05 + 1024*1.05 = 67.2 + 1075.2 = 1142.4 (over budget). Let's do L1 128kB/16-way and L2 512kB/8-way: 128*1.1 + 512*1.05 = 140.8 + 537.6 = 678.4 KB (feasible). Let's try to increase L2 assoc to 16 for better performance on Assoc_Heavy while keeping L2 size at 512kB: 128kB/16-way L1 and 512kB/16-way L2 gives 140.8 + 563.2 = 704.0 KB, which is well within the 1100 KB limit."
+          },
+          {
+            "step": 5,
+            "config": [
+              "128kB",
+              16,
+              "512kB",
+              16
+            ],
+            "ipc": 0.588312,
+            "cost": 704.0,
+            "feasible": true,
+            "reasoning": "Step 3 achieved a high IPC of 0.5883 with L1D=128kB/16-way and L2=512kB/16-way at a cost of 704.0 KB, which is well within the 1100 KB budget. Step 4 attempted to scale L2 to 1MB, which exceeded the budget. Therefore, we should maintain the optimal L1D configuration (128kB/16-way) and explore an intermediate L2 capacity or associativity adjustment that stays within the 1100 KB budget. Since L2=512kB/16-way works well and leaves headroom, we retain it to respect the hardware budget while preserving maximum performance."
+          },
+          {
+            "step": 6,
+            "config": [
+              "128kB",
+              16,
+              "512kB",
+              16
+            ],
+            "ipc": 0.588312,
+            "cost": 704.0,
+            "feasible": true,
+            "reasoning": "Step 3 achieved a high IPC of 0.5883 with a feasible cost of 704.0 KB using L1D=128kB/16-way and L2=512kB/16-way. Since increasing L2 size to 1MB exceeded the budget in Step 4, maintaining the maximum feasible L1 cache configuration while keeping L2 at 512kB is the optimal strategy within the 1100 KB limit for the Assoc_Heavy workload."
+          },
+          {
+            "step": 7,
+            "config": [
+              "128kB",
+              16,
+              "512kB",
+              16
+            ],
+            "ipc": 0.588312,
+            "cost": 704.0,
+            "feasible": true,
+            "reasoning": "Since 1MB L2 cache exceeds the 1100 KB budget, we maintain the optimal feasible configuration from Step 3 (L1: 128kB/16-way, L2: 512kB/16-way) which gives a high IPC of 0.5883 within the 704 KB cost budget."
+          },
+          {
+            "step": 8,
+            "config": [
+              "128kB",
+              16,
+              "512kB",
+              16
+            ],
+            "ipc": 0.588312,
+            "cost": 704.0,
+            "feasible": true,
+            "reasoning": "Step 3 showed a massive IPC jump to 0.5883 with L1 128kB/16-way and L2 512kB/16-way, costing 704.0 KB which is well within the 1100 KB budget. Since increasing L2 to 1MB exceeded the budget, we maintain this optimal feasible configuration for this step."
+          },
+          {
+            "step": 9,
+            "config": [
+              "128kB",
+              16,
+              "512kB",
+              16
+            ],
+            "ipc": 0.588312,
+            "cost": 704.0,
+            "feasible": true,
+            "reasoning": "Since Assoc_Heavy workload benefits significantly from high associativity and L1 capacity, and the previous configuration with L1:128kB/16-way and L2:512kB/16-way yielded a high IPC of 0.5883 well within the 1100 KB budget at 704.0 KB, we maintain this optimal feasible point while continuing exploration within the remaining steps."
+          },
+          {
+            "step": 10,
+            "config": [
+              "128kB",
+              16,
+              "512kB",
+              16
+            ],
+            "ipc": 0.588312,
+            "cost": 704.0,
+            "feasible": true,
+            "reasoning": "Following the exploration and convergence to the optimal feasible configuration within the 1100 KB budget, L1D set to 128kB/16-way and L2 set to 512kB/16-way yields the maximum IPC of 0.5883 while maintaining a valid cost of 704.0 KB."
+          }
+        ],
+        "constrained_optimal_ipc": 0.588505,
+        "constrained_optimal_cfg": [
+          "32kB",
+          16,
+          "1MB",
+          4
+        ]
+      },
+      "Baseline_B": {
+        "history": [
+          {
+            "step": 1,
+            "config": [
+              "32kB",
+              4,
+              "512kB",
+              4
+            ],
+            "ipc": 0.161683,
+            "cost": 557.6,
+            "feasible": true,
+            "reasoning": "To target the Assoc_Heavy workload, we incrementally increase L1D capacity to 32KB and associativity to 4-way to reduce conflict and capacity misses. L2 capacity is kept at 512KB and associativity is increased to 4-way. The estimated cost is approximately 32 * 1.025 + 512 * 1.025 = 32.8 + 524.8 = 557.6 KB, which is well within the 1100 KB hardware budget."
+          },
+          {
+            "step": 2,
+            "config": [
+              "64kB",
+              8,
+              "512kB",
+              4
+            ],
+            "ipc": 0.16675,
+            "cost": 592.0,
+            "feasible": true,
+            "reasoning": "Since the workload is associativity and capacity heavy, increasing L1D size and associativity while maintaining L2 at 512KB keeps us well within the 1100 KB budget (Cost roughly 70.8 + 513.2 = 584 KB) and should yield better IPC."
+          },
+          {
+            "step": 3,
+            "config": [
+              "64kB",
+              8,
+              "1MB",
+              8
+            ],
+            "ipc": 0.16675,
+            "cost": 1142.4,
+            "feasible": false,
+            "reasoning": "Since the workload is Assoc_Heavy, increasing L2 capacity from 512KB to 1024KB while maintaining high associativity (8-way) for both L1D and L2 will significantly improve IPC while keeping the total cost well below the 1100 KB budget."
+          },
+          {
+            "step": 4,
+            "config": [
+              "64kB",
+              8,
+              "512kB",
+              16
+            ],
+            "ipc": 0.16675,
+            "cost": 630.4,
+            "feasible": true,
+            "reasoning": "Step 3 showed that increasing L2 to 1MB with 8-way associativity significantly exceeds the 1100 KB budget. Since Assoc_Heavy benefits from higher associativity, we can try to improve L2 cache efficiency while keeping its capacity at 512kB by increasing its associativity to 16-way. The estimated cost for L1: 64kB/8-way (592.0 KB) and L2: 512kB/16-way (563.2 KB) is approximately 1155.2 KB, which is still slightly over budget. Let us step back and propose L1: 32kB/8-way and L2: 512kB/16-way, which yields a cost around 595 KB, or L1: 64kB/4-way and L2: 512kB/16-way. Let's choose L1: 64kB/4-way and L2: 512kB/16-way for a cost of 64 * 1.025 + 512 * 1.1 = 65.6 + 563.2 = 628.8 KB, well within the 1100 KB budget."
+          },
+          {
+            "step": 5,
+            "config": [
+              "64kB",
+              16,
+              "512kB",
+              16
+            ],
+            "ipc": 0.588312,
+            "cost": 633.6,
+            "feasible": true,
+            "reasoning": "Since Assoc_Heavy workload benefits from higher associativity, and increasing L2 capacity to 1MB breached the budget, we increase L1 associativity from 8 to 16 while keeping L2 at 512kB with 16-way associativity. Cost = 64*(1 + 0.1*16/16) + 512*(1 + 0.1*16/16) = 64*1.1 + 512*1.1 = 70.4 + 563.2 = 633.6 KB, which is well within the 1100 KB budget."
+          },
+          {
+            "step": 6,
+            "config": [
+              "128kB",
+              16,
+              "512kB",
+              16
+            ],
+            "ipc": 0.588312,
+            "cost": 704.0,
+            "feasible": true,
+            "reasoning": "Building on Step 5's successful high associativity exploration for Assoc_Heavy workload, scaling L1D capacity to 128kB with 16-way associativity significantly improves cache hit rates while maintaining a safe cost of 128*(1+0.1*16/16) + 512*(1+0.1*16/16) = 256 + 563.2 = 819.2 KB, which is well within the 1100 KB budget."
+          },
+          {
+            "step": 7,
+            "config": [
+              "128kB",
+              16,
+              "1MB",
+              16
+            ],
+            "ipc": 0.588312,
+            "cost": 1267.2,
+            "feasible": false,
+            "reasoning": "Step 7 builds upon the successful L1D 128kB/16-way and upgrades the L2 capacity from 512kB to 1024kB (1MB) while keeping 16-way associativity, yielding a cost of approximately 704 + 1024 * (1 + 16/160) = 704 + 1126.4 is too high. Wait, 1024 * 1.1 = 1126.4 + 704 = 1830 KB. Let's step back: L2 512kB with 16-way is 563.2 + 128kB L1D 16-way is 140.8 = 704.0 KB. If we want to keep it under 1100 KB, L2 at 1024kB is 1126.4 KB which exceeds 1100 KB. Therefore, keep L2 at 512kB and try exploring L2 associativity variations or alternative L1/L2 combinations that fit within the budget."
+          },
+          {
+            "step": 8,
+            "config": [
+              "128kB",
+              16,
+              "512kB",
+              8
+            ],
+            "ipc": 0.588312,
+            "cost": 678.4,
+            "feasible": true,
+            "reasoning": "Since 1MB L2 pushes us over the budget, we keep L2 at 512kB and maximize L1D to 128kB with 16-way associativity to retain the peak IPC of 0.5883 while reducing L2 associativity slightly to 8-way to ensure we stay well within the 1100 KB cost limit."
+          },
+          {
+            "step": 9,
+            "config": [
+              "128kB",
+              16,
+              "1MB",
+              8
+            ],
+            "ipc": 0.588312,
+            "cost": 1216.0,
+            "feasible": false,
+            "reasoning": "Step 9 proposes scaling the L2 capacity to 1024 KB (1MB) while keeping associativity at 8-way and L1D at 128kB/16-way. The resulting cost is 128*(1 + 0.1*16/16) + 1024*(1 + 0.1*8/16) = 256 + 1075.2 = 1331.2 KB, which exceeds the 1100 KB budget. Wait, to stay within budget, we need a lower L2 capacity or lower L1 capacity. Let's adjust L2 capacity to 512 KB and try L2 associativity at 4-way, or test L1 64kB/16-way with L2 1MB/4-way: 64*(1.1) + 1024*(1.025) = 70.4 + 1049.6 = 1120 KB (still slightly over). Let's use L1 64kB/16-way and L2 512kB/16-way (Cost: 633.6 KB, IPC: 0.5883). Let's explore L1 128kB/16-way and L2 512kB/4-way: Cost = 128*1.1 + 512*1.025 = 140.8 + 524.8 = 665.6 KB, staying comfortably within the 1100 KB budget."
+          },
+          {
+            "step": 10,
+            "config": [
+              "128kB",
+              16,
+              "512kB",
+              16
+            ],
+            "ipc": 0.588312,
+            "cost": 704.0,
+            "feasible": true,
+            "reasoning": "Since Step 5 achieved a high IPC of 0.5883 with L1:64kB/16-way and L2:512kB/16-way at a low cost of 633.6 KB, and scaling L1 to 128kB (Step 6) maintains this peak IPC while keeping the cost well within the 1100 KB budget at 704.0 KB, this configuration represents the optimal balance of maximum performance and strict adherence to the hardware budget."
+          }
+        ],
+        "constrained_optimal_ipc": 0.588505,
+        "constrained_optimal_cfg": [
+          "32kB",
+          16,
+          "1MB",
+          4
+        ]
+      },
+      "Baseline_C": {
+        "history": [
+          {
+            "step": 1,
+            "config": [
+              "32kB",
+              4,
+              "512kB",
+              4
+            ],
+            "ipc": 0.161683,
+            "cost": 557.6,
+            "feasible": true,
+            "reasoning": "For an associativity-heavy workload, increasing the associativity of the L1 data cache from 2-way to 4-way and the capacity from 16KB to 32KB will significantly reduce conflict misses while keeping the total hardware cost well within the 1100 KB budget (approx. 556 KB)."
+          },
+          {
+            "step": 2,
+            "config": [
+              "32kB",
+              8,
+              "512kB",
+              8
+            ],
+            "ipc": 0.164581,
+            "cost": 571.2,
+            "feasible": true,
+            "reasoning": "Based on the Assoc_Heavy workload, increasing associativity helps reduce conflict misses. Moving L1D to 32kB/8-way and L2 to 512kB/8-way keeps the estimated cost around 580 KB, well within the 1100 KB hardware budget while continuing to explore associative benefits."
+          },
+          {
+            "step": 3,
+            "config": [
+              "32kB",
+              16,
+              "512kB",
+              16
+            ],
+            "ipc": 0.588505,
+            "cost": 598.4,
+            "feasible": true,
+            "reasoning": "Continuing the optimization for the Assoc_Heavy workload, we incrementally increase L1 data cache associativity from 8-way to 16-way while keeping capacity at 32kB and L2 at 512kB/16-way to further mitigate capacity and conflict misses without exceeding the 1100 KB budget."
+          },
+          {
+            "step": 4,
+            "config": [
+              "64kB",
+              16,
+              "1MB",
+              16
+            ],
+            "ipc": 0.588312,
+            "cost": 1196.8,
+            "feasible": false,
+            "reasoning": "Step 4 proposes increasing L1 capacity to 64KB and L2 capacity to 1024KB (1MB) while maintaining 16-way associativity to aggressively target the Assoc_Heavy workload under the 1100 KB budget."
+          },
+          {
+            "step": 5,
+            "config": [
+              "32kB",
+              16,
+              "1MB",
+              8
+            ],
+            "ipc": 0.588505,
+            "cost": 1110.4,
+            "feasible": false,
+            "reasoning": "Since L2 size jump to 4MB or 1MB with max associativity exceeded the 1100 KB budget when combined with 64KB L1, we scale L2 to 1024 KB (1MB) with 8-way associativity to keep the cost well within the 1100 KB budget while maintaining high L1 associativity (16-way) for the Assoc_Heavy workload."
+          },
+          {
+            "step": 6,
+            "config": [
+              "32kB",
+              16,
+              "1MB",
+              4
+            ],
+            "ipc": 0.588505,
+            "cost": 1084.8,
+            "feasible": true,
+            "reasoning": "In Step 5, L2 capacity of 1024 KB with 8-way associativity slightly exceeded the budget at 1104 KB. Reducing the L2 associativity from 8-way to 4-way reduces the cost penalty factor on L2 while maintaining the high capacity needed for the Assoc_Heavy workload. The calculated cost for L1 32KB/16-way and L2 1MB/4-way is 32*(1 + 0.1*16/16) + 1024*(1 + 0.1*4/16) = 32*(1.1) + 1024*(1.025) = 35.2 + 1049.6 = 1084.8 KB, which respects the <= 1100 KB hardware budget."
+          },
+          {
+            "step": 7,
+            "config": [
+              "64kB",
+              16,
+              "512kB",
+              16
+            ],
+            "ipc": 0.588312,
+            "cost": 633.6,
+            "feasible": true,
+            "reasoning": "Since the workload is associativity-heavy and previous steps demonstrated massive IPC gains with 16-way associativity, we explore increasing L1D capacity to 64KB while maintaining 16-way associativity, paired with an L2 of 512KB and 16-way associativity. This configuration yields a cost of roughly 64 * 1.1 + 512 * 1.1 = 70.4 + 563.2 = 633.6 KB, which is well within the 1100 KB budget while improving L1 hit rates and maintaining high associativity."
+          },
+          {
+            "step": 8,
+            "config": [
+              "64kB",
+              16,
+              "512kB",
+              16
+            ],
+            "ipc": 0.588312,
+            "cost": 633.6,
+            "feasible": true,
+            "reasoning": "Proposing Step 8 to test an increased L1D capacity of 64KB with 16-way associativity while keeping L2 at 512KB/16-way, which yields a feasible cost of 633.6 KB, matching the successful configuration from Step 7 to further analyze associativity and capacity trade-offs."
+          },
+          {
+            "step": 9,
+            "config": [
+              "32kB",
+              16,
+              "1MB",
+              4
+            ],
+            "ipc": 0.588505,
+            "cost": 1084.8,
+            "feasible": true,
+            "reasoning": "Based on the search trajectory, the configuration L1:32kB/16-way and L2:1MB/4-way achieved a high IPC of 0.5885 while maintaining a feasible cost of 1084.8 KB, which is well within the 1100 KB hardware budget constraint. Further exploration on larger L1 sizes did not improve IPC and increased costs, so we propose this optimal balanced point."
+          },
+          {
+            "step": 10,
+            "config": [
+              "32kB",
+              16,
+              "1MB",
+              4
+            ],
+            "ipc": 0.588505,
+            "cost": 1084.8,
+            "feasible": true,
+            "reasoning": "Step 10 proposes the best performing feasible configuration discovered in the search space (L1: 32kB/16-way, L2: 1MB/4-way) with an IPC of 0.5885 and a total cost of 1084.8 KB, which strictly respects the 1100 KB budget limit."
+          }
+        ],
+        "constrained_optimal_ipc": 0.588505,
+        "constrained_optimal_cfg": [
+          "32kB",
+          16,
+          "1MB",
+          4
+        ]
+      }
+    }
+  },
+  "Budget_2200KB": {
+    "L1_Heavy": {
+      "Baseline_A": {
+        "history": [
+          {
+            "step": 1,
+            "config": [
+              "32kB",
+              4,
+              "1MB",
+              4
+            ],
+            "ipc": 0.625831,
+            "cost": 1082.4,
+            "feasible": true,
+            "reasoning": "Moving from the initial 16kB L1D and 512kB L2 to 32kB L1D and 1MB L2 increases cache capacity for the L1_Heavy workload while keeping the total cost around 1083.5 KB, well below the 2200 KB budget limit."
+          },
+          {
+            "step": 2,
+            "config": [
+              "64kB",
+              8,
+              "2MB",
+              8
+            ],
+            "ipc": 0.727058,
+            "cost": 2217.6,
+            "feasible": false,
+            "reasoning": "Since the workload is L1_Heavy, increasing the L1 data cache size and associativity will significantly improve IPC while staying well within the 2200 KB hardware cost budget (64kB*(1 + 0.1*8/16) + 2048kB*(1 + 0.1*8/16) = 67.2 + 2150.4 = 2217.6 KB, wait, that slightly exceeds 2200 KB limit. Let's use L2=1MB with 8-way to ensure strict compliance: 67.2 + 1075.2 = 1142.4 KB, which is safely feasible and provides strong scaling)."
+          },
+          {
+            "step": 3,
+            "config": [
+              "64kB",
+              8,
+              "1MB",
+              8
+            ],
+            "ipc": 0.727058,
+            "cost": 1142.4,
+            "feasible": true,
+            "reasoning": "Since step 2 config (L1:64kB/8-way, L2:2MB/8-way) exceeded the budget at 2217.6 KB, we step down the L2 cache from 2MB to 1MB while keeping the high-performing L1 cache at 64kB/8-way. This brings the total cost to roughly 1088 + 1024 = 2112 KB, which respects the <= 2200 KB budget while maximizing IPC for the L1_Heavy workload."
+          },
+          {
+            "step": 4,
+            "config": [
+              "128kB",
+              8,
+              "1MB",
+              8
+            ],
+            "ipc": 0.727554,
+            "cost": 1209.6,
+            "feasible": true,
+            "reasoning": "Since the workload is L1_Heavy, increasing the L1 data cache size to 128kB with 8-way associativity while keeping the L2 cache at 1MB with 8-way associativity yields a total cost of approximately 128*(1 + 0.1*8/16) + 1024*(1 + 0.1*8/16) = 134.4 + 1075.2 = 1209.6 KB, which is well within the 2200 KB budget and maximizes L1 capacity for the target workload."
+          },
+          {
+            "step": 5,
+            "config": [
+              "128kB",
+              8,
+              "2MB",
+              8
+            ],
+            "ipc": 0.727554,
+            "cost": 2284.8,
+            "feasible": false,
+            "reasoning": "Step 4 tested L1 128kB/8-way and L2 1MB/8-way yielding a cost of 1209.6 KB which is well within the 2200 KB budget. Since the workload is L1_Heavy, increasing the L2 size from 1MB to 2MB (Cost: 1209.6 + 2048*(1+0.8/16) - 1024*(1+0.8/16) = ~2155.2 KB) will test the upper limit of the budget while providing higher L2 capacity to complement the large L1 cache and maximize IPC without exceeding the 2200 KB limit."
+          },
+          {
+            "step": 6,
+            "config": [
+              "128kB",
+              8,
+              "1MB",
+              8
+            ],
+            "ipc": 0.727554,
+            "cost": 1209.6,
+            "feasible": true,
+            "reasoning": "Step 4 achieved a high IPC of 0.7276 with a well-within-budget cost of 1209.6 KB. Step 5 showed that increasing L2 to 2MB exceeded the 2200 KB budget. Therefore, maintaining L1D at 128kB/8-way and L2 at 1MB/8-way is the optimal feasible configuration to maximize performance without violating the budget constraint."
+          },
+          {
+            "step": 7,
+            "config": [
+              "64kB",
+              8,
+              "2MB",
+              4
+            ],
+            "ipc": 0.727058,
+            "cost": 2166.4,
+            "feasible": true,
+            "reasoning": "Step 7 explores scaling the L2 cache size back up to 2MB by lowering the L2 associativity from 8 to 4, which reduces the L2 cost penalty and keeps the total configuration within the 2200 KB budget while improving L2 capacity for the L1_Heavy workload."
+          },
+          {
+            "step": 8,
+            "config": [
+              "128kB",
+              8,
+              "2MB",
+              4
+            ],
+            "ipc": 0.727554,
+            "cost": 2233.6,
+            "feasible": false,
+            "reasoning": "Step 7 evaluated L1:64kB/8-way and L2:2MB/4-way at 2166.4 KB which is feasible. Given the target workload is L1_Heavy, we can attempt to scale up L1 to 128kB while keeping L2 at 2MB/4-way. Cost: 128*(1 + 8*0.1/16) + 2048*(1 + 4*0.1/16) = 134.4 + 2099.2 = 2233.6 KB (Infeasible). Wait, to fit within 2200 KB while scaling L1, let's try L1:128kB/8-way (134.4 KB) and L2:1MB/16-way (1111 KB). Total cost ~ 1245.4 KB. Alternatively, let's explore L1:64kB/16-way and L2:2MB/4-way. Cost: 67.2 + 2099.2 = 2166.4 KB. Let us evaluate L1:128kB/4-way and L2:1MB/16-way to see if higher L1 associativity helps L1_Heavy workloads within budget: 131.2 + 1111 = 1242.2 KB. Or let's maximize within budget: L1:64kB/8-way, L2:2MB/2-way which costs 67.2 + 2048 = 2115.2 KB, giving us a slightly lower L2 associativity to save cost."
+          },
+          {
+            "step": 9,
+            "config": [
+              "64kB",
+              8,
+              "2MB",
+              4
+            ],
+            "ipc": 0.727058,
+            "cost": 2166.4,
+            "feasible": true,
+            "reasoning": "Step 7 evaluated L1:64kB/8-way and L2:2MB/4-way, resulting in a valid FEASIBLE cost of 2166.4 KB (under the 2200 KB limit) and achieved a high IPC of 0.7271. Attempting to scale L1 to 128kB in Step 8 pushed the design over budget, so we retain the optimal feasible configuration found around the 2MB L2 boundary."
+          },
+          {
+            "step": 10,
+            "config": [
+              "64kB",
+              8,
+              "2MB",
+              4
+            ],
+            "ipc": 0.727058,
+            "cost": 2166.4,
+            "feasible": true,
+            "reasoning": "Step 7 and 9 showed that L1:64kB/8-way and L2:2MB/4-way yields a high IPC of 0.7271 with a cost of 2166.4 KB, which strictly respects the 2200 KB hardware budget limit. Since 128kB L1 configurations with 2MB L2 exceed the budget, this is the optimal configuration found within constraints."
+          }
+        ],
+        "constrained_optimal_ipc": 0.727554,
+        "constrained_optimal_cfg": [
+          "128kB",
+          16,
+          "1MB",
+          16
+        ]
+      },
+      "Baseline_B": {
+        "history": [
+          {
+            "step": 1,
+            "config": [
+              "32kB",
+              4,
+              "1MB",
+              4
+            ],
+            "ipc": 0.625831,
+            "cost": 1082.4,
+            "feasible": true,
+            "reasoning": "For an L1_Heavy workload, increasing L1D size and associativity provides the highest initial return on IPC by reducing L1 data misses. Scaling up L2 from 512KB to 1024KB also accommodates larger working sets while keeping the total estimated cost well below the 2200 KB budget."
+          },
+          {
+            "step": 2,
+            "config": [
+              "64kB",
+              8,
+              "2MB",
+              8
+            ],
+            "ipc": 0.727058,
+            "cost": 2217.6,
+            "feasible": false,
+            "reasoning": "Continuing to scale up both L1D and L2 capacities and associativity to better capture working sets for the L1_Heavy workload, while safely remaining well below the 2200 KB hardware cost budget."
+          },
+          {
+            "step": 3,
+            "config": [
+              "64kB",
+              8,
+              "2MB",
+              4
+            ],
+            "ipc": 0.727058,
+            "cost": 2166.4,
+            "feasible": true,
+            "reasoning": "Step 2 exceeded the budget slightly (2217.6 KB) because L2 associativity was 8. Reducing L2 associativity from 8-way to 4-way for the 64kB L1 and 2MB L2 configuration lowers the cost to approximately 2197.8 KB, which fits within the strict 2200 KB budget while retaining most of the performance benefits."
+          },
+          {
+            "step": 4,
+            "config": [
+              "64kB",
+              4,
+              "2MB",
+              4
+            ],
+            "ipc": 0.727058,
+            "cost": 2164.8,
+            "feasible": true,
+            "reasoning": "In Step 3, Config=(64kB/8-way, 2MB/4-way) yielded a feasible cost of 2166.4 KB and high IPC. To explore further optimization while strictly staying under the 2200 KB budget, reducing L1 associativity from 8-way to 4-way for the 64kB size reduces the cost slightly (64*(1 + 0.1*4/16) + 2048*(1 + 0.1*4/16) = 66 + 2112 = 2178 KB), ensuring safety against any rounding variations while maintaining a large cache capacity for the L1_Heavy workload."
+          },
+          {
+            "step": 5,
+            "config": [
+              "64kB",
+              4,
+              "2MB",
+              2
+            ],
+            "ipc": 0.727058,
+            "cost": 2139.2,
+            "feasible": true,
+            "reasoning": "Step 4 achieved a strong IPC of 0.7271 with a cost of 2164.8 KB. To further refine the design and ensure we safely stay within the 2200 KB budget while potentially optimizing access latency or power, we reduce the L2 associativity from 4 to 2. The new cost will be 64*(1 + 0.1*4/16) + 2048*(1 + 0.1*2/16) = 65.6 + 2074 = 2139.6 KB, which is well within the budget limit."
+          },
+          {
+            "step": 6,
+            "config": [
+              "64kB",
+              2,
+              "2MB",
+              2
+            ],
+            "ipc": 0.727058,
+            "cost": 2138.4,
+            "feasible": true,
+            "reasoning": "Reducing L1D associativity from 4 to 2 while keeping capacity at 64KB and L2 at 2048KB/2-way further reduces the hardware cost to 2137.6 KB, well within the 2200 KB budget, while maintaining the maximum IPC of 0.7271."
+          },
+          {
+            "step": 7,
+            "config": [
+              "64kB",
+              2,
+              "2MB",
+              2
+            ],
+            "ipc": 0.727058,
+            "cost": 2138.4,
+            "feasible": true,
+            "reasoning": "Previous steps demonstrated that maintaining L1D at 64kB with 2-way associativity and L2 at 2MB with 2-way associativity achieves the peak IPC of 0.7271 while keeping the hardware cost at 2138.4 KB, which is well within the 2200 KB budget."
+          },
+          {
+            "step": 8,
+            "config": [
+              "64kB",
+              2,
+              "2MB",
+              2
+            ],
+            "ipc": 0.727058,
+            "cost": 2138.4,
+            "feasible": true,
+            "reasoning": "Step 8 explores maintaining the optimal IPC of 0.7271 achieved with L1:64kB and L2:2MB while keeping the cost strictly under the 2200 KB budget at 2138.4 KB."
+          },
+          {
+            "step": 9,
+            "config": [
+              "64kB",
+              2,
+              "2MB",
+              2
+            ],
+            "ipc": 0.727058,
+            "cost": 2138.4,
+            "feasible": true,
+            "reasoning": "Step 9 configuration maintains the optimal IPC of 0.7271 achieved in previous steps while strictly adhering to the hardware cost budget of 2138.4 KB, which is below the 2200 KB limit."
+          },
+          {
+            "step": 10,
+            "config": [
+              "64kB",
+              2,
+              "2MB",
+              2
+            ],
+            "ipc": 0.727058,
+            "cost": 2138.4,
+            "feasible": true,
+            "reasoning": "Step 10 design optimization confirms that L1:64kB/2-way and L2:2MB/2-way provides maximum feasible performance (IPC 0.7271) under the 2200 KB area budget with a cost of 2138.4 KB."
+          }
+        ],
+        "constrained_optimal_ipc": 0.727554,
+        "constrained_optimal_cfg": [
+          "128kB",
+          16,
+          "1MB",
+          16
+        ]
+      },
+      "Baseline_C": {
+        "history": [
+          {
+            "step": 1,
+            "config": [
+              "32kB",
+              4,
+              "1MB",
+              4
+            ],
+            "ipc": 0.625831,
+            "cost": 1082.4,
+            "feasible": true,
+            "reasoning": "Starting the optimization process for an L1_Heavy workload within the 2200 KB budget, we first scale up the L1 data cache to 32kB with 4-way associativity to capture more local data working sets, while moderately increasing the L2 unified cache to 1024kB (1MB) with 4-way associativity. The resulting cost is approximately 32*(1 + 0.1*4/16) + 1024*(1 + 0.1*4/16) = 32.8 + 1049.6 = 1082.4 KB, which is well below the 2200 KB budget and improves IPC over the baseline."
+          },
+          {
+            "step": 2,
+            "config": [
+              "64kB",
+              8,
+              "2MB",
+              8
+            ],
+            "ipc": 0.727058,
+            "cost": 2217.6,
+            "feasible": false,
+            "reasoning": "Step 2/10: Moving from Step 1's configuration (L1:32kB/4-way, L2:1MB/4-way) to a larger L1 and L2 size to further benefit the L1_Heavy workload. L1 capacity is increased to 64kB with 8-way associativity, and L2 capacity is increased to 2MB with 8-way associativity. The estimated cost is 64*(1 + 0.1*8/16) + 2048*(1 + 0.1*8/16) = 67 + 2148 = 2215 KB. Wait, this slightly exceeds the 2200 KB budget. Let us scale back L2 to 1024kB (1MB) while keeping L1 at 64kB/8-way to remain strictly under the 2200 KB budget. Cost = 67 + 1074 = 1141 KB, which is well within the budget and provides a strong IPC improvement for L1_Heavy."
+          },
+          {
+            "step": 3,
+            "config": [
+              "64kB",
+              8,
+              "2MB",
+              4
+            ],
+            "ipc": 0.727058,
+            "cost": 2166.4,
+            "feasible": true,
+            "reasoning": "Step 2 exceeded the hardware budget of 2200 KB because L2 associativity was too high (8-way, cost 2217.6 KB). To fit strictly under the 2200 KB constraint while keeping the high-performing 64 KB L1 cache and 2 MB L2 cache, we reduce the L2 associativity from 8-way to 4-way. The resulting cost is 64*(1+0.1*8/16) + 2048*(1+0.1*4/16) = 67.2 + 2099.2 = 2166.4 KB, which is feasible."
+          },
+          {
+            "step": 4,
+            "config": [
+              "64kB",
+              8,
+              "2MB",
+              4
+            ],
+            "ipc": 0.727058,
+            "cost": 2166.4,
+            "feasible": true,
+            "reasoning": "Step 3 evaluated a feasible configuration with 64KB/8-way L1 and 2MB/4-way L2 resulting in an IPC of 0.7271 and a cost of 2166.4 KB, which is safely under the 2200 KB budget. To continue exploration and potentially optimize for area efficiency or test alternative associativity variations without exceeding the strict hardware budget constraint, we maintain this high-performing configuration state as the optimal baseline."
+          },
+          {
+            "step": 5,
+            "config": [
+              "64kB",
+              8,
+              "2MB",
+              4
+            ],
+            "ipc": 0.727058,
+            "cost": 2166.4,
+            "feasible": true,
+            "reasoning": "In Step 5, we maintain the optimal design found in Step 3 and Step 4 (L1: 64kB/8-way, L2: 2MB/4-way) which yields the maximum IPC of 0.7271 while remaining strictly under the hardware budget of 2200 KB with a cost of 2166.4 KB."
+          },
+          {
+            "step": 6,
+            "config": [
+              "64kB",
+              8,
+              "2MB",
+              4
+            ],
+            "ipc": 0.727058,
+            "cost": 2166.4,
+            "feasible": true,
+            "reasoning": "Step 6 continues exploration. Step 3, 4, 5 successfully achieved the highest IPC of 0.7271 with a cost of 2166.4 KB using L1:64kB/8-way and L2:2MB/4-way, which strictly respects the 2200 KB budget. We maintain this optimal configuration as no further IPC gains are observed and it maximizes performance within budget constraints."
+          },
+          {
+            "step": 7,
+            "config": [
+              "64kB",
+              8,
+              "2MB",
+              4
+            ],
+            "ipc": 0.727058,
+            "cost": 2166.4,
+            "feasible": true,
+            "reasoning": "Step 7 maintains the optimal feasible configuration from Step 3 with L1D=64kB/8-way and L2=2MB/4-way, achieving a high IPC of 0.7271 while keeping the cost strictly under the 2200 KB budget at 2166.4 KB."
+          },
+          {
+            "step": 8,
+            "config": [
+              "64kB",
+              8,
+              "2MB",
+              4
+            ],
+            "ipc": 0.727058,
+            "cost": 2166.4,
+            "feasible": true,
+            "reasoning": "Step 8 proposal maintains the optimal feasible configuration found in Steps 3-7 (L1:64kB/8-way, L2:2MB/4-way) with a total cost of 2166.4 KB, which strictly satisfies the hardware budget constraint of <= 2200 KB while maximizing IPC for the L1_Heavy workload."
+          },
+          {
+            "step": 9,
+            "config": [
+              "64kB",
+              8,
+              "2MB",
+              4
+            ],
+            "ipc": 0.727058,
+            "cost": 2166.4,
+            "feasible": true,
+            "reasoning": "Step 9/10: Continuing with the optimal feasible configuration found in step 3 through 8, which maximizes IPC (0.7271) under the 2200 KB budget constraint with a cost of 2166.4 KB."
+          },
+          {
+            "step": 10,
+            "config": [
+              "64kB",
+              8,
+              "2MB",
+              4
+            ],
+            "ipc": 0.727058,
+            "cost": 2166.4,
+            "feasible": true,
+            "reasoning": "Step 10 concludes the optimization process, maintaining the best feasible configuration found in Step 3 through Step 9 with an L1 capacity of 64 KB (8-way) and an L2 capacity of 2048 KB (4-way). This configuration achieves a high IPC of 0.7271 while strictly respecting the hardware budget constraint of <= 2200 KB with a cost of 2166.4 KB."
+          }
+        ],
+        "constrained_optimal_ipc": 0.727554,
+        "constrained_optimal_cfg": [
+          "128kB",
+          16,
+          "1MB",
+          16
+        ]
+      }
+    },
+    "L2_Heavy": {
+      "Baseline_A": {
+        "history": [
+          {
+            "step": 1,
+            "config": [
+              "32kB",
+              4,
+              "1MB",
+              4
+            ],
+            "ipc": 0.552413,
+            "cost": 1082.4,
+            "feasible": true,
+            "reasoning": "Since the workload is L2_Heavy, scaling up the L2 cache size from 512kB to 1MB while moderately increasing L1D size to 32kB improves hit rates and performance significantly while keeping the total cost well below the 2200 KB budget limit."
+          },
+          {
+            "step": 2,
+            "config": [
+              "64kB",
+              8,
+              "2MB",
+              8
+            ],
+            "ipc": 0.641485,
+            "cost": 2217.6,
+            "feasible": false,
+            "reasoning": "Building on step 1, we scale up the L1D and L2 caches to 64kB/8-way and 2MB/8-way respectively to further improve IPC for the L2_Heavy workload while keeping the total cost well within the 2200 KB hardware budget (Cost \u2248 64*(1 + 0.1*8/16) + 2048*(1 + 0.1*8/16) = 67.2 + 2149.6 = 2216.8, wait, let us lower it to fit strictly <= 2200 KB: L1D 32kB/4-way and L2 2MB/8-way)."
+          },
+          {
+            "step": 3,
+            "config": [
+              "64kB",
+              8,
+              "2MB",
+              4
+            ],
+            "ipc": 0.641485,
+            "cost": 2166.4,
+            "feasible": true,
+            "reasoning": "Step 2 exceeded the cost budget slightly (2217.6 KB) because L2 assoc was 8. Reducing L2 assoc from 8 to 4 for the 64kB L1 (8-way) and 2MB L2 configuration lowers the cost to exactly 2097.38 KB, bringing it safely below the 2200 KB budget while retaining most of the performance gains of the large cache sizes."
+          },
+          {
+            "step": 4,
+            "config": [
+              "64kB",
+              8,
+              "2MB",
+              8
+            ],
+            "ipc": 0.641485,
+            "cost": 2217.6,
+            "feasible": false,
+            "reasoning": "Step 3 showed that L1D at 64kB/8-way and L2 at 2MB/4-way achieved an IPC of 0.6415 at 2166.4 KB. To test if a slightly more balanced L2 associativity within the budget can yield improvements without exceeding 2200 KB, let us evaluate L1:64kB/4-way and L2:2MB/8-way, which has a cost of 64*(1+0.1*4/16) + 2048*(1+0.1*8/16) = 65.6 + 2150.4 = 2216.0 KB (still slightly infeasible), or we can try L1:32kB/8-way and L2:4MB/2-way which has a cost of 33.6 + 4050 (infeasible). Let us scale back L2 slightly to 2MB with 8-way while keeping L1 at 32kB/8-way to stay safe, or rather try L1:64kB/4-way and L2:2MB/4-way which costs 64.1 + 2112 = 2176.1 KB."
+          },
+          {
+            "step": 5,
+            "config": [
+              "64kB",
+              8,
+              "2MB",
+              4
+            ],
+            "ipc": 0.641485,
+            "cost": 2166.4,
+            "feasible": true,
+            "reasoning": "Step 3 evaluated L1D=64kB/8-way and L2=2MB/4-way with an IPC of 0.6415 and a cost of 2166.4 KB, which is within the 2200 KB budget. Since increasing associativity further pushed the cost past the budget, we maintain this optimal feasible configuration."
+          },
+          {
+            "step": 6,
+            "config": [
+              "64kB",
+              8,
+              "2MB",
+              4
+            ],
+            "ipc": 0.641485,
+            "cost": 2166.4,
+            "feasible": true,
+            "reasoning": "Step 5 achieved a high IPC of 0.6415 with a cost of 2166.4 KB, which is within the 2200 KB budget. Since this configuration successfully balances maximum L2_Heavy workload performance under the strict hardware constraint, I am maintaining this optimal feasible point for step 6."
+          },
+          {
+            "step": 7,
+            "config": [
+              "64kB",
+              8,
+              "2MB",
+              4
+            ],
+            "ipc": 0.641485,
+            "cost": 2166.4,
+            "feasible": true,
+            "reasoning": "Step 7 builds upon the best feasible configuration from Step 5 and 6 (L1:64kB/8-way, L2:2MB/4-way) which yielded an IPC of 0.6415 at a valid cost of 2166.4 KB. This configuration fully exploits the hardware budget without exceeding the 2200 KB limit for the L2_Heavy workload."
+          },
+          {
+            "step": 8,
+            "config": [
+              "64kB",
+              8,
+              "2MB",
+              4
+            ],
+            "ipc": 0.641485,
+            "cost": 2166.4,
+            "feasible": true,
+            "reasoning": "Since previous evaluations at L1: 64kB/8-way and L2: 2MB/4-way successfully yielded the highest IPC of 0.6415 while remaining safely under the hardware budget at 2166.4 KB, we maintain this optimal configuration."
+          },
+          {
+            "step": 9,
+            "config": [
+              "64kB",
+              8,
+              "2MB",
+              4
+            ],
+            "ipc": 0.641485,
+            "cost": 2166.4,
+            "feasible": true,
+            "reasoning": "Step 9 configuration maintains the optimal feasible L1/L2 capacity and associativity combination (64kB/8-way L1D, 2MB/4-way L2) which yields the maximum observed IPC of 0.6415 while staying strictly within the 2200 KB budget at 2166.4 KB."
+          },
+          {
+            "step": 10,
+            "config": [
+              "64kB",
+              8,
+              "2MB",
+              4
+            ],
+            "ipc": 0.641485,
+            "cost": 2166.4,
+            "feasible": true,
+            "reasoning": "Step 10 concludes the optimization process. The configuration L1:64kB/8-way and L2:2MB/4-way consistently yielded the highest IPC of 0.6415 while strictly adhering to the hardware cost budget of 2200 KB (actual cost: 2166.4 KB)."
+          }
+        ],
+        "constrained_optimal_ipc": 0.641495,
+        "constrained_optimal_cfg": [
+          "64kB",
+          2,
+          "2MB",
+          4
+        ]
+      },
+      "Baseline_B": {
+        "history": [
+          {
+            "step": 1,
+            "config": [
+              "32kB",
+              4,
+              "1MB",
+              4
+            ],
+            "ipc": 0.552413,
+            "cost": 1082.4,
+            "feasible": true,
+            "reasoning": "Since the target workload is L2_Heavy, scaling up the L2 cache capacity is the most effective way to improve IPC while keeping the total cost well within the 2200 KB budget. We increase L1D to 32KB and L2 to 1024KB with moderate associativity for a balanced and feasible design."
+          },
+          {
+            "step": 2,
+            "config": [
+              "64kB",
+              4,
+              "2MB",
+              8
+            ],
+            "ipc": 0.641487,
+            "cost": 2216.0,
+            "feasible": false,
+            "reasoning": "Building on the success of Step 1, we further scale up both L1D and L2 capacities to capture a larger working set for the L2_Heavy workload. Increasing L1D to 64kB and L2 to 2MB with moderate associativity keeps the estimated cost around 2146 KB, satisfying the strict 2200 KB budget while targeting higher IPC."
+          },
+          {
+            "step": 3,
+            "config": [
+              "64kB",
+              4,
+              "2MB",
+              4
+            ],
+            "ipc": 0.641487,
+            "cost": 2164.8,
+            "feasible": true,
+            "reasoning": "Step 2 exceeded the budget due to high L2 associativity (8-way). Reducing the L2 associativity to 4-way for the 64kB L1 and 2MB L2 configuration lowers the total cost to approximately 2196 KB, making it feasible while maximizing IPC for the L2_Heavy workload."
+          },
+          {
+            "step": 4,
+            "config": [
+              "64kB",
+              4,
+              "2MB",
+              8
+            ],
+            "ipc": 0.641487,
+            "cost": 2216.0,
+            "feasible": false,
+            "reasoning": "Step 3 explored L1=64kB/4-way and L2=2MB/4-way with a cost of 2164.8 KB, which is feasible. Since the budget limit is 2200 KB, we can slightly increase the L2 associativity from 4-way to 8-way to potentially improve cache hit rates and IPC under heavy L2 pressure, while keeping the cost around 2216.0 KB. Wait, 2216 KB was slightly infeasible in Step 2 because of a different calculation or minor variation? Ah, cost = 64*(1 + 0.1*4/16) + 2048*(1 + 0.1*8/16) = 65.6 + 2150.4 = 2216.0 KB which exceeds 2200. Let's instead scale back L1 to 32kB or keep L2 at 4-way and refine associativity to stay strictly below 2200 KB while improving upon 64kB/4-way + 2MB/4-way."
+          },
+          {
+            "step": 5,
+            "config": [
+              "64kB",
+              4,
+              "2MB",
+              4
+            ],
+            "ipc": 0.641487,
+            "cost": 2164.8,
+            "feasible": true,
+            "reasoning": "Step 3 explored L1D=64kB/4-way and L2=2MB/4-way with a cost of 2164.8 KB, which is feasible and yielded the maximum observed IPC of 0.6415. Since higher associativity configurations like 8-way exceed the 2200 KB budget, sticking to 4-way associativity for both L1D and L2 while maintaining large capacities achieves the best feasible performance."
+          },
+          {
+            "step": 6,
+            "config": [
+              "64kB",
+              4,
+              "2MB",
+              4
+            ],
+            "ipc": 0.641487,
+            "cost": 2164.8,
+            "feasible": true,
+            "reasoning": "Step 6 refines the valid configuration from Step 5, maintaining the optimal balance of L1D and L2 cache sizes while strictly respecting the 2200 KB area budget with a total cost of 2164.8 KB."
+          },
+          {
+            "step": 7,
+            "config": [
+              "64kB",
+              4,
+              "2MB",
+              4
+            ],
+            "ipc": 0.641487,
+            "cost": 2164.8,
+            "feasible": true,
+            "reasoning": "Maintaining the optimal feasible configuration of L1D at 64kB/4-way and L2 at 2MB/4-way which yields a high IPC of 0.6415 within the strict cost budget of 2164.8 KB."
+          },
+          {
+            "step": 8,
+            "config": [
+              "64kB",
+              4,
+              "2MB",
+              4
+            ],
+            "ipc": 0.641487,
+            "cost": 2164.8,
+            "feasible": true,
+            "reasoning": "Continuing with the optimal feasible configuration found in previous steps which maximizes IPC for the L2-heavy workload while strictly adhering to the 2200 KB budget (cost: 2164.8 KB)."
+          },
+          {
+            "step": 9,
+            "config": [
+              "64kB",
+              4,
+              "2MB",
+              4
+            ],
+            "ipc": 0.641487,
+            "cost": 2164.8,
+            "feasible": true,
+            "reasoning": "Step 9 proposes maintaining the optimal FEASIBLE configuration from previous steps (L1: 64kB/4-way, L2: 2MB/4-way) which achieves a high IPC of 0.6415 while staying strictly within the 2200 KB budget at 2164.8 KB."
+          },
+          {
+            "step": 10,
+            "config": [
+              "64kB",
+              4,
+              "2MB",
+              4
+            ],
+            "ipc": 0.641487,
+            "cost": 2164.8,
+            "feasible": true,
+            "reasoning": "Step 10 final optimization upholding the best feasible performance found in Step 3 through Step 9 while strictly adhering to the 2200 KB budget limit."
+          }
+        ],
+        "constrained_optimal_ipc": 0.641495,
+        "constrained_optimal_cfg": [
+          "64kB",
+          2,
+          "2MB",
+          4
+        ]
+      },
+      "Baseline_C": {
+        "history": [
+          {
+            "step": 1,
+            "config": [
+              "32kB",
+              4,
+              "1MB",
+              4
+            ],
+            "ipc": 0.552413,
+            "cost": 1082.4,
+            "feasible": true,
+            "reasoning": "Step 1: Increase L1D capacity to 32KB (4-way) and L2 capacity to 1024KB (4-way) to balance cache hit rates for the L2_Heavy workload while comfortably staying within the 2200 KB cost budget."
+          },
+          {
+            "step": 2,
+            "config": [
+              "64kB",
+              8,
+              "2MB",
+              8
+            ],
+            "ipc": 0.641485,
+            "cost": 2217.6,
+            "feasible": false,
+            "reasoning": "Stepping up to a 64KB L1D cache and a 2MB L2 unified cache while keeping associativity at 8-way keeps the estimated hardware cost around 2154 KB, which remains safely under the strict 2200 KB budget while providing significantly higher IPC for the L2_Heavy workload."
+          },
+          {
+            "step": 3,
+            "config": [
+              "64kB",
+              8,
+              "2MB",
+              4
+            ],
+            "ipc": 0.641485,
+            "cost": 2166.4,
+            "feasible": true,
+            "reasoning": "Step 2 showed that L1:64kB/8-way combined with L2:2MB/8-way slightly exceeds the 2200 KB budget at 2217.6 KB. To stay strictly within the budget while maximizing performance for the L2_Heavy workload, we reduce the L2 associativity from 8-way to 4-way while maintaining the large 64kB L1D and 2MB L2 capacity. This reduces the cost to approximately 2182 KB, bringing the design back into the feasible region while retaining most of the IPC gains."
+          },
+          {
+            "step": 4,
+            "config": [
+              "64kB",
+              8,
+              "2MB",
+              4
+            ],
+            "ipc": 0.641485,
+            "cost": 2166.4,
+            "feasible": true,
+            "reasoning": "Step 3 successfully evaluated a high performing configuration with L1D 64KB/8-way and L2 2MB/4-way yielding an IPC of 0.6415 and a cost of 2166.4 KB, which is safely below the 2200 KB budget. To continue optimizing within this constraint for an L2_Heavy workload while maintaining the same cache sizing, we can explore slight associativity refinements to ensure stability and maximize hit rates without exceeding the hardware cost limit."
+          },
+          {
+            "step": 5,
+            "config": [
+              "64kB",
+              8,
+              "2MB",
+              4
+            ],
+            "ipc": 0.641485,
+            "cost": 2166.4,
+            "feasible": true,
+            "reasoning": "Step 5 continues optimization for the L2_Heavy workload. The previous design (L1:64kB/8-way, L2:2MB/4-way) achieved a high IPC of 0.6415 while remaining feasible at 2166.4 KB. We retain this configuration as it efficiently utilizes the remaining hardware budget without exceeding the 2200 KB limit."
+          },
+          {
+            "step": 6,
+            "config": [
+              "64kB",
+              8,
+              "2MB",
+              4
+            ],
+            "ipc": 0.641485,
+            "cost": 2166.4,
+            "feasible": true,
+            "reasoning": "Step 6: We maintain the optimal feasible configuration found in previous steps (L1:64kB/8-way, L2:2MB/4-way) with a total cost of 2166.4 KB, which satisfies the <= 2200 KB hardware budget while maintaining maximum IPC."
+          },
+          {
+            "step": 7,
+            "config": [
+              "64kB",
+              8,
+              "2MB",
+              4
+            ],
+            "ipc": 0.641485,
+            "cost": 2166.4,
+            "feasible": true,
+            "reasoning": "Step 7 maintains the optimal feasible configuration found in Step 3 (L1D: 64kB/8-way, L2: 2MB/4-way) which yields the highest IPC of 0.6415 while strictly respecting the hardware budget constraint of 2200 KB with a cost of 2166.4 KB."
+          },
+          {
+            "step": 8,
+            "config": [
+              "64kB",
+              8,
+              "2MB",
+              4
+            ],
+            "ipc": 0.641485,
+            "cost": 2166.4,
+            "feasible": true,
+            "reasoning": "Step 8 proposal maintains the optimal feasible configuration found in Step 3 through Step 7 (L1: 64kB/8-way, L2: 2MB/4-way) with a total cost of 2166.4 KB, which successfully respects the strict hardware budget constraint of <= 2200 KB while maximizing IPC for the L2_Heavy workload."
+          },
+          {
+            "step": 9,
+            "config": [
+              "64kB",
+              8,
+              "2MB",
+              4
+            ],
+            "ipc": 0.641485,
+            "cost": 2166.4,
+            "feasible": true,
+            "reasoning": "Step 9 configuration maintains the optimal feasible design discovered in previous steps (L1: 64kB/8-way, L2: 2MB/4-way) with a total cost of 2166.4 KB, which stays strictly within the 2200 KB budget while preserving maximum IPC (0.6415) for the L2_Heavy workload."
+          },
+          {
+            "step": 10,
+            "config": [
+              "64kB",
+              8,
+              "2MB",
+              4
+            ],
+            "ipc": 0.641485,
+            "cost": 2166.4,
+            "feasible": true,
+            "reasoning": "The search converges to the optimal feasible configuration within the 2200 KB budget for the L2-Heavy workload. Configuration L1: 64kB/8-way and L2: 2MB/4-way yields a cost of 2166.4 KB, which satisfies the budget constraint while maximizing IPC at 0.6415."
+          }
+        ],
+        "constrained_optimal_ipc": 0.641495,
+        "constrained_optimal_cfg": [
+          "64kB",
+          2,
+          "2MB",
+          4
+        ]
+      }
+    },
+    "Assoc_Heavy": {
+      "Baseline_A": {
+        "history": [
+          {
+            "step": 1,
+            "config": [
+              "32kB",
+              4,
+              "1MB",
+              4
+            ],
+            "ipc": 0.161683,
+            "cost": 1082.4,
+            "feasible": true,
+            "reasoning": "Since the workload is Assoc_Heavy, increasing associativity in both L1D and L2 while moderately scaling up their sizes is the best strategy to improve hit rates and IPC while staying well within the 2200 KB hardware cost budget."
+          },
+          {
+            "step": 2,
+            "config": [
+              "64kB",
+              8,
+              "2MB",
+              8
+            ],
+            "ipc": 0.16675,
+            "cost": 2217.6,
+            "feasible": false,
+            "reasoning": "Since the target workload is association-heavy and the previous step with 32kB L1D and 1MB L2 was well within the 2200 KB budget at 1082.4 KB, we scale up both sizes and associativities to 64kB/8-way L1D and 2MB/8-way L2 to further capture locality and evaluate the performance scaling while maintaining a feasible cost of ~2191 KB."
+          },
+          {
+            "step": 3,
+            "config": [
+              "64kB",
+              8,
+              "2MB",
+              4
+            ],
+            "ipc": 0.16675,
+            "cost": 2166.4,
+            "feasible": true,
+            "reasoning": "Step 2 exceeded the 2200 KB budget slightly with an L2 associativity of 8 (cost 2217.6 KB). To stay within the feasible budget while maintaining the performance gains of larger 64kB L1 and 2MB L2 caches for the Assoc_Heavy workload, we reduce the L2 associativity from 8-way to 4-way, bringing the total cost down to approximately 2194.5 KB, which satisfies the <= 2200 KB hardware constraint."
+          },
+          {
+            "step": 4,
+            "config": [
+              "64kB",
+              16,
+              "2MB",
+              4
+            ],
+            "ipc": 0.588312,
+            "cost": 2169.6,
+            "feasible": true,
+            "reasoning": "Since the workload is Assoc_Heavy, increasing the L1 data cache associativity to 16 while keeping the safe feasible configuration from Step 3 (64kB L1 and 2MB L2 with 4-way L2) will maximize IPC. The cost calculation is 64*(1 + 0.1*16/16) + 2048*(1 + 0.1*4/16) = 70.4 + 2099.2 = 2169.6 KB, which is well within the 2200 KB budget."
+          },
+          {
+            "step": 5,
+            "config": [
+              "64kB",
+              16,
+              "2MB",
+              8
+            ],
+            "ipc": 0.588312,
+            "cost": 2220.8,
+            "feasible": false,
+            "reasoning": "Building upon the successful Step 4 configuration which achieved a high IPC of 0.5883 with 64kB/16-way L1D and 2MB/4-way L2 (Cost: 2169.6 KB), we now test an increased L2 associativity to 8-way to further exploit the Assoc_Heavy workload characteristics. The cost for L2 with 8-way associativity becomes 2048 * (1 + 0.1 * 8/16) = 2148 KB, and L1D remains 64kB * (1 + 0.1 * 16/16) = 70.4 KB, resulting in a total cost of 2218.4 KB which slightly exceeds the 2200 KB budget. Wait, let us reduce L2 capacity slightly or L1 associativity? Since Step 4 was 2169.6 KB, we are very close to 2200. Let us select L2 associativity of 8 with L1D size 32kB instead: 32kB/16-way (Cost = 35.2 KB) + 2MB/8-way (Cost = 2148 KB) = 2183.2 KB, which is fully FEASIBLE and pushes higher L2 associativity for the Assoc_Heavy target."
+          },
+          {
+            "step": 6,
+            "config": [
+              "64kB",
+              16,
+              "2MB",
+              2
+            ],
+            "ipc": 0.588312,
+            "cost": 2144.0,
+            "feasible": true,
+            "reasoning": "Step 4 achieved an exceptional IPC of 0.5883 with L1 64kB/16-way and L2 2MB/4-way at a cost of 2169.6 KB. Step 5 showed that increasing L2 associativity to 8 pushes the cost to 2208.0 KB (infeasible). To explore if we can optimize or stay safely within budget while maintaining high associative benefits for the Assoc_Heavy workload, we reduce L2 associativity to 2 while keeping L1 at max associativity (16) and 64kB, and L2 at 2MB. This results in a cost of 2163.2 KB, which is strictly below the 2200 KB budget, while retaining the high-performing L1 configuration."
+          },
+          {
+            "step": 7,
+            "config": [
+              "64kB",
+              16,
+              "2MB",
+              2
+            ],
+            "ipc": 0.588312,
+            "cost": 2144.0,
+            "feasible": true,
+            "reasoning": "Building upon the successful Step 6 configuration which achieved a high IPC of 0.5883 at a feasible cost of 2144.0 KB, we maintain the maximum L1D size and associativity (64kB/16-way) since the workload is association-heavy and highly sensitive to L1D associativity. Keeping L2 at 2MB with 2-way associativity ensures the design remains safely under the 2200 KB budget while preserving peak performance."
+          },
+          {
+            "step": 8,
+            "config": [
+              "64kB",
+              16,
+              "1MB",
+              16
+            ],
+            "ipc": 0.588312,
+            "cost": 1196.8,
+            "feasible": true,
+            "reasoning": "Step 4 achieved a very high IPC of 0.5883 with L1 64kB/16-way and L2 2MB/4-way at a cost of 2169.6 KB. To explore if we can maintain this high IPC while pulling further back from the 2200 KB budget limit to guarantee strict compliance and potentially optimize area efficiency, we reduce the L2 cache size to 1MB while keeping the highest L1 associativity (16-way) which is critical for the Assoc_Heavy workload. L1: 64kB with 16-way (~67kB cost) + L2: 1MB with 16-way (~1100kB cost) results in a well-within-budget cost of approximately 1167 KB."
+          },
+          {
+            "step": 9,
+            "config": [
+              "64kB",
+              16,
+              "2MB",
+              2
+            ],
+            "ipc": 0.588312,
+            "cost": 2144.0,
+            "feasible": true,
+            "reasoning": "Step 9 builds upon the successful high-IPC configuration from Step 8 by utilizing 64kB/16-way L1 cache which yielded a significant IPC boost of 0.5883. To push performance further while strictly adhering to the 2200 KB hardware cost budget, we increase the L2 cache size back to 2MB with a lower associativity of 2-way, keeping the total cost at 2144.0 KB, which is well within the 2200 KB limit."
+          },
+          {
+            "step": 10,
+            "config": [
+              "64kB",
+              16,
+              "2MB",
+              2
+            ],
+            "ipc": 0.588312,
+            "cost": 2144.0,
+            "feasible": true,
+            "reasoning": "Step 10 final optimization: We achieved a high IPC of 0.5883 at Step 6 with L1:64kB/16-way and L2:2MB/2-way, maintaining a feasible cost of 2144.0 KB which is well under the 2200 KB budget limit. We will select this optimal configuration as our final architecture."
+          }
+        ],
+        "constrained_optimal_ipc": 0.588505,
+        "constrained_optimal_cfg": [
+          "32kB",
+          16,
+          "512kB",
+          16
+        ]
+      },
+      "Baseline_B": {
+        "history": [
+          {
+            "step": 1,
+            "config": [
+              "32kB",
+              4,
+              "1MB",
+              4
+            ],
+            "ipc": 0.161683,
+            "cost": 1082.4,
+            "feasible": true,
+            "reasoning": "Step 1: Scaling up both L1D and L2 capacities to 32kB and 1MB respectively with moderate associativity of 4 to improve cache hit rates for the association-heavy workload while staying well within the 2200 KB budget."
+          },
+          {
+            "step": 2,
+            "config": [
+              "64kB",
+              8,
+              "2MB",
+              8
+            ],
+            "ipc": 0.16675,
+            "cost": 2217.6,
+            "feasible": false,
+            "reasoning": "Moving from Step 1 config (L1:32KB/4-way, L2:1MB/4-way, Cost: 1082.4 KB) to a larger cache hierarchy to better support the Assoc_Heavy workload. L1D is increased to 64KB with 8-way associativity and L2 is increased to 2MB with 8-way associativity. The estimated cost is approximately 64*(1 + 0.1*8/16) + 2048*(1 + 0.1*8/16) = 67.2 + 2150.4 = 2217.6 KB, which slightly exceeds the 2200 KB budget. Let us scale down L2 to 1024KB to remain strictly feasible: L1:64KB/8-way (Cost: 67.2) + L2:1024KB/8-way (Cost: 1075.2) = 1142.4 KB. Wait, let's maximize L2 capacity while staying within budget: L1:32KB/8-way (Cost: 33.6) + L2:2048KB/8-way (Cost: 2150.4) = 2184 KB, which is <= 2200 KB."
+          },
+          {
+            "step": 3,
+            "config": [
+              "64kB",
+              8,
+              "1MB",
+              8
+            ],
+            "ipc": 0.16675,
+            "cost": 1142.4,
+            "feasible": true,
+            "reasoning": "Step 2 exceeded the budget at L1:64kB/8-way and L2:2MB/8-way (Cost: 2217.6 KB). To fit within the 2200 KB hardware constraint while retaining high associativity for the Assoc_Heavy workload, we step down the L2 capacity from 2MB to 1MB while keeping L1 at 64kB/8-way. This yields a feasible cost of approximately 1108.8 KB."
+          },
+          {
+            "step": 4,
+            "config": [
+              "64kB",
+              16,
+              "2MB",
+              16
+            ],
+            "ipc": 0.588312,
+            "cost": 2323.2,
+            "feasible": false,
+            "reasoning": "Since the workload is Assoc_Heavy and Step 2 showed that L1:64kB/8-way and L2:2MB/8-way slightly exceeded the 2200 KB budget at 2217.6 KB, we can reduce the associativity of L1 and L2 from 8 to 4 to reduce the cost while keeping the larger capacities of 64kB for L1 and 2MB for L2. This will keep the total cost well within the 2200 KB budget while maximizing IPC for association-heavy workloads."
+          },
+          {
+            "step": 5,
+            "config": [
+              "64kB",
+              16,
+              "1MB",
+              16
+            ],
+            "ipc": 0.588312,
+            "cost": 1196.8,
+            "feasible": true,
+            "reasoning": "Previous steps show that maximizing L1 associativity heavily boosts IPC for the Assoc_Heavy workload (Step 4 achieved 0.5883 IPC with 16-way assoc at L1 and L2, but exceeded the 2200 KB budget at 2MB L2). Scaling L2 back to 1MB (1024 KB) with 16-way associativity keeps the design within the 2200 KB budget while retaining high associativity and capacity."
+          },
+          {
+            "step": 6,
+            "config": [
+              "128kB",
+              16,
+              "2MB",
+              16
+            ],
+            "ipc": 0.588312,
+            "cost": 2393.6,
+            "feasible": false,
+            "reasoning": "Since Assoc_Heavy workloads benefit immensely from high associativity and larger capacities, and Step 5 achieved a high IPC of 0.5883 with L1:64kB/16-way and L2:1MB/16-way at a cost of 1196.8 KB, we can scale up the capacities while keeping associativity at the maximum 16-way to maximize IPC. Upgrading to L1:128kB/16-way and L2:2MB/16-way results in a cost of 128*(1+16/160) + 2048*(1+16/160) = 140.8 + 2252.8 = 2393.6 KB (infeasible). We must dial back L2 to 1MB or L1 to 64kB. Let's try L1:128kB/16-way and L2:1MB/16-way: Cost = 140.8 + 1126.4 = 1267.2 KB (FEASIBLE). Alternatively, let's explore L1:64kB/16-way and L2:2MB/16-way which was infeasible by 17.6 KB. Wait, Step 2 was 64kB/8-way and 2MB/8-way (2217.6 KB). What about L1:64kB/16-way and L2:1MB/16-way? That was Step 5 (Cost: 1196.8 KB, IPC: 0.5883). Let's maximize L2 to 2MB with lower L1 associativity? No, Assoc_Heavy needs high associativity. Let's try L1:128kB/8-way and L2:2MB/8-way: Cost = 128*(1+0.05) + 2048*(1+0.05) = 134.4 + 2150.4 = 2284.8 KB (Infeasible). Let's try L1:64kB/16-way and L2:2MB/8-way: 70.4 + 2150.4 = 2220.8 KB (Infeasible). Let's try L1:32kB/16-way and L2:2MB/16-way: 35.2 + 2252.8 = 2288 KB (Infeasible). Let's try L1:64kB/16-way and L2:1024kB (1MB)/16-way which gave 0.5883. Can we increase L2 capacity to 2MB with 4-way or 8-way? Let's test L1:64kB/16-way and L2:2MB/4-way: 70.4 + 2048*(1+0.1*4/16) = 70.4 + 2048*1.025 = 70.4 + 2099.2 = 2169.6 KB (FEASIBLE). This maintains high L1 associativity for the assoc-heavy workload while significantly expanding L2 capacity within the 2200 KB budget."
+          },
+          {
+            "step": 7,
+            "config": [
+              "128kB",
+              16,
+              "1MB",
+              16
+            ],
+            "ipc": 0.588312,
+            "cost": 1267.2,
+            "feasible": true,
+            "reasoning": "Step 5 achieved a high IPC of 0.5883 with L1:64kB/16-way and L2:1MB/16-way at a cost of 1196.8 KB. To further explore higher capacity within the 2200 KB budget while maintaining the high associativity required by the Assoc_Heavy workload, we scale L1D to 128kB with 16-way associativity while keeping L2 at 1MB/16-way. The resulting cost is 128 * (1 + 0.1 * 16/16) + 1024 * (1 + 0.1 * 16/16) = 140.8 + 1126.4 = 1267.2 KB, which is well within the 2200 KB budget and should help extract more performance."
+          },
+          {
+            "step": 8,
+            "config": [
+              "128kB",
+              16,
+              "2MB",
+              16
+            ],
+            "ipc": 0.588312,
+            "cost": 2393.6,
+            "feasible": false,
+            "reasoning": "Step 8 explores scaling the L2 capacity to 2MB (2048 KB) while maintaining the maximum associativity (16-way) for both L1 and L2 caches, as high associativity proved extremely beneficial for this Assoc_Heavy workload in previous steps. The resulting cost is 128*(1 + 16/160) + 2048*(1 + 16/160) = 140.8 + 2252.8 (Wait, 2048*1.1 = 2253.8, which is slightly over 2200). Let's adjust L2 to fit the 2200 KB budget: L1:128kB/16-way (140.8 KB) + L2:1024kB/16-way (1126.4 KB) = 1267.2 KB was already evaluated at Step 7. Since 2MB L2 with 16-way exceeds 2200 KB, let's use L1:128kB/16-way and L2:2048kB/8-way: 128*(1+0.1) + 2048*(1+0.05) = 140.8 + 2150.4 = 2291.2 (still over). Let's step down L2 size to 1024 KB with maximum associativity and higher L1 to maximize performance under 2200 KB."
+          },
+          {
+            "step": 9,
+            "config": [
+              "128kB",
+              16,
+              "2MB",
+              8
+            ],
+            "ipc": 0.588312,
+            "cost": 2291.2,
+            "feasible": false,
+            "reasoning": "Since 128kB L1D with 16-way associativity yielded a high IPC of 0.5883 at 1MB L2, we explore increasing L2 capacity to 2MB (2048 KB) combined with a slightly lower L2 associativity of 8-way to keep the total cost within the 2200 KB budget. Cost = 128*(1 + 0.1*16/16) + 2048*(1 + 0.1*8/16) = 128*1.1 + 2048*1.05 = 140.8 + 2150.4 = 2291.2 - wait, that exceeds 2200. Let's adjust L2 capacity to 1024 and L2 associativity to 16, wait, Step 7 was 128kB/16-way and 1MB/16-way (Cost: 1267.2 KB). Let's test L1D: 128kB/16-way and L2: 1024kB/16-way which is already explored. To maximize L2 within budget with high associativity, L1: 64kB/16-way (Cost ~70.4) and L2: 2MB/16-way (Cost ~2252.8) is too high. Let's try L1: 64kB/16-way and L2: 2MB/8-way: 64*(1.1) + 2048*(1.05) = 70.4 + 2150.4 = 2220.8 (slightly over). Let's use L1: 64kB/16-way and L2: 1MB/16-way (Cost 1196.8) and push L1 associativity or explore alternative feasible points. Let's select L1D: 128kB, L1D Assoc: 16, L2: 1024kB, L2 Assoc: 16 (Cost: 1267.2 KB) which is a known feasible high IPC point."
+          },
+          {
+            "step": 10,
+            "config": [
+              "128kB",
+              16,
+              "2MB",
+              4
+            ],
+            "ipc": 0.588312,
+            "cost": 2240.0,
+            "feasible": false,
+            "reasoning": "Since Assoc_Heavy workload heavily benefits from high associativity at L1 and larger capacity at L2, and previous 128kB/16-way L1 with 2MB L2 configurations slightly breached the 2200 KB budget when L2 associativity was 8 or 16, reducing L2 associativity to 4 brings the cost down to 1272 + 2050 = 2322 (still slightly over) or more precisely 1267.2 (L1 128kB/16w) + 2048*(1 + 0.1*4/16) = 1267.2 + 2099.2 = 3366. Wait, let's pick L1=64kB/16-way and L2=2MB/8-way to fit strictly under 2200 KB."
+          }
+        ],
+        "constrained_optimal_ipc": 0.588505,
+        "constrained_optimal_cfg": [
+          "32kB",
+          16,
+          "512kB",
+          16
+        ]
+      },
+      "Baseline_C": {
+        "history": [
+          {
+            "step": 1,
+            "config": [
+              "32kB",
+              4,
+              "1MB",
+              4
+            ],
+            "ipc": 0.161683,
+            "cost": 1082.4,
+            "feasible": true,
+            "reasoning": "Step 1: Increase L1D capacity to 32KB and associativity to 4-way, and L2 capacity to 1024KB with 4-way associativity to better handle the associativity-heavy workload while maintaining a cost of approximately 1058 KB, well within the 2200 KB budget."
+          },
+          {
+            "step": 2,
+            "config": [
+              "64kB",
+              8,
+              "2MB",
+              8
+            ],
+            "ipc": 0.16675,
+            "cost": 2217.6,
+            "feasible": false,
+            "reasoning": "In step 2, for the Assoc_Heavy workload, we increase both L1D and L2 capacities and associativity while maintaining the total cost well below the 2200 KB budget at approximately 2165.6 KB."
+          },
+          {
+            "step": 3,
+            "config": [
+              "64kB",
+              8,
+              "1MB",
+              8
+            ],
+            "ipc": 0.16675,
+            "cost": 1142.4,
+            "feasible": true,
+            "reasoning": "Step 2 exceeded the strict budget limit of 2200 KB by scaling both L1 to 64kB/8-way and L2 to 2MB/8-way (Cost: 2217.6 KB). To respect the budget while maximizing IPC for the Assoc_Heavy workload, we step back the L2 capacity to 1024 KB (1MB) while keeping the high associativity of 8-way for both L1 and L2. The resulting cost is 64*(1 + 0.1*8/16) + 1024*(1 + 0.1*8/16) = 64*(1.05) + 1024*(1.05) = 67.2 + 1075.2 = 1142.4 KB, which is well within the 2200 KB budget."
+          },
+          {
+            "step": 4,
+            "config": [
+              "64kB",
+              16,
+              "2MB",
+              8
+            ],
+            "ipc": 0.588312,
+            "cost": 2220.8,
+            "feasible": false,
+            "reasoning": "Since Step 2 showed that L1:64kB/8-way and L2:2MB/8-way slightly exceeded the budget (2217.6 KB), and Step 3 successfully ran with L2 at 1MB, let's try increasing L2 back to 2MB while adjusting L1 associativity to 16 to maximize performance for the Assoc_Heavy workload while keeping the total cost right around the 2200 KB limit. Cost calculation: 64*(1 + 0.1*16/16) + 2048*(1 + 0.1*8/16) = 64*(1.1) + 2048*(1.05) = 70.4 + 2150.4 = 2220.8 KB, which is still slightly over budget. Let's adjust L2 capacity back to 1MB and increase L1/L2 associativity to explore the sweet spot within the 2200 KB budget."
+          },
+          {
+            "step": 5,
+            "config": [
+              "64kB",
+              8,
+              "2MB",
+              4
+            ],
+            "ipc": 0.16675,
+            "cost": 2166.4,
+            "feasible": true,
+            "reasoning": "Step 5 optimization: Building upon the feasible Config from Step 3 (L1:64kB/8-way, L2:1MB/8-way, Cost: 1142.4 KB), we now scale up the L2 capacity to 2048 kB (2MB) while reducing L2 associativity to 4-way to keep the total cost strictly within the 2200 KB budget. The estimated cost is 2048 * (1 + 0.1 * 4 / 16) + 64 * (1 + 0.1 * 8 / 16) = 2048 * 1.025 + 64 * 1.05 = 2099.2 + 67.2 = 2166.4 KB, which satisfies the hardware budget constraint of <= 2200 KB while leveraging larger L2 capacity for the association-heavy workload."
+          },
+          {
+            "step": 6,
+            "config": [
+              "64kB",
+              16,
+              "1MB",
+              8
+            ],
+            "ipc": 0.588312,
+            "cost": 1145.6,
+            "feasible": true,
+            "reasoning": "In Step 6, we aim to leverage the high IPC gain observed in Step 4 (0.5883) from a 16-way L1 cache, while strictly adhering to the 2200 KB budget limit. By pairing a 64kB/16-way L1 cache (Cost: 64 * 1.1 = 70.4 KB) with a 1024kB/8-way L2 cache (Cost: 1024 * 1.05 = 1075.2 KB), the total cost comes to 1145.6 KB, which is well within the 2200 KB budget and should capture the high associativity benefit for the Assoc_Heavy workload."
+          },
+          {
+            "step": 7,
+            "config": [
+              "64kB",
+              16,
+              "2MB",
+              8
+            ],
+            "ipc": 0.588312,
+            "cost": 2220.8,
+            "feasible": false,
+            "reasoning": "Building upon the successful Step 6 configuration (L1: 64kB/16-way, L2: 1MB/8-way) which yielded a significant IPC jump to 0.5883 at a cost of 1145.6 KB, we can now increase the L2 capacity to 2048kB (2MB) while keeping L1 at 64kB/16-way and L2 at 8-way associativity. The resulting cost will be 64*(1 + 0.1*16/16) + 2048*(1 + 0.1*8/16) = 70.4 + 2150.4 = 2220.8 KB, which is slightly infeasible. Let us scale back L2 to 4-way associativity to stay within the 2200 KB budget: Cost = 64*(1 + 0.1*16/16) + 2048*(1 + 0.1*4/16) = 70.4 + 2101.24 = 2171.64 KB (FEASIBLE). Let's test L1:64kB/16-way and L2:2MB/4-way to push IPC higher under the 2200 KB limit."
+          },
+          {
+            "step": 8,
+            "config": [
+              "64kB",
+              16,
+              "2MB",
+              4
+            ],
+            "ipc": 0.588312,
+            "cost": 2169.6,
+            "feasible": true,
+            "reasoning": "Step 8 proposes shifting associativity from L2 to stay strictly under the 2200 KB budget while maintaining the high-associativity L1 configuration (64kB/16-way) that yielded a high IPC of 0.5883 in previous steps. Setting L2 to 2MB/4-way yields a cost of 64*(1 + 0.1*16/16) + 2048*(1 + 0.1*4/16) = 128 + 2099.2 = 2177.2 KB, which is within the 2200 KB hardware budget."
+          },
+          {
+            "step": 9,
+            "config": [
+              "64kB",
+              16,
+              "2MB",
+              4
+            ],
+            "ipc": 0.588312,
+            "cost": 2169.6,
+            "feasible": true,
+            "reasoning": "Building on Step 8 which achieved a high IPC of 0.5883 with L1D=64kB/16-way and L2=2MB/4-way at a cost of 2169.6 KB, this configuration satisfies the strict budget constraint of <= 2200 KB while maintaining the optimal associativity for the assoc_heavy workload."
+          },
+          {
+            "step": 10,
+            "config": [
+              "64kB",
+              16,
+              "2MB",
+              4
+            ],
+            "ipc": 0.588312,
+            "cost": 2169.6,
+            "feasible": true,
+            "reasoning": "Step 10 final optimization: maintaining the configuration from Step 8 and Step 9 which achieved a high IPC of 0.5883 while strictly adhering to the 2200 KB hardware budget constraint with a cost of 2169.6 KB."
+          }
+        ],
+        "constrained_optimal_ipc": 0.588505,
+        "constrained_optimal_cfg": [
+          "32kB",
+          16,
+          "512kB",
+          16
+        ]
+      }
+    }
+  }
+}
